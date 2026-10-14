@@ -162,7 +162,7 @@ p { margin: 0; }
 .footer-row a:hover { opacity: .7; }
 .wordmark {
   margin-top: clamp(80px, 14vw, 220px); font-family: var(--serif); font-weight: 400; letter-spacing: -0.03em; line-height: .85;
-  white-space: nowrap; font-size: 18vw;
+  white-space: nowrap; font-size: 18vw; padding-bottom: .14em;
 }
 .copyright { margin-top: 28px; font-size: 13px; color: var(--muted); }
 

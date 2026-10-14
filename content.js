@@ -11,7 +11,7 @@
  *  • Add or remove projects by copying / deleting a { ... } block.
  */
 window.PORTFOLIO = {
-  name: "Your Name",
+  name: "Kaltrina Ajdini",
   title: "Architect",
   location: "Based in Vienna — working worldwide",
   tagline: "Quiet buildings, carefully made. Spaces shaped by light, material and the people who live in them.",
