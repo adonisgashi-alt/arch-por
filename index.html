@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Architecture Portfolio</title>
+  <meta name="description" content="Architecture portfolio — selected works, about and contact." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a href="#top" class="brand" data-bind="name"></a>
+    <nav class="nav">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <p class="eyebrow"><span data-bind="title"></span> · <span data-bind="location"></span></p>
+      <h1 class="hero-name" data-bind="name"></h1>
+      <p class="hero-tagline" data-bind="tagline"></p>
+      <a href="#work" class="scroll-cue">Selected work <span aria-hidden="true">↓</span></a>
+    </section>
+
+    <section id="work" class="section">
+      <div class="section-head">
+        <h2 class="section-title">Selected Work</h2>
+        <div class="filters" role="tablist" aria-label="Filter projects"></div>
+      </div>
+      <div class="grid" id="project-grid"></div>
+    </section>
+
+    <section id="about" class="section about">
+      <div class="about-portrait" id="about-portrait"></div>
+      <div class="about-body">
+        <h2 class="section-title">About</h2>
+        <div id="about-bio" class="bio"></div>
+        <div class="cv-cols">
+          <div>
+            <h3 class="label">Experience</h3>
+            <ul class="timeline" id="about-experience"></ul>
+          </div>
+          <div>
+            <h3 class="label">Education</h3>
+            <ul class="timeline" id="about-education"></ul>
+          </div>
+        </div>
+        <div class="cv-cols">
+          <div>
+            <h3 class="label">Tools &amp; skills</h3>
+            <ul class="tags" id="about-skills"></ul>
+          </div>
+          <div>
+            <h3 class="label">Languages</h3>
+            <ul class="tags" id="about-languages"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact">
+      <p class="eyebrow">Contact</p>
+      <h2 class="contact-line">Let’s build something <em>together</em>.</h2>
+      <a class="contact-email" id="contact-email"></a>
+      <div class="contact-links" id="contact-links"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© <span id="year"></span> <span data-bind="name"></span></span>
+    <a href="#top">Back to top ↑</a>
+  </footer>
+
+  <!-- Project detail overlay -->
+  <div class="overlay" id="overlay" aria-hidden="true">
+    <article class="project" role="dialog" aria-modal="true" aria-labelledby="p-title">
+      <button class="close" id="overlay-close" aria-label="Close project">Close ✕</button>
+      <div class="project-gallery" id="p-gallery"></div>
+      <div class="project-info">
+        <p class="eyebrow" id="p-meta"></p>
+        <h2 id="p-title"></h2>
+        <dl class="facts" id="p-facts"></dl>
+        <div class="project-text" id="p-text"></div>
+        <nav class="project-nav">
+          <button id="p-prev">← Previous</button>
+          <button id="p-next">Next →</button>
+        </nav>
+      </div>
+    </article>
+  </div>
+
+  <script src="content.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
