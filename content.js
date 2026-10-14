@@ -15,6 +15,15 @@ window.PORTFOLIO = {
   title: "Architect",
   location: "Based in Vienna — working worldwide",
   tagline: "Quiet buildings, carefully made. Spaces shaped by light, material and the people who live in them.",
+  // Short paragraph shown under the tagline on the right.
+  intro: "I work across design, documentation and technical coordination — from reading existing conditions precisely to resolving the details that make a building go together.",
+  // Large image at the top of the page. Wide (landscape) images work best.
+  heroImage: "images/200-s-wacker-2.jpg",
+  // Contact section
+  contactHeading: "Let’s build!",
+  contactText: "Open to new roles, collaborations and freelance projects. Send a note and I’ll get back to you.",
+  phone: "", // optional, e.g. "+1 (555) 555-5555"
+  footerLine: "Architecture & Spatial Design",
   email: "hello@yourname.com",
   social: [
     { label: "Instagram", url: "https://instagram.com/" },
@@ -38,6 +47,8 @@ window.PORTFOLIO = {
       { years: "2020 — 2022", title: "Architectural Designer", place: "Office Name, City" },
       { years: "2019", title: "Intern", place: "Practice Name, City" },
     ],
+    // "Expertise" list in the About section
+    services: ["Scan-to-BIM", "Existing conditions", "Design development", "Construction documents", "Technical coordination"],
     skills: ["Rhino", "Revit", "ArchiCAD", "AutoCAD", "Grasshopper", "Enscape", "V-Ray", "Photoshop", "InDesign", "Model making", "Hand drawing"],
     languages: ["English", "German", "Albanian"],
   },

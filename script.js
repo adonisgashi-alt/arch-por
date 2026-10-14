@@ -63,61 +63,113 @@
   }
 
   function media(img, alt, seed, palette, w, h) {
-    const src = typeof img === "string" ? img : img?.src;
+    const src = imgSrc(img);
     return src ? `<img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" />` : drawing(seed, palette, w, h);
   }
+
+  const imgSrc = (img) => (typeof img === "string" ? img : img?.src);
+  const cover = (p) => p.images?.[0];
+  const place = (p) => [p.location, p.year].filter(Boolean).join(", ");
 
   /* ── Bind simple text ── */
   document.title = `${data.name} — ${data.title}`;
   document.querySelectorAll("[data-bind]").forEach((el) => (el.textContent = data[el.dataset.bind] || ""));
   $("#year").textContent = new Date().getFullYear();
 
-  /* ── Projects grid ── */
-  const grid = $("#project-grid");
-  grid.innerHTML = data.projects.map((p, i) => `
-    <button class="card reveal" data-index="${i}" data-category="${esc(p.category)}">
-      <div class="card-media">${media(p.images?.[0], p.title, p.id, p.palette)}</div>
-      <div class="card-caption">
-        <div>
-          <h3 class="card-title">${esc(p.title)}</h3>
-          <p class="card-summary">${esc(p.summary)}</p>
-        </div>
-        <div class="card-meta">${esc(p.category)}${p.year ? `<br />${esc(p.year)}` : ""}</div>
-      </div>
-    </button>`).join("");
+  /* ── Hero ── */
+  $("#hero-media").innerHTML = media(data.heroImage || cover(data.projects[0]), `${data.name} — featured work`, "hero", ["#e8e6e1", "#a7a29a", "#2b2a28"], 1600, 900);
 
-  /* ── Filters ── */
-  const filters = $(".filters");
-  const used = data.categories.filter((c) => data.projects.some((p) => p.category === c));
-  filters.innerHTML = ["All", ...used].map((c, i) =>
-    `<button role="tab" aria-selected="${i === 0}" data-filter="${esc(c)}">${esc(c)}</button>`).join("");
-  filters.addEventListener("click", (e) => {
-    const btn = e.target.closest("button");
-    if (!btn) return;
-    filters.querySelectorAll("button").forEach((b) => b.setAttribute("aria-selected", b === btn));
-    const f = btn.dataset.filter;
-    grid.querySelectorAll(".card").forEach((c) => c.classList.toggle("hidden", f !== "All" && c.dataset.category !== f));
-  });
+  /* ── Projects carousel ── */
+  const track = $("#carousel-track");
+  track.innerHTML = data.projects.map((p, i) => `
+    <li class="slide" data-index="${i}" tabindex="0" role="button" aria-label="Open ${esc(p.title)}">
+      <div class="slide-media">${media(cover(p), p.title, p.id, p.palette)}</div>
+      <h3 class="slide-title">${esc(p.title)}</h3>
+      <p class="label">${esc(place(p))}</p>
+      <span class="btn btn-small">View project</span>
+    </li>`).join("");
+  const step = () => track.querySelector(".slide").offsetWidth + 20;
+  const prev = $("#carousel-prev"), next = $("#carousel-next");
+  const updateArrows = () => {
+    prev.disabled = track.scrollLeft < 4;
+    next.disabled = track.scrollLeft + track.clientWidth > track.scrollWidth - 4;
+  };
+  prev.addEventListener("click", () => track.scrollBy({ left: -step(), behavior: "smooth" }));
+  next.addEventListener("click", () => track.scrollBy({ left: step(), behavior: "smooth" }));
+  track.addEventListener("scroll", updateArrows, { passive: true });
+  addEventListener("resize", updateArrows);
+  updateArrows();
+
+  /* ── Explore list ── */
+  const explore = $("#explore-list");
+  explore.innerHTML = data.projects.map((p, i) => `
+    <div class="explore-row reveal" data-index="${i}" tabindex="0" role="button" aria-label="Open ${esc(p.title)}">
+      <p class="explore-title">${esc(p.title)}<span class="label">${esc(place(p))}</span></p>
+      <p>${esc(p.summary)}</p>
+      <div class="explore-media">${media(cover(p), p.title, p.id + "-x", p.palette)}</div>
+    </div>`).join("");
+
+  /* ── Experience ── */
+  const a = data.about;
+  $("#exp-cols").innerHTML = [...a.experience, ...a.education].map((x) => `
+    <div class="exp-item reveal">
+      <p class="label">${esc(x.years)}</p>
+      <h3>${esc(x.title)}</h3>
+      <p>${esc(x.place)}</p>
+    </div>`).join("");
 
   /* ── About ── */
-  const a = data.about;
-  $("#about-portrait").innerHTML = media(a.portrait, data.name, "portrait-" + data.name, ["#e2dcd2", "#a89a88", "#3a342e"], 800, 1000);
+  $("#about-portrait").innerHTML = media(a.portrait, data.name, "portrait", ["#2a2927", "#5c5852", "#d8d4cc"], 800, 1120);
   $("#about-bio").innerHTML = a.bio.map((p) => `<p>${esc(p)}</p>`).join("");
-  const tl = (list) => list.map((x) => `<li><span class="yrs">${esc(x.years)}</span><span>${esc(x.title)}<span class="place">${esc(x.place)}</span></span></li>`).join("");
-  $("#about-experience").innerHTML = tl(a.experience);
-  $("#about-education").innerHTML = tl(a.education);
-  $("#about-skills").innerHTML = a.skills.map((s) => `<li>${esc(s)}</li>`).join("");
-  $("#about-languages").innerHTML = a.languages.map((s) => `<li>${esc(s)}</li>`).join("");
+  const lists = [
+    ["Expertise", a.services],
+    ["Software", a.skills],
+    ["Education", a.education.map((e) => e.title)],
+    ["Languages", a.languages],
+  ].filter(([, items]) => items?.length);
+  $("#about-lists").innerHTML = lists.map(([h, items]) =>
+    `<div class="reveal"><h4>${h}</h4><ul>${items.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>`).join("");
 
-  /* ── Contact ── */
-  const email = $("#contact-email");
-  email.textContent = data.email;
-  email.href = `mailto:${data.email}`;
-  const links = data.social.map((s) => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)} ↗</a>`);
-  if (data.cv) links.push(`<a href="${esc(data.cv)}" target="_blank" rel="noopener">Download CV ↓</a>`);
-  $("#contact-links").innerHTML = links.join("");
+  /* ── Contact form (opens the visitor's email app) ── */
+  $("#contact-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const f = new FormData(e.target);
+    const subject = `Portfolio enquiry from ${f.get("name")}`;
+    const body = `${f.get("message") || ""}\n\n— ${f.get("name")} (${f.get("email")})`;
+    location.href = `mailto:${data.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
 
-  /* ── Project overlay ── */
+  /* ── Footer ── */
+  $("#footer-contact").innerHTML = `<a href="mailto:${esc(data.email)}">${esc(data.email)}</a>${data.phone ? `<br />${esc(data.phone)}` : ""}`;
+  const links = data.social.map((s) => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a>`);
+  if (data.cv) links.push(`<a href="${esc(data.cv)}" target="_blank" rel="noopener">CV</a>`);
+  $("#footer-links").innerHTML = links.join("<br />");
+
+  // Giant name wordmark, sized to fill the footer width
+  const wordmark = $("#wordmark");
+  wordmark.innerHTML = `<span>${esc(data.name)}</span>`;
+  const fitWordmark = () => {
+    wordmark.style.fontSize = "100px";
+    const w = wordmark.clientWidth, textW = wordmark.firstChild.getBoundingClientRect().width;
+    wordmark.style.fontSize = `${Math.floor((100 * w) / textW * 0.99)}px`;
+  };
+  document.fonts?.ready.then(fitWordmark);
+  addEventListener("resize", fitWordmark);
+  fitWordmark();
+
+  /* ── Mobile menu ── */
+  const burger = $("#burger"), menu = $("#menu");
+  const setMenu = (open) => {
+    burger.setAttribute("aria-expanded", open);
+    burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    menu.classList.toggle("open", open);
+    menu.setAttribute("aria-hidden", !open);
+    document.body.classList.toggle("locked", open);
+  };
+  burger.addEventListener("click", () => setMenu(burger.getAttribute("aria-expanded") !== "true"));
+  menu.addEventListener("click", (e) => e.target.closest("a") && setMenu(false));
+
+  /* ── Project page ── */
   const overlay = $("#overlay");
   let current = 0, lastFocus = null;
 
@@ -125,11 +177,12 @@
     current = (i + data.projects.length) % data.projects.length;
     const p = data.projects[current];
     const imgs = p.images?.length ? p.images : [null, null, null];
-    $("#p-gallery").innerHTML = imgs.map((img, k) =>
-      `<figure>${media(img, img?.caption || `${p.title} — image ${k + 1}`, `${p.id}-${k}`, p.palette)}${img?.caption ? `<figcaption>${esc(img.caption)}</figcaption>` : ""}</figure>`).join("");
-    $("#p-meta").textContent = [p.category, p.year].filter(Boolean).join(" · ");
+    const fig = (img, k) => `<figure>${media(img, img?.caption || `${p.title} — image ${k + 1}`, `${p.id}-${k}`, p.palette)}${img?.caption ? `<figcaption>${esc(img.caption)}</figcaption>` : ""}</figure>`;
     $("#p-title").textContent = p.title;
-    const facts = [["Location", p.location], ["Status", p.status], ["Scope", p.scope], ["Area", p.area], ["Client", p.client], ["Role", p.role]];
+    $("#p-meta").textContent = [p.category, place(p)].filter(Boolean).join(" · ");
+    $("#p-cover").innerHTML = fig(imgs[0], 0);
+    $("#p-gallery").innerHTML = imgs.slice(1).map((img, k) => fig(img, k + 1)).join("");
+    const facts = [["Location", p.location], ["Year", p.year], ["Status", p.status], ["Scope", p.scope], ["Area", p.area], ["Client", p.client], ["Role", p.role]];
     $("#p-facts").innerHTML = facts.filter(([, v]) => v).map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("");
     $("#p-text").innerHTML = (p.description || [p.summary]).map((t) => `<p>${esc(t)}</p>`).join("");
     overlay.scrollTop = 0;
@@ -147,18 +200,23 @@
     overlay.classList.remove("open");
     overlay.setAttribute("aria-hidden", "true");
     document.body.classList.remove("locked");
-    history.replaceState(null, "", "#work");
+    history.replaceState(null, "", "#projects");
     lastFocus?.focus();
   }
 
-  grid.addEventListener("click", (e) => {
-    const card = e.target.closest(".card");
-    if (card) openProject(+card.dataset.index);
+  const openFrom = (e) => {
+    const el = e.target.closest("[data-index]");
+    if (el) openProject(+el.dataset.index);
+  };
+  [track, explore].forEach((el) => {
+    el.addEventListener("click", openFrom);
+    el.addEventListener("keydown", (e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), openFrom(e)));
   });
   $("#overlay-close").addEventListener("click", closeProject);
   $("#p-prev").addEventListener("click", () => openProject(current - 1));
   $("#p-next").addEventListener("click", () => openProject(current + 1));
   document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && menu.classList.contains("open")) return setMenu(false);
     if (!overlay.classList.contains("open")) return;
     if (e.key === "Escape") closeProject();
     if (e.key === "ArrowRight") openProject(current + 1);
@@ -172,11 +230,9 @@
     if (i >= 0) openProject(i);
   }
 
-  /* ── Header border + reveal on scroll ── */
-  const header = $(".site-header");
-  addEventListener("scroll", () => header.classList.toggle("scrolled", scrollY > 10), { passive: true });
+  /* ── Fade in on scroll ── */
   const io = new IntersectionObserver((entries) => entries.forEach((en) => {
     if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
-  }), { threshold: 0.12 });
+  }), { threshold: 0.1 });
   document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 })();

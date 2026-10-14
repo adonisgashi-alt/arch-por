@@ -4,94 +4,123 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Architecture Portfolio</title>
-  <meta name="description" content="Architecture portfolio — selected works, about and contact." />
+  <meta name="description" content="Architecture portfolio — projects, about and contact." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="site-header">
     <a href="#top" class="brand" data-bind="name"></a>
-    <nav class="nav">
-      <a href="#work">Work</a>
+    <nav class="nav" aria-label="Main">
+      <a href="#projects">Projects</a>
+      <a href="#explore">Index</a>
       <a href="#about">About</a>
-      <a href="#contact">Contact</a>
     </nav>
+    <a href="#contact" class="btn btn-small">Contact</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+      <span></span><span></span>
+    </button>
   </header>
+
+  <div class="menu" id="menu" aria-hidden="true">
+    <nav aria-label="Mobile">
+      <a href="#projects">Projects</a>
+      <a href="#explore">Index</a>
+      <a href="#experience">Experience</a>
+      <a href="#about">About</a>
+    </nav>
+    <a href="#contact" class="btn">Contact</a>
+  </div>
 
   <main id="top">
     <section class="hero">
-      <p class="eyebrow"><span data-bind="title"></span> · <span data-bind="location"></span></p>
-      <h1 class="hero-name" data-bind="name"></h1>
-      <p class="hero-tagline" data-bind="tagline"></p>
-      <a href="#work" class="scroll-cue">Selected work <span aria-hidden="true">↓</span></a>
+      <div class="hero-media reveal" id="hero-media"></div>
+      <h1 class="hero-tagline reveal" data-bind="tagline"></h1>
+      <p class="hero-intro reveal" data-bind="intro"></p>
     </section>
 
-    <section id="work" class="section">
-      <div class="section-head">
-        <h2 class="section-title">Selected Work</h2>
-        <div class="filters" role="tablist" aria-label="Filter projects"></div>
+    <section id="projects" class="section">
+      <h2 class="h2 reveal" data-num="01">Projects</h2>
+      <div class="carousel">
+        <ul class="carousel-track" id="carousel-track"></ul>
+        <div class="carousel-nav">
+          <button class="arrow" id="carousel-prev" aria-label="Previous">
+            <svg viewBox="0 0 44 18"><path d="M9.9 16.96L2.12 9.18 9.9 1.39M42.86 9.18H3.38" /></svg>
+          </button>
+          <button class="arrow" id="carousel-next" aria-label="Next">
+            <svg viewBox="0 0 44 18"><path d="M34.15 1.39l7.78 7.78-7.78 7.79M1.19 9.17h39.49" /></svg>
+          </button>
+        </div>
       </div>
-      <div class="grid" id="project-grid"></div>
     </section>
 
-    <section id="about" class="section about">
-      <div class="about-portrait" id="about-portrait"></div>
+    <section id="explore" class="section">
+      <h2 class="h2 reveal" data-num="02">Index</h2>
+      <div id="explore-list"></div>
+    </section>
+
+    <section id="experience" class="section theme-white">
+      <h2 class="h2 reveal" data-num="03">Experience</h2>
+      <div class="exp-cols" id="exp-cols"></div>
+    </section>
+
+    <section id="about" class="section theme-black about">
+      <div class="about-portrait reveal" id="about-portrait"></div>
       <div class="about-body">
-        <h2 class="section-title">About</h2>
-        <div id="about-bio" class="bio"></div>
-        <div class="cv-cols">
-          <div>
-            <h3 class="label">Experience</h3>
-            <ul class="timeline" id="about-experience"></ul>
-          </div>
-          <div>
-            <h3 class="label">Education</h3>
-            <ul class="timeline" id="about-education"></ul>
-          </div>
-        </div>
-        <div class="cv-cols">
-          <div>
-            <h3 class="label">Tools &amp; skills</h3>
-            <ul class="tags" id="about-skills"></ul>
-          </div>
-          <div>
-            <h3 class="label">Languages</h3>
-            <ul class="tags" id="about-languages"></ul>
-          </div>
-        </div>
+        <h2 class="h2 reveal" data-num="04">About</h2>
+        <div class="bio reveal" id="about-bio"></div>
+        <div class="about-lists" id="about-lists"></div>
       </div>
     </section>
 
-    <section id="contact" class="section contact">
-      <p class="eyebrow">Contact</p>
-      <h2 class="contact-line">Let’s build something <em>together</em>.</h2>
-      <a class="contact-email" id="contact-email"></a>
-      <div class="contact-links" id="contact-links"></div>
+    <section id="contact" class="section theme-bright contact">
+      <h2 class="h2 reveal" data-num="05" data-bind="contactHeading"></h2>
+      <div class="contact-body reveal">
+        <p class="contact-text" data-bind="contactText"></p>
+        <form class="contact-form" id="contact-form">
+          <label>Name <span>(required)</span><input name="name" required autocomplete="name" /></label>
+          <label>Email <span>(required)</span><input name="email" type="email" required autocomplete="email" /></label>
+          <label>Message<textarea name="message" rows="5"></textarea></label>
+          <button type="submit" class="btn">Send</button>
+          <p class="form-note">Opens your email app with the message ready to send.</p>
+        </form>
+      </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <span>© <span id="year"></span> <span data-bind="name"></span></span>
-    <a href="#top">Back to top ↑</a>
+  <footer class="site-footer theme-black">
+    <div class="footer-row">
+      <p data-bind="footerLine"></p>
+      <p id="footer-contact"></p>
+      <p id="footer-links"></p>
+    </div>
+    <div class="wordmark" id="wordmark" aria-hidden="true"></div>
+    <p class="copyright">© <span id="year"></span> <span data-bind="name"></span></p>
   </footer>
 
-  <!-- Project detail overlay -->
+  <!-- Project page -->
   <div class="overlay" id="overlay" aria-hidden="true">
     <article class="project" role="dialog" aria-modal="true" aria-labelledby="p-title">
-      <button class="close" id="overlay-close" aria-label="Close project">Close ✕</button>
-      <div class="project-gallery" id="p-gallery"></div>
+      <div class="project-bar">
+        <span class="brand" data-bind="name"></span>
+        <button class="btn btn-small" id="overlay-close">Close</button>
+      </div>
+      <header class="project-head">
+        <h2 id="p-title" class="h2"></h2>
+        <p id="p-meta" class="project-meta"></p>
+      </header>
+      <div id="p-cover" class="project-cover"></div>
       <div class="project-info">
-        <p class="eyebrow" id="p-meta"></p>
-        <h2 id="p-title"></h2>
         <dl class="facts" id="p-facts"></dl>
         <div class="project-text" id="p-text"></div>
-        <nav class="project-nav">
-          <button id="p-prev">← Previous</button>
-          <button id="p-next">Next →</button>
-        </nav>
       </div>
+      <div class="project-gallery" id="p-gallery"></div>
+      <nav class="project-nav">
+        <button id="p-prev">← Previous</button>
+        <button id="p-next">Next project →</button>
+      </nav>
     </article>
   </div>
 

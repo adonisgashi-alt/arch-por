@@ -6,7 +6,8 @@ A minimal, fast, single-page portfolio for an architect. Plain HTML/CSS/JS — n
 
 Everything she'll want to change lives in **`content.js`**:
 
-- **Name, title, tagline, email, social links, CV link**
+- **Name, title, tagline, intro, hero image, email, phone, social links, CV link**
+- **Contact heading/text and footer line**
 - **About** — bio paragraphs, experience, education, software skills, languages, portrait photo
 - **Projects** — title, category, year, location, status, area, client, role, summary, description and photos
 
@@ -27,9 +28,16 @@ Open `index.html` in a browser, or run `python3 -m http.server` and visit http:/
 **GitHub Pages:** repo → Settings → Pages → Deploy from branch → pick the branch and `/ (root)`.
 Netlify or Vercel also work — just drag the folder in; there's nothing to build.
 
+## Layout
+
+Inspired by the Squarespace *Radian* template: a large hero image, a project carousel,
+an index of projects with images, an experience section, a dark About section, a contact
+form and a footer with her name set large across the page.
+
 ## Features
 
-- Filter projects by category
-- Full-screen project view with gallery, project facts, previous/next and keyboard navigation (← → Esc)
+- Project carousel and project index, both opening a full project page
+- Project page with cover, facts, description, captioned gallery, previous/next and keyboard navigation (← → Esc)
+- Contact form that opens the visitor's email app with the message filled in (no server needed)
 - Shareable project links (`#project/courtyard-house`)
 - Responsive down to phone width, respects reduced-motion settings
