@@ -62,7 +62,8 @@
     return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder drawing">${s}</svg>`;
   }
 
-  function media(src, alt, seed, palette, w, h) {
+  function media(img, alt, seed, palette, w, h) {
+    const src = typeof img === "string" ? img : img?.src;
     return src ? `<img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" />` : drawing(seed, palette, w, h);
   }
 
@@ -81,7 +82,7 @@
           <h3 class="card-title">${esc(p.title)}</h3>
           <p class="card-summary">${esc(p.summary)}</p>
         </div>
-        <div class="card-meta">${esc(p.category)}<br />${esc(p.year)}</div>
+        <div class="card-meta">${esc(p.category)}${p.year ? `<br />${esc(p.year)}` : ""}</div>
       </div>
     </button>`).join("");
 
@@ -124,11 +125,11 @@
     current = (i + data.projects.length) % data.projects.length;
     const p = data.projects[current];
     const imgs = p.images?.length ? p.images : [null, null, null];
-    $("#p-gallery").innerHTML = imgs.map((src, k) =>
-      `<figure>${media(src, `${p.title} — image ${k + 1}`, `${p.id}-${k}`, p.palette)}</figure>`).join("");
-    $("#p-meta").textContent = `${p.category} · ${p.year}`;
+    $("#p-gallery").innerHTML = imgs.map((img, k) =>
+      `<figure>${media(img, img?.caption || `${p.title} — image ${k + 1}`, `${p.id}-${k}`, p.palette)}${img?.caption ? `<figcaption>${esc(img.caption)}</figcaption>` : ""}</figure>`).join("");
+    $("#p-meta").textContent = [p.category, p.year].filter(Boolean).join(" · ");
     $("#p-title").textContent = p.title;
-    const facts = [["Location", p.location], ["Status", p.status], ["Area", p.area], ["Client", p.client], ["Role", p.role]];
+    const facts = [["Location", p.location], ["Status", p.status], ["Scope", p.scope], ["Area", p.area], ["Client", p.client], ["Role", p.role]];
     $("#p-facts").innerHTML = facts.filter(([, v]) => v).map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("");
     $("#p-text").innerHTML = (p.description || [p.summary]).map((t) => `<p>${esc(t)}</p>`).join("");
     overlay.scrollTop = 0;

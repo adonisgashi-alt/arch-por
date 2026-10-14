@@ -133,6 +133,7 @@ body.locked { overflow: hidden; }
 .project-gallery { display: flex; flex-direction: column; gap: 12px; padding: 12px; }
 .project-gallery figure { margin: 0; background: var(--surface); }
 .project-gallery img, .project-gallery svg { width: 100%; height: auto; }
+.project-gallery figcaption { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 10px 14px; background: var(--bg); }
 .project-info { position: sticky; top: 0; align-self: start; padding: 96px var(--gutter) 48px clamp(24px, 3vw, 48px); }
 .project-info h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(40px, 4.5vw, 68px); line-height: 1; margin: 0 0 32px; }
 .facts { display: grid; grid-template-columns: auto 1fr; margin: 0 0 32px; font-size: 14px; }

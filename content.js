@@ -5,7 +5,8 @@
  *  • Text: just replace the strings below.
  *  • Photos: drop files into /images and list them in a project's
  *    `images` array, e.g. images: ["images/villa-1.jpg", "images/villa-2.jpg"].
- *    The first image is used as the cover. If `images` is empty,
+ *    The first image is used as the cover. Use { src: "...", caption: "..." }
+ *    instead of a plain path to add a caption. If `images` is empty,
  *    an abstract drawing is generated as a placeholder.
  *  • Add or remove projects by copying / deleting a { ... } block.
  */
@@ -42,9 +43,32 @@ window.PORTFOLIO = {
   },
 
   // Categories shown in the filter bar (must match project `category` values)
-  categories: ["Residential", "Cultural", "Interior", "Competition", "Academic"],
+  categories: ["Technical", "Residential", "Cultural", "Interior", "Competition", "Academic"],
 
   projects: [
+    {
+      id: "200-s-wacker",
+      title: "200 S Wacker",
+      category: "Technical",
+      year: "", // add the year here
+      location: "Chicago, IL",
+      status: "Documentation & coordination",
+      scope: "Scan-to-BIM / Existing Conditions / Paving Coordination",
+      role: "Scan-to-BIM modelling, documentation",
+      summary: "A scan-based documentation and technical coordination study for the exterior plaza of 200 S Wacker in downtown Chicago.",
+      description: [
+        "A scan-based documentation and technical coordination study for the exterior plaza of 200 S Wacker in downtown Chicago. Working from laser-scanning data, I reconstructed the existing conditions in Archicad and developed coordinated plans, sections and details for the proposed plaza paving.",
+        "The work evolved from documenting the existing geometry to resolving paving joints, elevations, drainage, precast interfaces and field conditions for fabrication and installation.",
+      ],
+      // Images can be a plain path, or { src, caption } to show a caption in the project view.
+      images: [
+        "images/200-s-wacker-1.jpg",
+        { src: "images/200-s-wacker-2.jpg", caption: "Point cloud" },
+        { src: "images/200-s-wacker-3.jpg", caption: "Archicad model" },
+        { src: "images/200-s-wacker-sheet.jpg", caption: "Portfolio sheet" },
+      ],
+      palette: ["#e6e4e1", "#d9382f", "#1e1e1e"],
+    },
     {
       id: "courtyard-house",
       title: "Courtyard House",
