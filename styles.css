@@ -51,14 +51,18 @@ p { margin: 0; }
 
 /* Header */
 .site-header {
-  position: relative; z-index: 30;
+  position: sticky; top: 0; z-index: 30;
   display: flex; align-items: center; gap: 32px;
   padding: max(16px, 1.4vw) var(--pad);
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
 }
+section[id] { scroll-margin-top: 72px; }
 .brand { font-family: var(--serif); font-size: 26px; margin-right: auto; }
 .nav { display: flex; gap: 28px; font-size: 15px; }
 .nav a { opacity: .7; transition: opacity .2s; }
-.nav a:hover { opacity: 1; }
+.nav a:hover, .nav a.active { opacity: 1; }
+.nav a.active { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
 .burger { display: none; width: 34px; height: 34px; position: relative; }
 .burger span { position: absolute; left: 5px; right: 5px; height: 2px; background: var(--ink); transition: transform .3s, top .3s; }
 .burger span:first-child { top: 12px; }

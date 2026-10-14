@@ -21,7 +21,8 @@ Until real photos are added, each project shows a generated abstract architectur
 
 ## Preview locally
 
-Open `index.html` in a browser, or run `python3 -m http.server` and visit http://localhost:8000.
+Run `python3 -m http.server` in this folder and visit http://localhost:8000.
+(Opening `index.html` directly from disk won't load the styles, because paths are site-root based for the clean `/projects/<id>` URLs.)
 
 ## Publish (free)
 
@@ -39,5 +40,5 @@ form and a footer with her name set large across the page.
 - Project carousel and project index, both opening a full project page
 - Project page with cover, facts, description, captioned gallery, previous/next and keyboard navigation (← → Esc)
 - Contact form that opens the visitor's email app with the message filled in (no server needed)
-- Shareable project links (`#project/courtyard-house`)
+- Clean, shareable project links (`/projects/courtyard-house`); `vercel.json` routes them to the page
 - Responsive down to phone width, respects reduced-motion settings

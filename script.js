@@ -173,7 +173,14 @@
   const overlay = $("#overlay");
   let current = 0, lastFocus = null;
 
-  function openProject(i) {
+  // Clean URLs: "/" for the page, "/projects/<id>" for a project (no "#" in the address bar).
+  // Skipped when the file is opened directly from disk, where history paths aren't allowed.
+  const setUrl = (path, push) => {
+    if (location.protocol === "file:" || location.pathname + location.hash === path) return;
+    history[push ? "pushState" : "replaceState"](null, "", path);
+  };
+
+  function openProject(i, push = false) {
     current = (i + data.projects.length) % data.projects.length;
     const p = data.projects[current];
     const imgs = p.images?.length ? p.images : [null, null, null];
@@ -193,20 +200,20 @@
       document.body.classList.add("locked");
       $("#overlay-close").focus();
     }
-    history.replaceState(null, "", `#project/${p.id}`);
+    setUrl(`/projects/${p.id}`, push);
   }
 
   function closeProject() {
     overlay.classList.remove("open");
     overlay.setAttribute("aria-hidden", "true");
     document.body.classList.remove("locked");
-    history.replaceState(null, "", "#projects");
+    setUrl("/");
     lastFocus?.focus();
   }
 
   const openFrom = (e) => {
     const el = e.target.closest("[data-index]");
-    if (el) openProject(+el.dataset.index);
+    if (el) openProject(+el.dataset.index, true);
   };
   [track, explore].forEach((el) => {
     el.addEventListener("click", openFrom);
@@ -223,12 +230,43 @@
     if (e.key === "ArrowLeft") openProject(current - 1);
   });
 
-  // Deep link: #project/<id>
-  const m = location.hash.match(/^#project\/(.+)$/);
-  if (m) {
-    const i = data.projects.findIndex((p) => p.id === m[1]);
-    if (i >= 0) openProject(i);
-  }
+  /* ── Section links scroll without adding "#section" to the URL ── */
+  const scrollToSection = (id, smooth = true) => {
+    const el = id && id !== "top" && document.getElementById(id);
+    const behavior = smooth ? "smooth" : "auto";
+    el ? el.scrollIntoView({ behavior }) : scrollTo({ top: 0, behavior });
+  };
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    e.preventDefault();
+    if (overlay.classList.contains("open")) closeProject();
+    scrollToSection(a.getAttribute("href").slice(1));
+    setUrl("/");
+  });
+
+  /* ── Initial URL: /projects/<id>, or old-style #project/<id> and #section links ── */
+  const routeFromUrl = () => {
+    const m = location.pathname.match(/^\/projects\/([^/]+)/) || location.hash.match(/^#project\/(.+)$/);
+    const i = m ? data.projects.findIndex((p) => p.id === decodeURIComponent(m[1])) : -1;
+    if (i >= 0) return openProject(i);
+    if (overlay.classList.contains("open")) closeProject();
+    if (location.hash.length > 1) {
+      const id = location.hash.slice(1);
+      setUrl("/");
+      requestAnimationFrame(() => scrollToSection(id, false));
+    }
+  };
+  routeFromUrl();
+  addEventListener("popstate", routeFromUrl);
+
+  /* ── Highlight the menu link for the section on screen ── */
+  const navLinks = [...document.querySelectorAll(".nav a")];
+  const spy = new IntersectionObserver((entries) => entries.forEach((en) => {
+    if (!en.isIntersecting) return;
+    navLinks.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === `#${en.target.id}`));
+  }), { rootMargin: "-45% 0px -50% 0px" });
+  document.querySelectorAll("main section[id]").forEach((s) => spy.observe(s));
 
   /* ── Fade in on scroll ── */
   const io = new IntersectionObserver((entries) => entries.forEach((en) => {
