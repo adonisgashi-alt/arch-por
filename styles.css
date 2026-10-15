@@ -37,10 +37,6 @@ p { margin: 0; }
 
 /* Type */
 .h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(48px, 7vw, 112px); line-height: .95; letter-spacing: -0.02em; margin: 0; }
-.h2[data-num]::before {
-  content: attr(data-num); display: block; margin-bottom: 18px;
-  font: 400 13px/1 var(--font); letter-spacing: .12em; color: var(--muted);
-}
 .label { font-size: 14px; color: var(--muted); }
 
 /* Buttons */
