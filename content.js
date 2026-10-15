@@ -1,67 +1,74 @@
 /*
  * ─────────────────────────────────────────────────────────────
- *  PORTFOLIO CONTENT — edit this file to make the site hers.
+ *  PORTFOLIO CONTENT — edit this file to update the site.
  * ─────────────────────────────────────────────────────────────
  *  • Text: just replace the strings below.
  *  • Photos: drop files into /images and list them in a project's
- *    `images` array, e.g. images: ["images/villa-1.jpg", "images/villa-2.jpg"].
- *    The first image is used as the cover. Use { src: "...", caption: "..." }
- *    instead of a plain path to add a caption. If `images` is empty,
- *    an abstract drawing is generated as a placeholder.
- *  • Add or remove projects by copying / deleting a { ... } block.
+ *    `images` array. The first image is the cover. Use
+ *    { src: "...", caption: "..." } instead of a plain path to add a caption.
+ *  • Add, remove or reorder projects by moving the { ... } blocks.
+ *  • Each project gets its own page at /projects/<id>.
  */
 window.PORTFOLIO = {
   name: "Kaltrina Ajdini",
   title: "Architect",
-  location: "Based in Vienna — working worldwide",
-  tagline: "Quiet buildings, carefully made. Spaces shaped by light, material and the people who live in them.",
+  location: "Prishtina, Kosovo",
+  tagline: "Beautiful, functional architecture that gives better shape to the places we live in.",
   // Short paragraph shown under the tagline on the right.
-  intro: "I work across design, documentation and technical coordination — from reading existing conditions precisely to resolving the details that make a building go together.",
-  // Large image at the top of the page. Wide (landscape) images work best.
-  heroImage: "images/200-s-wacker-2.jpg",
+  intro: "Architect working across public buildings, housing, interiors and cultural heritage — from the first concept through construction documentation and site coordination.",
+  // Images that rotate at the top of the home page (wide images work best).
+  heroImages: [
+    { src: "images/school-1.jpg", project: "primary-school" },
+    { src: "images/pool-2.jpg", project: "olympic-pool" },
+    { src: "images/housing-3.jpg", project: "flexible-housing" },
+    { src: "images/geodes-2.jpg", project: "geodes-office" },
+  ],
   // Contact section
   contactHeading: "Let’s build!",
-  contactText: "Open to new roles, collaborations and freelance projects. Send a note and I’ll get back to you.",
-  phone: "", // optional, e.g. "+1 (555) 555-5555"
-  footerLine: "Architecture & Spatial Design",
-  email: "hello@yourname.com",
+  contactText: "Open to new roles, collaborations and design commissions. Send a note and I’ll get back to you.",
+  phone: "", // optional — left off the public site on purpose
+  footerLine: "Architecture & Interior Design",
+  email: "kaltrinaajdini93@gmail.com",
   social: [
-    { label: "Instagram", url: "https://instagram.com/" },
-    { label: "LinkedIn", url: "https://linkedin.com/" },
-    { label: "Issuu", url: "https://issuu.com/" },
+    // { label: "LinkedIn", url: "https://www.linkedin.com/in/..." },
+    // { label: "Instagram", url: "https://instagram.com/..." },
   ],
-  cv: "", // e.g. "files/cv.pdf" — leave empty to hide the button
+  cv: "", // e.g. "files/cv.pdf" — leave empty to hide the link
 
   about: {
     portrait: "", // e.g. "images/portrait.jpg"
     bio: [
-      "I am an architect interested in the overlap between careful construction and everyday life. My work moves between housing, small cultural buildings and interiors, always starting from the site — its light, its history and its materials.",
-      "I studied architecture and have since worked in practices across Europe on projects from early competition stages through to construction on site. I enjoy hand sketching as much as building precise digital models, and I believe good detailing is a form of generosity.",
-    ],
-    education: [
-      { years: "2018 — 2020", title: "M.Arch, Master of Architecture", place: "University Name" },
-      { years: "2014 — 2018", title: "B.Arch, Bachelor of Architecture", place: "University Name" },
+      "I’m an architect from Prishtina. My goal is always to give better shape to the built environment through beautiful, functional architecture — buildings and interiors that work well for the people who use them.",
+      "I studied architecture at the University of Prishtina “Hasan Prishtina” and spent three years at New Dimension Architecture, designing commercial and residential projects with budgets up to €6 million across every phase, from concept to construction documents and on-site supervision. Alongside practice I’ve worked on cultural heritage — documenting and protecting monuments with the Ministry of Culture, Youth and Sport and Cultural Heritage without Borders.",
+      "I’m detail-oriented, a fast learner and at my best in a team, comfortable juggling several projects at once.",
     ],
     experience: [
-      { years: "2022 — Now", title: "Project Architect", place: "Studio Name, City" },
-      { years: "2020 — 2022", title: "Architectural Designer", place: "Office Name, City" },
-      { years: "2019", title: "Intern", place: "Practice Name, City" },
+      { years: "Sept – Nov 2019", title: "Intern Architect", place: "Ministry of Culture, Youth and Sport, Prishtina" },
+      { years: "2016 — 2019", title: "Architect", place: "New Dimension Architecture, Prishtina" },
+      { years: "June – July 2019", title: "Heritage Lab — “Refinding the Heritage of Letnica”", place: "Cultural Heritage without Borders (CHwB) Kosovo" },
+      { years: "June 2015", title: "“Santefaction” — access in public spaces", place: "Kosovo Architecture Festival workshop" },
+    ],
+    education: [
+      { years: "2012 — 2020", title: "Master of Technical Sciences — Architecture", place: "University of Prishtina “Hasan Prishtina”, Faculty of Civil Engineering and Architecture" },
     ],
     // "Expertise" list in the About section
-    services: ["Scan-to-BIM", "Existing conditions", "Design development", "Construction documents", "Technical coordination"],
-    skills: ["Rhino", "Revit", "ArchiCAD", "AutoCAD", "Grasshopper", "Enscape", "V-Ray", "Photoshop", "InDesign", "Model making", "Hand drawing"],
-    languages: ["English", "German", "Albanian"],
+    services: ["Concept & design development", "Construction documentation", "3D modelling & visualisation", "Interior design", "Cultural heritage documentation", "Scan-to-BIM & existing conditions"],
+    skills: ["ArchiCAD", "AutoCAD", "SketchUp", "Autodesk 3ds Max", "Lumion", "Adobe Photoshop", "Microsoft Excel", "Microsoft PowerPoint"],
+    certifications: [
+      "ArchiCAD 17 — 3D modelling & documentation, archiEDU",
+      "Photoshop CS6 — post-processing, archiEDU",
+      "3ds Max 2016 — modelling & rendering, VIProduct",
+      "SketchUp — 3D modelling & documentation, VIProduct",
+    ],
+    languages: ["Albanian — native", "English — full", "Turkish — fluent", "Serbian — fluent", "French — elementary"],
   },
-
-  // Categories shown in the filter bar (must match project `category` values)
-  categories: ["Technical", "Residential", "Cultural", "Interior", "Competition", "Academic"],
 
   projects: [
     {
       id: "200-s-wacker",
       title: "200 S Wacker",
-      category: "Technical",
-      year: "", // add the year here
+      category: "Documentation",
+      year: "",
       location: "Chicago, IL",
       status: "Documentation & coordination",
       scope: "Scan-to-BIM / Existing Conditions / Paving Coordination",
@@ -71,121 +78,98 @@ window.PORTFOLIO = {
         "A scan-based documentation and technical coordination study for the exterior plaza of 200 S Wacker in downtown Chicago. Working from laser-scanning data, I reconstructed the existing conditions in Archicad and developed coordinated plans, sections and details for the proposed plaza paving.",
         "The work evolved from documenting the existing geometry to resolving paving joints, elevations, drainage, precast interfaces and field conditions for fabrication and installation.",
       ],
-      // Images can be a plain path, or { src, caption } to show a caption in the project view.
       images: [
         "images/200-s-wacker-1.jpg",
         { src: "images/200-s-wacker-2.jpg", caption: "Point cloud" },
         { src: "images/200-s-wacker-3.jpg", caption: "Archicad model" },
-        { src: "images/200-s-wacker-sheet.jpg", caption: "Portfolio sheet" },
+        { src: "images/200-s-wacker-4.jpg", caption: "Existing condition plan" },
       ],
-      palette: ["#e6e4e1", "#d9382f", "#1e1e1e"],
     },
     {
-      id: "courtyard-house",
-      title: "Courtyard House",
+      id: "primary-school",
+      title: "Primary School",
+      category: "Public facility",
+      summary: "A school organised around group learning, with shared spaces and an atrium between the classrooms.",
+      description: [
+        "The design of the school has been based on the organization of qualitative group learning. Particular attention has been paid to student socialism, which is why space for many purposes and the atrium are located between classes.",
+        "The school is also thought to be an ecological facility with green roofs and solar panels.",
+      ],
+      scope: "Concept, site plan, floor plans, interiors",
+      images: [
+        "images/school-1.jpg",
+        { src: "images/school-2.jpg", caption: "Shared learning space" },
+        { src: "images/school-3.jpg", caption: "Classroom opening onto the atrium" },
+        { src: "images/school-4.jpg", caption: "Site plan, ground floor and section" },
+      ],
+    },
+    {
+      id: "olympic-pool",
+      title: "Olympic Pool",
+      category: "Public facility",
+      summary: "A sports centre that pulls the surrounding greenery into the building through long views.",
+      description: [
+        "The concept of the Olympic pool is based on the use and integration of green space in the building through wonderful views, which enables the organic connection between indoor and outdoor space. The location itself has made this possible, as the integrated greenery surrounds the entire space, while also using it as a recreational space.",
+        "Particular emphasis has been placed on the entrance part, which is related to the existing basketball court. With the addition of the Olympic swimming pool, this facility today functions as a sports center.",
+      ],
+      scope: "Concept, plans, sections, details",
+      images: [
+        "images/pool-2.jpg",
+        { src: "images/pool-1.jpg", caption: "Approach through the greenery" },
+        { src: "images/pool-3.jpg", caption: "Street elevation" },
+        { src: "images/pool-4.jpg", caption: "Ground floor, sections and tribune seating detail" },
+      ],
+    },
+    {
+      id: "office-building",
+      title: "Office Building",
+      category: "Public facility",
+      summary: "An office building with a rigid urban façade and a second skin of aluminium louvres over a transparent curtain wall.",
+      description: [
+        "The design of the project started with the creation of a structure that gives the facility a pronounced concentration in the interior area, without turning away from the road from which access is made.",
+        "The second challenge was to create a rigid façade from an urban perspective on the one hand, and to maximise transparency on the exterior wall to benefit the interior on the other. To achieve this, the second skin of the façade was designed as a combination of prefabricated vertical aluminium louvres attached to the curtain wall behind it to save energy, in addition to meeting the needs of the interior space.",
+      ],
+      scope: "Concept, plans, section, façade detail, interiors",
+      images: [
+        "images/office-1.jpg",
+        { src: "images/office-4.jpg", caption: "Louvred second skin" },
+        { src: "images/office-2.jpg", caption: "Interior" },
+        { src: "images/office-3.jpg", caption: "Typical floor plan and façade" },
+      ],
+    },
+    {
+      id: "flexible-housing",
+      title: "Flexible Housing",
       category: "Residential",
-      year: "2024",
-      location: "Lake district, Austria",
-      status: "Built",
-      area: "240 m²",
-      role: "Project architect",
-      client: "Private",
-      summary: "A single-family house arranged around a planted courtyard, opening to the lake on one side and closed to the road on the other.",
+      summary: "A housing block whose apartments can adapt to the changing needs of the people living in them.",
       description: [
-        "The house is organised as a sequence of rooms around a central courtyard, which brings daylight deep into the plan and acts as an outdoor living room for most of the year.",
-        "A heavy rammed-earth wall faces the road, while the lake façade dissolves into a timber frame with full-height glazing. Local larch, lime plaster and terrazzo floors form a restrained palette that will age gracefully.",
+        "Studies have shown that the most accurate and precise way of conceptualising the living space derives from the needs of the residents, the variety of which cannot even be imagined. Housing needs are a dynamic category, and the buildings we build today are incapable of conveying that dynamic.",
+        "In this building, solutions have been made which enable at least partial adaptation of the apartment for the unpredictable needs of the residents. Flexibility is considered to be the main criterion for meeting the diverse needs of residents.",
       ],
-      images: [],
-      palette: ["#d9cfc1", "#8c7b68", "#3b352f"],
+      scope: "Concept, unit combinations, plans, sections, façades",
+      images: [
+        "images/housing-3.jpg",
+        { src: "images/housing-1.jpg", caption: "Façade with planted balconies" },
+        { src: "images/housing-2.jpg", caption: "Courtyard" },
+        { src: "images/housing-4.jpg", caption: "Section, elevation and apartment variations" },
+      ],
     },
     {
-      id: "library-pavilion",
-      title: "Library Pavilion",
-      category: "Cultural",
-      year: "2023",
-      location: "Prishtina, Kosovo",
-      status: "Competition — 2nd prize",
-      area: "1,100 m²",
-      role: "Design lead",
-      client: "Municipality",
-      summary: "A neighbourhood library conceived as a covered public room under a folded concrete roof.",
+      id: "geodes-office",
+      title: "Geodes Office",
+      category: "Interior design",
+      summary: "A green, technologically advanced office interior designed around flexible work and employee well-being.",
       description: [
-        "The pavilion extends the public park under a single folded roof. Reading spaces step down towards a sunken garden, creating quiet zones without closing walls.",
-        "Clerestory windows between the roof folds bring soft northern light onto the shelves, and the ground floor remains open to the street during the day.",
+        "The purpose of this design task is to create an innovative, technologically advanced office that would encourage flexible work, collaboration, work mobility and inspiration, all while staying as green as possible based on high-quality design, use of wood, light that consumes very little energy, furniture made of recyclable materials, printing and other recycling equipment. The other goal is to protect and promote employee well-being.",
+        "There are many factors that affect the well-being of the workplace. Allowing staff to work effectively in different environments within the same space is key to both productivity and workplace well-being. Delicate changes designed for employee well-being can have an effect on happiness and productivity — a happy workforce is a productive workforce.",
       ],
-      images: [],
-      palette: ["#e4e1da", "#9aa39b", "#2f3a36"],
-    },
-    {
-      id: "apartment-renovation",
-      title: "Apartment on Marktgasse",
-      category: "Interior",
-      year: "2023",
-      location: "Vienna, Austria",
-      status: "Built",
-      area: "95 m²",
-      role: "Architect",
-      client: "Private",
-      summary: "The renovation of a 19th-century apartment, reorganised around a new built-in timber wall.",
-      description: [
-        "A continuous oak wall holds the kitchen, storage and a hidden study, freeing the original rooms to be read again in their full proportions.",
-        "Original parquet and stucco were restored; new elements are kept deliberately simple so the old and new speak clearly to each other.",
+      scope: "Space planning, interiors, materials, furniture",
+      images: [
+        "images/geodes-1.jpg",
+        { src: "images/geodes-2.jpg", caption: "Working spaces" },
+        { src: "images/geodes-3.jpg", caption: "Kitchen and well-being" },
+        { src: "images/geodes-4.jpg", caption: "CEO’s office" },
+        { src: "images/geodes-5.jpg", caption: "Plan, well-being concept and section" },
       ],
-      images: [],
-      palette: ["#efe7dc", "#b89474", "#4a3a2c"],
-    },
-    {
-      id: "harbour-housing",
-      title: "Harbour Housing",
-      category: "Residential",
-      year: "2022",
-      location: "Rotterdam, Netherlands",
-      status: "Under construction",
-      area: "6,800 m²",
-      role: "Architectural designer",
-      client: "Housing association",
-      summary: "Sixty-four affordable homes with shared gallery walkways and a communal roof garden.",
-      description: [
-        "The block is cut and stepped to let sunlight into the shared courtyard. Generous gallery walkways double as front porches, encouraging neighbourly encounters.",
-        "Brick in three tones ties the building into the surrounding harbour warehouses.",
-      ],
-      images: [],
-      palette: ["#e6d8cc", "#b0705a", "#3d2a24"],
-    },
-    {
-      id: "chapel",
-      title: "Chapel of Light",
-      category: "Competition",
-      year: "2021",
-      location: "Alpine valley, Switzerland",
-      status: "Competition entry",
-      area: "120 m²",
-      role: "Team member",
-      client: "—",
-      summary: "A small stone chapel where a single opening tracks the sun across the year.",
-      description: [
-        "A compact volume of local stone is carved by one oculus. The changing patch of light measures the hours and seasons on the interior walls.",
-      ],
-      images: [],
-      palette: ["#ece9e3", "#a7a29a", "#26272a"],
-    },
-    {
-      id: "thesis",
-      title: "Re-inhabiting the Factory",
-      category: "Academic",
-      year: "2020",
-      location: "Master thesis",
-      status: "Academic",
-      area: "—",
-      role: "Author",
-      client: "University",
-      summary: "A thesis on the adaptive reuse of a disused textile factory as a school and workshops.",
-      description: [
-        "The project keeps the existing concrete frame and inserts lightweight timber volumes, turning the former production halls into a learning landscape.",
-        "Research included a full survey of the existing structure and a material reuse inventory.",
-      ],
-      images: [],
-      palette: ["#e0ddd5", "#7d8a8f", "#2b3236"],
     },
   ],
 };
