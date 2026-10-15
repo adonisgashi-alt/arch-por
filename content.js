@@ -77,10 +77,9 @@ window.PORTFOLIO = {
       category: "Documentation",
       year: "2026",
       location: "Chicago, IL",
-      status: "Shop drawings, April 2026",
+      status: "Shop drawings",
       scope: "Scan-to-BIM / Existing Conditions / Stone Cap Shop Drawings",
       role: "Scan-to-BIM modelling, drawing set",
-      client: "W. R. Weis Company, Inc.",
       summary: "Scan-to-BIM documentation and stone-cap shop drawings for the outdoor plaza of the Hyatt Regency Chicago on East Wacker Drive.",
       description: [
         "Scan-to-BIM documentation and shop drawings for the outdoor plaza of the Hyatt Regency Chicago at 151 E Wacker Drive. Working from laser-scanning point clouds, I modelled the existing planters, retaining walls, stairs, railings and paving in Archicad and checked the model against the scan to capture the real conditions on site.",
@@ -98,8 +97,8 @@ window.PORTFOLIO = {
         { src: "images/hyatt-11.jpg", caption: "Line perspective — tower and plaza" },
         { src: "images/hyatt-3.jpg", caption: "Line perspective — plaza" },
         { src: "images/hyatt-12.jpg", caption: "Area A plan with dimensions" },
-        { src: "images/hyatt-sheet-a1.jpg", caption: "Sheet A-1 — Enlarged plan" },
-        { src: "images/hyatt-sheet-a2.jpg", caption: "Sheet A-2 — Elevations" },
+        { src: "images/hyatt-sheet-a1.jpg", caption: "Enlarged plan" },
+        { src: "images/hyatt-sheet-a2.jpg", caption: "Elevations" },
       ],
     },
     {
