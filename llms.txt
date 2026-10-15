@@ -41,6 +41,7 @@ I’m detail-oriented, a fast learner and at my best in a team, comfortable jugg
 - Albanian — native; English — full; Turkish — fluent; Serbian — fluent; French — elementary
 
 ## Projects
+- [Hyatt Regency Chicago](https://www.kaltrinaajdini.com/projects/hyatt-regency-chicago) — Documentation, Chicago, IL: Scan-to-BIM documentation of the plaza at the Hyatt Regency Chicago, with the Archicad model built and checked against laser-scan data.
 - [200 S Wacker](https://www.kaltrinaajdini.com/projects/200-s-wacker) — Documentation, Chicago, IL: A scan-based documentation and technical coordination study for the exterior plaza of 200 S Wacker in downtown Chicago.
 - [Primary School](https://www.kaltrinaajdini.com/projects/primary-school) — Public facility: A school organised around group learning, with shared spaces and an atrium between the classrooms.
 - [Olympic Pool](https://www.kaltrinaajdini.com/projects/olympic-pool) — Public facility: A sports centre that pulls the surrounding greenery into the building through long views.

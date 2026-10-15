@@ -22,6 +22,7 @@ window.PORTFOLIO = {
   intro: "Architect working across public buildings, housing, interiors and cultural heritage — from the first concept through construction documentation and site coordination. Currently freelancing for PIKA 3D, Chicago.",
   // Images that rotate at the top of the home page (wide images work best).
   heroImages: [
+    { src: "images/hyatt-1.jpg", project: "hyatt-regency-chicago" },
     { src: "images/school-1.jpg", project: "primary-school" },
     { src: "images/pool-2.jpg", project: "olympic-pool" },
     { src: "images/housing-3.jpg", project: "flexible-housing" },
@@ -70,6 +71,30 @@ window.PORTFOLIO = {
   },
 
   projects: [
+    {
+      id: "hyatt-regency-chicago",
+      title: "Hyatt Regency Chicago",
+      category: "Documentation",
+      year: "2026",
+      location: "Chicago, IL",
+      status: "Documentation & coordination",
+      scope: "Scan-to-BIM / Existing Conditions / Plaza Documentation",
+      role: "Scan-to-BIM modelling, documentation",
+      summary: "Scan-to-BIM documentation of the plaza at the Hyatt Regency Chicago, with the Archicad model built and checked against laser-scan data.",
+      description: [
+        "A scan-to-BIM documentation of the outdoor plaza at the Hyatt Regency Chicago in downtown Chicago. Working from laser-scanning point clouds, I modelled the existing planters, retaining walls, stairs, railings and paving in Archicad, and overlaid the model on the scan to verify it against the real conditions.",
+        "From the coordinated model I produced a top view, elevations and perspectives of the plaza, marking the areas studied for the proposed work.",
+      ],
+      images: [
+        "images/hyatt-1.jpg",
+        { src: "images/hyatt-2.jpg", caption: "Archicad model overlaid on the point cloud" },
+        { src: "images/hyatt-3.jpg", caption: "Plaza perspective" },
+        { src: "images/hyatt-4.jpg", caption: "Top view — model over point cloud" },
+        { src: "images/hyatt-5.jpg", caption: "Elevation" },
+        { src: "images/hyatt-6.jpg", caption: "Elevation" },
+        { src: "images/hyatt-7.jpg", caption: "Elevation" },
+      ],
+    },
     {
       id: "200-s-wacker",
       title: "200 S Wacker",
