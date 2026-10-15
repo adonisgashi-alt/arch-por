@@ -54,32 +54,5 @@
     if (e.key === "ArrowRight") location.href = `/projects/${next.id}`;
   });
 
-  // Gallery layout: wide images fill the row; tall ones pair up side by side.
-  // A tall image without a partner is shown centred at a comfortable height.
-  const gallery = main.querySelector(".project-gallery");
-  const figs = [...gallery.querySelectorAll("figure")];
-  const ratio = (img) => new Promise((resolve) => {
-    if (!img || img.tagName !== "IMG") return resolve(16 / 9);
-    const done = () => resolve(img.naturalWidth / img.naturalHeight || 16 / 9);
-    img.complete && img.naturalWidth ? done() : img.addEventListener("load", done, { once: true });
-    img.addEventListener("error", () => resolve(16 / 9), { once: true });
-  });
-  Promise.all(figs.map((f) => ratio(f.querySelector("img")))).then((ratios) => {
-    // Group consecutive tall images two at a time; widths follow each image's shape so a pair ends level
-    let run = [];
-    const flush = () => {
-      for (let k = 0; k + 1 < run.length; k += 2) {
-        const pair = document.createElement("div");
-        pair.className = "pair";
-        run[k].before(pair);
-        [run[k], run[k + 1]].forEach((f) => { f.style.flex = `${ratios[figs.indexOf(f)]} 1 0`; pair.append(f); });
-      }
-      if (run.length % 2) run[run.length - 1].classList.add("solo");
-      run = [];
-    };
-    figs.forEach((f, k) => (ratios[k] < 1.3 ? run.push(f) : flush()));
-    flush();
-  });
-
   observeReveals();
 })();
