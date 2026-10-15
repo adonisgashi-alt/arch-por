@@ -1,0 +1,5 @@
+# Search engines and AI assistants are welcome to read and index this portfolio.
+User-agent: *
+Allow: /
+
+Sitemap: https://www.kaltrinaajdini.com/sitemap.xml

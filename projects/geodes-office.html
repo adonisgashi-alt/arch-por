@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="/">
+  <title>Geodes Office — Kaltrina Ajdini, Architect</title>
+  <meta name="description" content="A green, technologically advanced office interior designed around flexible work and employee well-being.">
+  <link rel="preload" href="/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin="">
+  <link rel="preload" href="/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin="">
+  <style>
+    /* Fonts are self-hosted and preloaded. The page fades in once they're ready (max 1.5s),
+       so visitors never see a fallback font swap in. */
+    @font-face { font-family: "Instrument Serif"; font-style: normal; font-weight: 400; font-display: block;
+      src: url(/fonts/instrument-serif.woff2) format("woff2"); }
+    @font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 300 500; font-display: block;
+      src: url(/fonts/inter-tight.woff2) format("woff2"); }
+    html.wf-wait body { opacity: 0; }
+    body { transition: opacity .35s ease; }
+  </style>
+  <script>
+    (function () {
+      var root = document.documentElement, done = function () { root.classList.remove("wf-wait"); };
+      if (!document.fonts || !document.fonts.load) return;
+      root.classList.add("wf-wait");
+      setTimeout(done, 1500);
+      Promise.all([document.fonts.load('400 1em "Instrument Serif"'), document.fonts.load('400 1em "Inter Tight"')]).then(done, done);
+    })();
+  </script>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="Geodes Office — Kaltrina Ajdini, Architect"><meta property="og:description" content="A green, technologically advanced office interior designed around flexible work and employee well-being."><meta property="og:image" content="https://www.kaltrinaajdini.com/images/geodes-1.jpg"><meta property="og:url" content="https://www.kaltrinaajdini.com/projects/geodes-office"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="https://www.kaltrinaajdini.com/projects/geodes-office"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","@id":"https://www.kaltrinaajdini.com/projects/geodes-office#work","name":"Geodes Office","url":"https://www.kaltrinaajdini.com/projects/geodes-office","genre":"Interior design","description":"The purpose of this design task is to create an innovative, technologically advanced office that would encourage flexible work, collaboration, work mobility and inspiration, all while staying as green as possible based on high-quality design, use of wood, light that consumes very little energy, furniture made of recyclable materials, printing and other recycling equipment. The other goal is to protect and promote employee well-being. There are many factors that affect the well-being of the workplace. Allowing staff to work effectively in different environments within the same space is key to both productivity and workplace well-being. Delicate changes designed for employee well-being can have an effect on happiness and productivity — a happy workforce is a productive workforce.","abstract":"A green, technologically advanced office interior designed around flexible work and employee well-being.","image":["https://www.kaltrinaajdini.com/images/geodes-1.jpg","https://www.kaltrinaajdini.com/images/geodes-2.jpg","https://www.kaltrinaajdini.com/images/geodes-3.jpg","https://www.kaltrinaajdini.com/images/geodes-4.jpg","https://www.kaltrinaajdini.com/images/geodes-5.jpg"],"creator":{"@id":"https://www.kaltrinaajdini.com/#person"}}</script></head>
+<body data-page="project">
+  
+  <header class="site-header">
+    <a href="/" class="brand">Kaltrina Ajdini</a>
+    <nav class="nav" aria-label="Main">
+      <a href="/#projects">Projects</a>
+      <a href="/#explore">Index</a>
+      <a href="/#about">About</a>
+    </nav>
+    <a href="/#contact" class="btn btn-small">Contact</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+      <span></span><span></span>
+    </button>
+  </header>
+  <div class="menu" id="menu" aria-hidden="true">
+    <nav aria-label="Mobile">
+      <a href="/#projects">Projects</a>
+      <a href="/#explore">Index</a>
+      <a href="/#experience">Experience</a>
+      <a href="/#about">About</a>
+    </nav>
+    <a href="/#contact" class="btn">Contact</a>
+  </div>
+
+  <main id="project" class="project">
+    <header class="project-head">
+      <a class="back-link" href="/#projects">← All projects</a>
+      <h1 class="h2">Geodes Office</h1>
+      <p class="project-meta">Interior design</p>
+    </header>
+    <div class="project-cover">
+    <figure class="reveal"><img src="images/geodes-1.jpg" alt="Geodes Office — image 1" loading="lazy">
+      
+    </figure></div>
+    <div class="project-info">
+      <dl class="facts reveal"><dt>Scope</dt><dd>Space planning, interiors, materials, furniture</dd></dl>
+      <div class="project-text reveal"><p>The purpose of this design task is to create an innovative, technologically advanced office that would encourage flexible work, collaboration, work mobility and inspiration, all while staying as green as possible based on high-quality design, use of wood, light that consumes very little energy, furniture made of recyclable materials, printing and other recycling equipment. The other goal is to protect and promote employee well-being.</p><p>There are many factors that affect the well-being of the workplace. Allowing staff to work effectively in different environments within the same space is key to both productivity and workplace well-being. Delicate changes designed for employee well-being can have an effect on happiness and productivity — a happy workforce is a productive workforce.</p></div>
+    </div>
+    <div class="project-gallery">
+    <figure class="reveal"><img src="images/geodes-2.jpg" alt="Working spaces" loading="lazy">
+      <figcaption>Working spaces</figcaption>
+    </figure>
+    <figure class="reveal"><img src="images/geodes-3.jpg" alt="Kitchen and well-being" loading="lazy">
+      <figcaption>Kitchen and well-being</figcaption>
+    </figure>
+    <figure class="reveal"><img src="images/geodes-4.jpg" alt="CEO’s office" loading="lazy">
+      <figcaption>CEO’s office</figcaption>
+    </figure>
+    <figure class="reveal"><img src="images/geodes-5.jpg" alt="Plan, well-being concept and section" loading="lazy">
+      <figcaption>Plan, well-being concept and section</figcaption>
+    </figure></div>
+    <nav class="project-nav" aria-label="More projects">
+      <a href="/projects/flexible-housing"><span class="label">Previous</span>Flexible Housing</a>
+      <a href="/projects/200-s-wacker" class="next"><span class="label">Next</span>200 S Wacker</a>
+    </nav></main>
+
+  
+  <footer class="site-footer theme-black">
+    <div class="footer-row">
+      <p>Architecture &amp; Interior Design</p>
+      <p><a href="https://www.linkedin.com/in/kaltrina-ajdini/" target="_blank" rel="noopener">LinkedIn</a><br><a href="/files/Kaltrina-Ajdini-CV.pdf" download="">Download CV</a></p>
+    </div>
+    <p class="copyright">© 2026 Kaltrina Ajdini</p>
+  </footer>
+
+  <script src="content.js"></script>
+  <script src="common.js"></script>
+  <script src="project.js"></script>
+
+
+</body></html>

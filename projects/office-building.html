@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="/">
+  <title>Office Building — Kaltrina Ajdini, Architect</title>
+  <meta name="description" content="An office building with a rigid urban façade and a second skin of aluminium louvres over a transparent curtain wall.">
+  <link rel="preload" href="/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin="">
+  <link rel="preload" href="/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin="">
+  <style>
+    /* Fonts are self-hosted and preloaded. The page fades in once they're ready (max 1.5s),
+       so visitors never see a fallback font swap in. */
+    @font-face { font-family: "Instrument Serif"; font-style: normal; font-weight: 400; font-display: block;
+      src: url(/fonts/instrument-serif.woff2) format("woff2"); }
+    @font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 300 500; font-display: block;
+      src: url(/fonts/inter-tight.woff2) format("woff2"); }
+    html.wf-wait body { opacity: 0; }
+    body { transition: opacity .35s ease; }
+  </style>
+  <script>
+    (function () {
+      var root = document.documentElement, done = function () { root.classList.remove("wf-wait"); };
+      if (!document.fonts || !document.fonts.load) return;
+      root.classList.add("wf-wait");
+      setTimeout(done, 1500);
+      Promise.all([document.fonts.load('400 1em "Instrument Serif"'), document.fonts.load('400 1em "Inter Tight"')]).then(done, done);
+    })();
+  </script>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="Office Building — Kaltrina Ajdini, Architect"><meta property="og:description" content="An office building with a rigid urban façade and a second skin of aluminium louvres over a transparent curtain wall."><meta property="og:image" content="https://www.kaltrinaajdini.com/images/office-1.jpg"><meta property="og:url" content="https://www.kaltrinaajdini.com/projects/office-building"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="https://www.kaltrinaajdini.com/projects/office-building"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","@id":"https://www.kaltrinaajdini.com/projects/office-building#work","name":"Office Building","url":"https://www.kaltrinaajdini.com/projects/office-building","genre":"Public facility","description":"The design of the project started with the creation of a structure that gives the facility a pronounced concentration in the interior area, without turning away from the road from which access is made. The second challenge was to create a rigid façade from an urban perspective on the one hand, and to maximise transparency on the exterior wall to benefit the interior on the other. To achieve this, the second skin of the façade was designed as a combination of prefabricated vertical aluminium louvres attached to the curtain wall behind it to save energy, in addition to meeting the needs of the interior space.","abstract":"An office building with a rigid urban façade and a second skin of aluminium louvres over a transparent curtain wall.","image":["https://www.kaltrinaajdini.com/images/office-1.jpg","https://www.kaltrinaajdini.com/images/office-4.jpg","https://www.kaltrinaajdini.com/images/office-2.jpg","https://www.kaltrinaajdini.com/images/office-3.jpg"],"creator":{"@id":"https://www.kaltrinaajdini.com/#person"}}</script></head>
+<body data-page="project">
+  
+  <header class="site-header">
+    <a href="/" class="brand">Kaltrina Ajdini</a>
+    <nav class="nav" aria-label="Main">
+      <a href="/#projects">Projects</a>
+      <a href="/#explore">Index</a>
+      <a href="/#about">About</a>
+    </nav>
+    <a href="/#contact" class="btn btn-small">Contact</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+      <span></span><span></span>
+    </button>
+  </header>
+  <div class="menu" id="menu" aria-hidden="true">
+    <nav aria-label="Mobile">
+      <a href="/#projects">Projects</a>
+      <a href="/#explore">Index</a>
+      <a href="/#experience">Experience</a>
+      <a href="/#about">About</a>
+    </nav>
+    <a href="/#contact" class="btn">Contact</a>
+  </div>
+
+  <main id="project" class="project">
+    <header class="project-head">
+      <a class="back-link" href="/#projects">← All projects</a>
+      <h1 class="h2">Office Building</h1>
+      <p class="project-meta">Public facility</p>
+    </header>
+    <div class="project-cover">
+    <figure class="reveal"><img src="images/office-1.jpg" alt="Office Building — image 1" loading="lazy">
+      
+    </figure></div>
+    <div class="project-info">
+      <dl class="facts reveal"><dt>Scope</dt><dd>Concept, plans, section, façade detail, interiors</dd></dl>
+      <div class="project-text reveal"><p>The design of the project started with the creation of a structure that gives the facility a pronounced concentration in the interior area, without turning away from the road from which access is made.</p><p>The second challenge was to create a rigid façade from an urban perspective on the one hand, and to maximise transparency on the exterior wall to benefit the interior on the other. To achieve this, the second skin of the façade was designed as a combination of prefabricated vertical aluminium louvres attached to the curtain wall behind it to save energy, in addition to meeting the needs of the interior space.</p></div>
+    </div>
+    <div class="project-gallery">
+    <figure class="reveal"><img src="images/office-4.jpg" alt="Louvred second skin" loading="lazy">
+      <figcaption>Louvred second skin</figcaption>
+    </figure>
+    <figure class="reveal"><img src="images/office-2.jpg" alt="Interior" loading="lazy">
+      <figcaption>Interior</figcaption>
+    </figure>
+    <figure class="reveal"><img src="images/office-3.jpg" alt="Typical floor plan and façade" loading="lazy">
+      <figcaption>Typical floor plan and façade</figcaption>
+    </figure></div>
+    <nav class="project-nav" aria-label="More projects">
+      <a href="/projects/olympic-pool"><span class="label">Previous</span>Olympic Pool</a>
+      <a href="/projects/flexible-housing" class="next"><span class="label">Next</span>Flexible Housing</a>
+    </nav></main>
+
+  
+  <footer class="site-footer theme-black">
+    <div class="footer-row">
+      <p>Architecture &amp; Interior Design</p>
+      <p><a href="https://www.linkedin.com/in/kaltrina-ajdini/" target="_blank" rel="noopener">LinkedIn</a><br><a href="/files/Kaltrina-Ajdini-CV.pdf" download="">Download CV</a></p>
+    </div>
+    <p class="copyright">© 2026 Kaltrina Ajdini</p>
+  </footer>
+
+  <script src="content.js"></script>
+  <script src="common.js"></script>
+  <script src="project.js"></script>
+
+
+</body></html>

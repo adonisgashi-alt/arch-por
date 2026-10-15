@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <base href="/" />
+  <title>Kaltrina Ajdini — Architect</title>
+  <meta name="description" content="Kaltrina Ajdini, architect from Prishtina — public buildings, housing, interiors and cultural heritage." />
+  <link rel="preload" href="/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin />
+  <style>
+    /* Fonts are self-hosted and preloaded. The page fades in once they're ready (max 1.5s),
+       so visitors never see a fallback font swap in. */
+    @font-face { font-family: "Instrument Serif"; font-style: normal; font-weight: 400; font-display: block;
+      src: url(/fonts/instrument-serif.woff2) format("woff2"); }
+    @font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 300 500; font-display: block;
+      src: url(/fonts/inter-tight.woff2) format("woff2"); }
+    html.wf-wait body { opacity: 0; }
+    body { transition: opacity .35s ease; }
+  </style>
+  <script>
+    (function () {
+      var root = document.documentElement, done = function () { root.classList.remove("wf-wait"); };
+      if (!document.fonts || !document.fonts.load) return;
+      root.classList.add("wf-wait");
+      setTimeout(done, 1500);
+      Promise.all([document.fonts.load('400 1em "Instrument Serif"'), document.fonts.load('400 1em "Inter Tight"')]).then(done, done);
+    })();
+  </script>
+  <meta property="og:title" content="Kaltrina Ajdini — Architect" />
+  <meta property="og:description" content="Public buildings, housing, interiors and cultural heritage." />
+  <meta property="og:image" content="https://www.kaltrinaajdini.com/images/school-1.jpg" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="home">
+  <div id="site-header"></div>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-media reveal" id="hero-media"></div>
+      <div class="hero-text">
+        <h1 class="hero-tagline reveal" data-bind="tagline"></h1>
+        <p class="hero-intro reveal" data-bind="intro"></p>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <h2 class="h2 reveal" data-num="01">Projects</h2>
+      <div class="carousel">
+        <ul class="carousel-track" id="carousel-track"></ul>
+        <div class="carousel-nav">
+          <button class="arrow" id="carousel-prev" aria-label="Previous">
+            <svg viewBox="0 0 44 18"><path d="M9.9 16.96L2.12 9.18 9.9 1.39M42.86 9.18H3.38" /></svg>
+          </button>
+          <button class="arrow" id="carousel-next" aria-label="Next">
+            <svg viewBox="0 0 44 18"><path d="M34.15 1.39l7.78 7.78-7.78 7.79M1.19 9.17h39.49" /></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="explore" class="section">
+      <h2 class="h2 reveal" data-num="02">Index</h2>
+      <div id="explore-list"></div>
+    </section>
+
+    <section id="experience" class="section theme-white">
+      <h2 class="h2 reveal" data-num="03">Experience</h2>
+      <div class="exp-cols" id="exp-cols"></div>
+    </section>
+
+    <section id="about" class="section theme-black about">
+      <div class="about-portrait reveal" id="about-portrait"></div>
+      <div class="about-body">
+        <h2 class="h2 reveal" data-num="04">About</h2>
+        <div class="bio reveal" id="about-bio"></div>
+        <div class="about-lists" id="about-lists"></div>
+      </div>
+    </section>
+
+    <section id="contact" class="section theme-bright contact">
+      <h2 class="h2 reveal" data-num="05" data-bind="contactHeading"></h2>
+      <div class="contact-body reveal">
+        <p class="contact-text" data-bind="contactText"></p>
+        <form class="contact-form" id="contact-form">
+          <label>Name <span>(required)</span><input name="name" required autocomplete="name" /></label>
+          <label>Email <span>(required)</span><input name="email" type="email" required autocomplete="email" /></label>
+          <label>Message<textarea name="message" rows="5"></textarea></label>
+          <button type="submit" class="btn">Send</button>
+          <p class="form-note">Opens your email app with the message ready to send.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="content.js"></script>
+  <script src="common.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

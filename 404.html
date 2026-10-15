@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="/">
+  <title>Page not found — Kaltrina Ajdini</title>
+  <meta name="description" content="This page doesn’t exist.">
+  <link rel="preload" href="/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin="">
+  <link rel="preload" href="/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin="">
+  <style>
+    /* Fonts are self-hosted and preloaded. The page fades in once they're ready (max 1.5s),
+       so visitors never see a fallback font swap in. */
+    @font-face { font-family: "Instrument Serif"; font-style: normal; font-weight: 400; font-display: block;
+      src: url(/fonts/instrument-serif.woff2) format("woff2"); }
+    @font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 300 500; font-display: block;
+      src: url(/fonts/inter-tight.woff2) format("woff2"); }
+    html.wf-wait body { opacity: 0; }
+    body { transition: opacity .35s ease; }
+  </style>
+  <script>
+    (function () {
+      var root = document.documentElement, done = function () { root.classList.remove("wf-wait"); };
+      if (!document.fonts || !document.fonts.load) return;
+      root.classList.add("wf-wait");
+      setTimeout(done, 1500);
+      Promise.all([document.fonts.load('400 1em "Instrument Serif"'), document.fonts.load('400 1em "Inter Tight"')]).then(done, done);
+    })();
+  </script>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="Page not found — Kaltrina Ajdini"><meta property="og:description" content="This page doesn’t exist."><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"></head>
+<body data-page="project">
+  
+  <header class="site-header">
+    <a href="/" class="brand">Kaltrina Ajdini</a>
+    <nav class="nav" aria-label="Main">
+      <a href="/#projects">Projects</a>
+      <a href="/#explore">Index</a>
+      <a href="/#about">About</a>
+    </nav>
+    <a href="/#contact" class="btn btn-small">Contact</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+      <span></span><span></span>
+    </button>
+  </header>
+  <div class="menu" id="menu" aria-hidden="true">
+    <nav aria-label="Mobile">
+      <a href="/#projects">Projects</a>
+      <a href="/#explore">Index</a>
+      <a href="/#experience">Experience</a>
+      <a href="/#about">About</a>
+    </nav>
+    <a href="/#contact" class="btn">Contact</a>
+  </div>
+
+  <main id="project" class="project">
+      <header class="project-head">
+        <a class="back-link" href="/#projects">← All projects</a>
+        <h1 class="h2">Project not found</h1>
+        <p class="project-meta">This project may have moved. <a href="/#projects">See all projects</a>.</p>
+      </header></main>
+
+  
+  <footer class="site-footer theme-black">
+    <div class="footer-row">
+      <p>Architecture &amp; Interior Design</p>
+      <p><a href="https://www.linkedin.com/in/kaltrina-ajdini/" target="_blank" rel="noopener">LinkedIn</a><br><a href="/files/Kaltrina-Ajdini-CV.pdf" download="">Download CV</a></p>
+    </div>
+    <p class="copyright">© 2026 Kaltrina Ajdini</p>
+  </footer>
+
+  <script src="content.js"></script>
+  <script src="common.js"></script>
+  <script src="project.js"></script>
+
+
+</body></html>

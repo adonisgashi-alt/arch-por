@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="/">
+  <title>Flexible Housing — Kaltrina Ajdini, Architect</title>
+  <meta name="description" content="A housing block whose apartments can adapt to the changing needs of the people living in them.">
+  <link rel="preload" href="/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin="">
+  <link rel="preload" href="/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin="">
+  <style>
+    /* Fonts are self-hosted and preloaded. The page fades in once they're ready (max 1.5s),
+       so visitors never see a fallback font swap in. */
+    @font-face { font-family: "Instrument Serif"; font-style: normal; font-weight: 400; font-display: block;
+      src: url(/fonts/instrument-serif.woff2) format("woff2"); }
+    @font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 300 500; font-display: block;
+      src: url(/fonts/inter-tight.woff2) format("woff2"); }
+    html.wf-wait body { opacity: 0; }
+    body { transition: opacity .35s ease; }
+  </style>
+  <script>
+    (function () {
+      var root = document.documentElement, done = function () { root.classList.remove("wf-wait"); };
+      if (!document.fonts || !document.fonts.load) return;
+      root.classList.add("wf-wait");
+      setTimeout(done, 1500);
+      Promise.all([document.fonts.load('400 1em "Instrument Serif"'), document.fonts.load('400 1em "Inter Tight"')]).then(done, done);
+    })();
+  </script>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="Flexible Housing — Kaltrina Ajdini, Architect"><meta property="og:description" content="A housing block whose apartments can adapt to the changing needs of the people living in them."><meta property="og:image" content="https://www.kaltrinaajdini.com/images/housing-3.jpg"><meta property="og:url" content="https://www.kaltrinaajdini.com/projects/flexible-housing"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="https://www.kaltrinaajdini.com/projects/flexible-housing"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","@id":"https://www.kaltrinaajdini.com/projects/flexible-housing#work","name":"Flexible Housing","url":"https://www.kaltrinaajdini.com/projects/flexible-housing","genre":"Residential","description":"Studies have shown that the most accurate and precise way of conceptualising the living space derives from the needs of the residents, the variety of which cannot even be imagined. Housing needs are a dynamic category, and the buildings we build today are incapable of conveying that dynamic. In this building, solutions have been made which enable at least partial adaptation of the apartment for the unpredictable needs of the residents. Flexibility is considered to be the main criterion for meeting the diverse needs of residents.","abstract":"A housing block whose apartments can adapt to the changing needs of the people living in them.","image":["https://www.kaltrinaajdini.com/images/housing-3.jpg","https://www.kaltrinaajdini.com/images/housing-1.jpg","https://www.kaltrinaajdini.com/images/housing-2.jpg","https://www.kaltrinaajdini.com/images/housing-4.jpg"],"creator":{"@id":"https://www.kaltrinaajdini.com/#person"}}</script></head>
+<body data-page="project">
+  
+  <header class="site-header">
+    <a href="/" class="brand">Kaltrina Ajdini</a>
+    <nav class="nav" aria-label="Main">
+      <a href="/#projects">Projects</a>
+      <a href="/#explore">Index</a>
+      <a href="/#about">About</a>
+    </nav>
+    <a href="/#contact" class="btn btn-small">Contact</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+      <span></span><span></span>
+    </button>
+  </header>
+  <div class="menu" id="menu" aria-hidden="true">
+    <nav aria-label="Mobile">
+      <a href="/#projects">Projects</a>
+      <a href="/#explore">Index</a>
+      <a href="/#experience">Experience</a>
+      <a href="/#about">About</a>
+    </nav>
+    <a href="/#contact" class="btn">Contact</a>
+  </div>
+
+  <main id="project" class="project">
+    <header class="project-head">
+      <a class="back-link" href="/#projects">← All projects</a>
+      <h1 class="h2">Flexible Housing</h1>
+      <p class="project-meta">Residential</p>
+    </header>
+    <div class="project-cover">
+    <figure class="reveal"><img src="images/housing-3.jpg" alt="Flexible Housing — image 1" loading="lazy">
+      
+    </figure></div>
+    <div class="project-info">
+      <dl class="facts reveal"><dt>Scope</dt><dd>Concept, unit combinations, plans, sections, façades</dd></dl>
+      <div class="project-text reveal"><p>Studies have shown that the most accurate and precise way of conceptualising the living space derives from the needs of the residents, the variety of which cannot even be imagined. Housing needs are a dynamic category, and the buildings we build today are incapable of conveying that dynamic.</p><p>In this building, solutions have been made which enable at least partial adaptation of the apartment for the unpredictable needs of the residents. Flexibility is considered to be the main criterion for meeting the diverse needs of residents.</p></div>
+    </div>
+    <div class="project-gallery">
+    <figure class="reveal"><img src="images/housing-1.jpg" alt="Façade with planted balconies" loading="lazy">
+      <figcaption>Façade with planted balconies</figcaption>
+    </figure>
+    <figure class="reveal"><img src="images/housing-2.jpg" alt="Courtyard" loading="lazy">
+      <figcaption>Courtyard</figcaption>
+    </figure>
+    <figure class="reveal"><img src="images/housing-4.jpg" alt="Section, elevation and apartment variations" loading="lazy">
+      <figcaption>Section, elevation and apartment variations</figcaption>
+    </figure></div>
+    <nav class="project-nav" aria-label="More projects">
+      <a href="/projects/office-building"><span class="label">Previous</span>Office Building</a>
+      <a href="/projects/geodes-office" class="next"><span class="label">Next</span>Geodes Office</a>
+    </nav></main>
+
+  
+  <footer class="site-footer theme-black">
+    <div class="footer-row">
+      <p>Architecture &amp; Interior Design</p>
+      <p><a href="https://www.linkedin.com/in/kaltrina-ajdini/" target="_blank" rel="noopener">LinkedIn</a><br><a href="/files/Kaltrina-Ajdini-CV.pdf" download="">Download CV</a></p>
+    </div>
+    <p class="copyright">© 2026 Kaltrina Ajdini</p>
+  </footer>
+
+  <script src="content.js"></script>
+  <script src="common.js"></script>
+  <script src="project.js"></script>
+
+
+</body></html>

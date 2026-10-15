@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="/">
+  <title>200 S Wacker — Kaltrina Ajdini, Architect</title>
+  <meta name="description" content="A scan-based documentation and technical coordination study for the exterior plaza of 200 S Wacker in downtown Chicago.">
+  <link rel="preload" href="/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin="">
+  <link rel="preload" href="/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin="">
+  <style>
+    /* Fonts are self-hosted and preloaded. The page fades in once they're ready (max 1.5s),
+       so visitors never see a fallback font swap in. */
+    @font-face { font-family: "Instrument Serif"; font-style: normal; font-weight: 400; font-display: block;
+      src: url(/fonts/instrument-serif.woff2) format("woff2"); }
+    @font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 300 500; font-display: block;
+      src: url(/fonts/inter-tight.woff2) format("woff2"); }
+    html.wf-wait body { opacity: 0; }
+    body { transition: opacity .35s ease; }
+  </style>
+  <script>
+    (function () {
+      var root = document.documentElement, done = function () { root.classList.remove("wf-wait"); };
+      if (!document.fonts || !document.fonts.load) return;
+      root.classList.add("wf-wait");
+      setTimeout(done, 1500);
+      Promise.all([document.fonts.load('400 1em "Instrument Serif"'), document.fonts.load('400 1em "Inter Tight"')]).then(done, done);
+    })();
+  </script>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="200 S Wacker — Kaltrina Ajdini, Architect"><meta property="og:description" content="A scan-based documentation and technical coordination study for the exterior plaza of 200 S Wacker in downtown Chicago."><meta property="og:image" content="https://www.kaltrinaajdini.com/images/200-s-wacker-1.jpg"><meta property="og:url" content="https://www.kaltrinaajdini.com/projects/200-s-wacker"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="https://www.kaltrinaajdini.com/projects/200-s-wacker"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","@id":"https://www.kaltrinaajdini.com/projects/200-s-wacker#work","name":"200 S Wacker","url":"https://www.kaltrinaajdini.com/projects/200-s-wacker","genre":"Documentation","description":"A scan-based documentation and technical coordination study for the exterior plaza of 200 S Wacker in downtown Chicago. Working from laser-scanning data, I reconstructed the existing conditions in Archicad and developed coordinated plans, sections and details for the proposed plaza paving. The work evolved from documenting the existing geometry to resolving paving joints, elevations, drainage, precast interfaces and field conditions for fabrication and installation.","abstract":"A scan-based documentation and technical coordination study for the exterior plaza of 200 S Wacker in downtown Chicago.","image":["https://www.kaltrinaajdini.com/images/200-s-wacker-1.jpg","https://www.kaltrinaajdini.com/images/200-s-wacker-2.jpg","https://www.kaltrinaajdini.com/images/200-s-wacker-3.jpg","https://www.kaltrinaajdini.com/images/200-s-wacker-4.jpg"],"locationCreated":{"@type":"Place","name":"Chicago, IL"},"creator":{"@id":"https://www.kaltrinaajdini.com/#person"}}</script></head>
+<body data-page="project">
+  
+  <header class="site-header">
+    <a href="/" class="brand">Kaltrina Ajdini</a>
+    <nav class="nav" aria-label="Main">
+      <a href="/#projects">Projects</a>
+      <a href="/#explore">Index</a>
+      <a href="/#about">About</a>
+    </nav>
+    <a href="/#contact" class="btn btn-small">Contact</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+      <span></span><span></span>
+    </button>
+  </header>
+  <div class="menu" id="menu" aria-hidden="true">
+    <nav aria-label="Mobile">
+      <a href="/#projects">Projects</a>
+      <a href="/#explore">Index</a>
+      <a href="/#experience">Experience</a>
+      <a href="/#about">About</a>
+    </nav>
+    <a href="/#contact" class="btn">Contact</a>
+  </div>
+
+  <main id="project" class="project">
+    <header class="project-head">
+      <a class="back-link" href="/#projects">← All projects</a>
+      <h1 class="h2">200 S Wacker</h1>
+      <p class="project-meta">Documentation · Chicago, IL</p>
+    </header>
+    <div class="project-cover">
+    <figure class="reveal"><img src="images/200-s-wacker-1.jpg" alt="200 S Wacker — image 1" loading="lazy">
+      
+    </figure></div>
+    <div class="project-info">
+      <dl class="facts reveal"><dt>Location</dt><dd>Chicago, IL</dd><dt>Status</dt><dd>Documentation &amp; coordination</dd><dt>Scope</dt><dd>Scan-to-BIM / Existing Conditions / Paving Coordination</dd><dt>Role</dt><dd>Scan-to-BIM modelling, documentation</dd></dl>
+      <div class="project-text reveal"><p>A scan-based documentation and technical coordination study for the exterior plaza of 200 S Wacker in downtown Chicago. Working from laser-scanning data, I reconstructed the existing conditions in Archicad and developed coordinated plans, sections and details for the proposed plaza paving.</p><p>The work evolved from documenting the existing geometry to resolving paving joints, elevations, drainage, precast interfaces and field conditions for fabrication and installation.</p></div>
+    </div>
+    <div class="project-gallery">
+    <figure class="reveal"><img src="images/200-s-wacker-2.jpg" alt="Point cloud" loading="lazy">
+      <figcaption>Point cloud</figcaption>
+    </figure>
+    <figure class="reveal"><img src="images/200-s-wacker-3.jpg" alt="Archicad model" loading="lazy">
+      <figcaption>Archicad model</figcaption>
+    </figure>
+    <figure class="reveal"><img src="images/200-s-wacker-4.jpg" alt="Existing condition plan" loading="lazy">
+      <figcaption>Existing condition plan</figcaption>
+    </figure></div>
+    <nav class="project-nav" aria-label="More projects">
+      <a href="/projects/geodes-office"><span class="label">Previous</span>Geodes Office</a>
+      <a href="/projects/primary-school" class="next"><span class="label">Next</span>Primary School</a>
+    </nav></main>
+
+  
+  <footer class="site-footer theme-black">
+    <div class="footer-row">
+      <p>Architecture &amp; Interior Design</p>
+      <p><a href="https://www.linkedin.com/in/kaltrina-ajdini/" target="_blank" rel="noopener">LinkedIn</a><br><a href="/files/Kaltrina-Ajdini-CV.pdf" download="">Download CV</a></p>
+    </div>
+    <p class="copyright">© 2026 Kaltrina Ajdini</p>
+  </footer>
+
+  <script src="content.js"></script>
+  <script src="common.js"></script>
+  <script src="project.js"></script>
+
+
+</body></html>

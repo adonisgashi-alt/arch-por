@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="/">
+  <title>Olympic Pool — Kaltrina Ajdini, Architect</title>
+  <meta name="description" content="A sports centre that pulls the surrounding greenery into the building through long views.">
+  <link rel="preload" href="/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin="">
+  <link rel="preload" href="/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin="">
+  <style>
+    /* Fonts are self-hosted and preloaded. The page fades in once they're ready (max 1.5s),
+       so visitors never see a fallback font swap in. */
+    @font-face { font-family: "Instrument Serif"; font-style: normal; font-weight: 400; font-display: block;
+      src: url(/fonts/instrument-serif.woff2) format("woff2"); }
+    @font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 300 500; font-display: block;
+      src: url(/fonts/inter-tight.woff2) format("woff2"); }
+    html.wf-wait body { opacity: 0; }
+    body { transition: opacity .35s ease; }
+  </style>
+  <script>
+    (function () {
+      var root = document.documentElement, done = function () { root.classList.remove("wf-wait"); };
+      if (!document.fonts || !document.fonts.load) return;
+      root.classList.add("wf-wait");
+      setTimeout(done, 1500);
+      Promise.all([document.fonts.load('400 1em "Instrument Serif"'), document.fonts.load('400 1em "Inter Tight"')]).then(done, done);
+    })();
+  </script>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="Olympic Pool — Kaltrina Ajdini, Architect"><meta property="og:description" content="A sports centre that pulls the surrounding greenery into the building through long views."><meta property="og:image" content="https://www.kaltrinaajdini.com/images/pool-2.jpg"><meta property="og:url" content="https://www.kaltrinaajdini.com/projects/olympic-pool"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="https://www.kaltrinaajdini.com/projects/olympic-pool"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","@id":"https://www.kaltrinaajdini.com/projects/olympic-pool#work","name":"Olympic Pool","url":"https://www.kaltrinaajdini.com/projects/olympic-pool","genre":"Public facility","description":"The concept of the Olympic pool is based on the use and integration of green space in the building through wonderful views, which enables the organic connection between indoor and outdoor space. The location itself has made this possible, as the integrated greenery surrounds the entire space, while also using it as a recreational space. Particular emphasis has been placed on the entrance part, which is related to the existing basketball court. With the addition of the Olympic swimming pool, this facility today functions as a sports center.","abstract":"A sports centre that pulls the surrounding greenery into the building through long views.","image":["https://www.kaltrinaajdini.com/images/pool-2.jpg","https://www.kaltrinaajdini.com/images/pool-1.jpg","https://www.kaltrinaajdini.com/images/pool-3.jpg","https://www.kaltrinaajdini.com/images/pool-4.jpg"],"creator":{"@id":"https://www.kaltrinaajdini.com/#person"}}</script></head>
+<body data-page="project">
+  
+  <header class="site-header">
+    <a href="/" class="brand">Kaltrina Ajdini</a>
+    <nav class="nav" aria-label="Main">
+      <a href="/#projects">Projects</a>
+      <a href="/#explore">Index</a>
+      <a href="/#about">About</a>
+    </nav>
+    <a href="/#contact" class="btn btn-small">Contact</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+      <span></span><span></span>
+    </button>
+  </header>
+  <div class="menu" id="menu" aria-hidden="true">
+    <nav aria-label="Mobile">
+      <a href="/#projects">Projects</a>
+      <a href="/#explore">Index</a>
+      <a href="/#experience">Experience</a>
+      <a href="/#about">About</a>
+    </nav>
+    <a href="/#contact" class="btn">Contact</a>
+  </div>
+
+  <main id="project" class="project">
+    <header class="project-head">
+      <a class="back-link" href="/#projects">← All projects</a>
+      <h1 class="h2">Olympic Pool</h1>
+      <p class="project-meta">Public facility</p>
+    </header>
+    <div class="project-cover">
+    <figure class="reveal"><img src="images/pool-2.jpg" alt="Olympic Pool — image 1" loading="lazy">
+      
+    </figure></div>
+    <div class="project-info">
+      <dl class="facts reveal"><dt>Scope</dt><dd>Concept, plans, sections, details</dd></dl>
+      <div class="project-text reveal"><p>The concept of the Olympic pool is based on the use and integration of green space in the building through wonderful views, which enables the organic connection between indoor and outdoor space. The location itself has made this possible, as the integrated greenery surrounds the entire space, while also using it as a recreational space.</p><p>Particular emphasis has been placed on the entrance part, which is related to the existing basketball court. With the addition of the Olympic swimming pool, this facility today functions as a sports center.</p></div>
+    </div>
+    <div class="project-gallery">
+    <figure class="reveal"><img src="images/pool-1.jpg" alt="Approach through the greenery" loading="lazy">
+      <figcaption>Approach through the greenery</figcaption>
+    </figure>
+    <figure class="reveal"><img src="images/pool-3.jpg" alt="Street elevation" loading="lazy">
+      <figcaption>Street elevation</figcaption>
+    </figure>
+    <figure class="reveal"><img src="images/pool-4.jpg" alt="Ground floor, sections and tribune seating detail" loading="lazy">
+      <figcaption>Ground floor, sections and tribune seating detail</figcaption>
+    </figure></div>
+    <nav class="project-nav" aria-label="More projects">
+      <a href="/projects/primary-school"><span class="label">Previous</span>Primary School</a>
+      <a href="/projects/office-building" class="next"><span class="label">Next</span>Office Building</a>
+    </nav></main>
+
+  
+  <footer class="site-footer theme-black">
+    <div class="footer-row">
+      <p>Architecture &amp; Interior Design</p>
+      <p><a href="https://www.linkedin.com/in/kaltrina-ajdini/" target="_blank" rel="noopener">LinkedIn</a><br><a href="/files/Kaltrina-Ajdini-CV.pdf" download="">Download CV</a></p>
+    </div>
+    <p class="copyright">© 2026 Kaltrina Ajdini</p>
+  </footer>
+
+  <script src="content.js"></script>
+  <script src="common.js"></script>
+  <script src="project.js"></script>
+
+
+</body></html>

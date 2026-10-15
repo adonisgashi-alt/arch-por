@@ -77,7 +77,9 @@
   const home = onHome ? "" : "/";
 
   /* ── Header + mobile menu ── */
-  document.getElementById("site-header").outerHTML = `
+  // Pre-built pages already contain the header/footer; only fill the placeholders when present.
+  const headerSlot = document.getElementById("site-header");
+  if (headerSlot) headerSlot.outerHTML = `
   <header class="site-header">
     <a href="${onHome ? "#top" : "/"}" class="brand">${esc(data.name)}</a>
     <nav class="nav" aria-label="Main">
@@ -115,7 +117,8 @@
   /* ── Footer ── */
   const links = data.social.map((s) => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a>`);
   if (data.cv) links.push(`<a href="/${esc(data.cv)}" download>Download CV</a>`);
-  document.getElementById("site-footer").outerHTML = `
+  const footerSlot = document.getElementById("site-footer");
+  if (footerSlot) footerSlot.outerHTML = `
   <footer class="site-footer theme-black">
     <div class="footer-row">
       <p>${esc(data.footerLine)}</p>

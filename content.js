@@ -13,6 +13,10 @@ window.PORTFOLIO = {
   name: "Kaltrina Ajdini",
   title: "Architect",
   location: "Prishtina, Kosovo · freelancing for PIKA 3D, Chicago",
+  // Used for search engines and AI assistants (structured data, sitemap, llms.txt)
+  site: "https://www.kaltrinaajdini.com",
+  hometown: { city: "Prishtina", country: "XK" },
+  worksFor: { name: "PIKA 3D", city: "Chicago", region: "IL", country: "US", role: "Freelance Architect" },
   tagline: "Beautiful, functional architecture that gives better shape to the places we live in.",
   // Short paragraph shown under the tagline on the right.
   intro: "Architect working across public buildings, housing, interiors and cultural heritage — from the first concept through construction documentation and site coordination. Currently freelancing for PIKA 3D, Chicago.",

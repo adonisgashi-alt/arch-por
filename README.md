@@ -24,6 +24,18 @@ Until real photos are added, each project shows a generated abstract architectur
 Run `npx vercel dev` (or `python3 -m http.server` for the home page only) and visit the local URL.
 (Opening `index.html` directly from disk won't load the styles, because paths are site-root based for the clean `/projects/<id>` URLs.)
 
+## After editing content
+
+The pages are pre-built into plain HTML so search engines and AI assistants can read them.
+After changing `content.js` or the templates in `tools/`, run:
+
+```
+node tools/prerender.js
+```
+
+This regenerates `index.html`, `projects/*.html`, `404.html`, `sitemap.xml`, `robots.txt` and `llms.txt`
+(structured data for her profile and each project is included automatically).
+
 ## Publish
 
 The site is on Vercel, connected to this GitHub repo. **Every push to `main` deploys to the live site automatically**

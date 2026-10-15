@@ -1,10 +1,5 @@
 {
-  "rewrites": [
-    {
-      "source": "/projects/:id",
-      "destination": "/project.html"
-    }
-  ],
+  "cleanUrls": true,
   "headers": [
     {
       "source": "/fonts/(.*)",

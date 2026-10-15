@@ -1,13 +1,12 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <base href="/" />
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="/">
   <title>Kaltrina Ajdini — Architect</title>
-  <meta name="description" content="Kaltrina Ajdini, architect from Prishtina — public buildings, housing, interiors and cultural heritage." />
-  <link rel="preload" href="/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="preload" href="/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin />
+  <meta name="description" content="Kaltrina Ajdini, architect — Architect working across public buildings, housing, interiors and cultural heritage — from the first concept through construction documentation and site coordination. Currently freelancing for PIKA 3D, Chicago.">
+  <link rel="preload" href="/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin="">
+  <link rel="preload" href="/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin="">
   <style>
     /* Fonts are self-hosted and preloaded. The page fades in once they're ready (max 1.5s),
        so visitors never see a fallback font swap in. */
@@ -27,35 +26,123 @@
       Promise.all([document.fonts.load('400 1em "Instrument Serif"'), document.fonts.load('400 1em "Inter Tight"')]).then(done, done);
     })();
   </script>
-  <meta property="og:title" content="Kaltrina Ajdini — Architect" />
-  <meta property="og:description" content="Public buildings, housing, interiors and cultural heritage." />
-  <meta property="og:image" content="https://www.kaltrinaajdini.com/images/school-1.jpg" />
-  <meta property="og:type" content="website" />
-  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="styles.css" />
-</head>
+  <meta property="og:title" content="Kaltrina Ajdini — Architect">
+  <meta property="og:description" content="Kaltrina Ajdini, architect — Architect working across public buildings, housing, interiors and cultural heritage — from the first concept through construction documentation and site coordination. Currently freelancing for PIKA 3D, Chicago.">
+  <meta property="og:image" content="https://www.kaltrinaajdini.com/images/school-1.jpg">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+<meta property="og:url" content="https://www.kaltrinaajdini.com/"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="https://www.kaltrinaajdini.com/"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://www.kaltrinaajdini.com/#person","name":"Kaltrina Ajdini","jobTitle":"Architect","description":"Architect working across public buildings, housing, interiors and cultural heritage — from the first concept through construction documentation and site coordination. Currently freelancing for PIKA 3D, Chicago.","url":"https://www.kaltrinaajdini.com","image":"https://www.kaltrinaajdini.com/images/portrait.jpg","address":{"@type":"PostalAddress","addressLocality":"Prishtina","addressCountry":"XK"},"worksFor":{"@type":"Organization","name":"PIKA 3D","address":{"@type":"PostalAddress","addressLocality":"Chicago","addressRegion":"IL","addressCountry":"US"}},"hasOccupation":{"@type":"Occupation","name":"Freelance Architect","occupationalCategory":"Architects"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"University of Prishtina “Hasan Prishtina”, Faculty of Civil Engineering and Architecture"}],"hasCredential":[{"@type":"EducationalOccupationalCredential","credentialCategory":"degree","name":"Master of Technical Sciences — Architecture"},{"@type":"EducationalOccupationalCredential","credentialCategory":"certificate","name":"ArchiCAD 17 — 3D modelling & documentation, archiEDU"},{"@type":"EducationalOccupationalCredential","credentialCategory":"certificate","name":"Photoshop CS6 — post-processing, archiEDU"},{"@type":"EducationalOccupationalCredential","credentialCategory":"certificate","name":"3ds Max 2016 — modelling & rendering, VIProduct"},{"@type":"EducationalOccupationalCredential","credentialCategory":"certificate","name":"SketchUp — 3D modelling & documentation, VIProduct"}],"knowsAbout":["Concept & design development","Construction documentation","3D modelling & visualisation","Interior design","Cultural heritage documentation","Scan-to-BIM & existing conditions","ArchiCAD","AutoCAD","SketchUp","Autodesk 3ds Max","Lumion","Adobe Photoshop","Microsoft Excel","Microsoft PowerPoint"],"knowsLanguage":["Albanian","English","Turkish","Serbian","French"],"sameAs":["https://www.linkedin.com/in/kaltrina-ajdini/"]},{"@type":"WebSite","@id":"https://www.kaltrinaajdini.com/#website","url":"https://www.kaltrinaajdini.com","name":"Kaltrina Ajdini — Architect","about":{"@id":"https://www.kaltrinaajdini.com/#person"}},{"@type":"ItemList","name":"Projects","itemListElement":[{"@type":"ListItem","position":1,"url":"https://www.kaltrinaajdini.com/projects/200-s-wacker","name":"200 S Wacker"},{"@type":"ListItem","position":2,"url":"https://www.kaltrinaajdini.com/projects/primary-school","name":"Primary School"},{"@type":"ListItem","position":3,"url":"https://www.kaltrinaajdini.com/projects/olympic-pool","name":"Olympic Pool"},{"@type":"ListItem","position":4,"url":"https://www.kaltrinaajdini.com/projects/office-building","name":"Office Building"},{"@type":"ListItem","position":5,"url":"https://www.kaltrinaajdini.com/projects/flexible-housing","name":"Flexible Housing"},{"@type":"ListItem","position":6,"url":"https://www.kaltrinaajdini.com/projects/geodes-office","name":"Geodes Office"}]}]}</script></head>
 <body data-page="home">
-  <div id="site-header"></div>
+  
+  <header class="site-header">
+    <a href="#top" class="brand">Kaltrina Ajdini</a>
+    <nav class="nav" aria-label="Main">
+      <a href="#projects">Projects</a>
+      <a href="#explore">Index</a>
+      <a href="#about">About</a>
+    </nav>
+    <a href="#contact" class="btn btn-small">Contact</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+      <span></span><span></span>
+    </button>
+  </header>
+  <div class="menu" id="menu" aria-hidden="true">
+    <nav aria-label="Mobile">
+      <a href="#projects">Projects</a>
+      <a href="#explore">Index</a>
+      <a href="#experience">Experience</a>
+      <a href="#about">About</a>
+    </nav>
+    <a href="#contact" class="btn">Contact</a>
+  </div>
 
   <main id="top">
     <section class="hero">
-      <div class="hero-media reveal" id="hero-media"></div>
+      <div class="hero-media reveal" id="hero-media">
+    <a class="hero-slide active" href="/projects/primary-school" tabindex="-1" aria-hidden="false">
+      <img src="images/school-1.jpg" alt="Primary School">
+    </a>
+    <a class="hero-slide" href="/projects/olympic-pool" tabindex="-1" aria-hidden="true">
+      <img src="images/pool-2.jpg" alt="Olympic Pool">
+    </a>
+    <a class="hero-slide" href="/projects/flexible-housing" tabindex="-1" aria-hidden="true">
+      <img src="images/housing-3.jpg" alt="Flexible Housing">
+    </a>
+    <a class="hero-slide" href="/projects/geodes-office" tabindex="-1" aria-hidden="true">
+      <img src="images/geodes-2.jpg" alt="Geodes Office">
+    </a>
+    <a class="hero-card" href="/projects/primary-school">
+      <span class="hero-card-meta"><span class="hero-count">01 / 04</span><span class="hero-cat">Public facility</span></span>
+      <span class="hero-card-title">Primary School</span>
+      <span class="hero-card-cta">View project <span class="hero-arrow" aria-hidden="true"></span></span>
+    </a>
+    <div class="hero-progress"><button aria-label="Show Primary School" class="active"><i></i></button><button aria-label="Show Olympic Pool"><i></i></button><button aria-label="Show Flexible Housing"><i></i></button><button aria-label="Show Geodes Office"><i></i></button></div>
+    <span class="hero-cursor" aria-hidden="true">View</span></div>
       <div class="hero-text">
-        <h1 class="hero-tagline reveal" data-bind="tagline"></h1>
-        <p class="hero-intro reveal" data-bind="intro"></p>
+        <h1 class="hero-tagline reveal" data-bind="tagline">Beautiful, functional architecture that gives better shape to the places we live in.</h1>
+        <p class="hero-intro reveal" data-bind="intro">Architect working across public buildings, housing, interiors and cultural heritage — from the first concept through construction documentation and site coordination. Currently freelancing for PIKA 3D, Chicago.</p>
       </div>
     </section>
 
     <section id="projects" class="section">
       <h2 class="h2 reveal" data-num="01">Projects</h2>
       <div class="carousel">
-        <ul class="carousel-track" id="carousel-track"></ul>
+        <ul class="carousel-track" id="carousel-track">
+    <li class="slide">
+      <a href="/projects/200-s-wacker">
+        <div class="slide-media"><img src="images/200-s-wacker-1.jpg" alt="200 S Wacker" loading="lazy"></div>
+        <h3 class="slide-title">200 S Wacker</h3>
+        <p class="label">Documentation · Chicago, IL</p>
+        <span class="btn btn-small">View project</span>
+      </a>
+    </li>
+    <li class="slide">
+      <a href="/projects/primary-school">
+        <div class="slide-media"><img src="images/school-1.jpg" alt="Primary School" loading="lazy"></div>
+        <h3 class="slide-title">Primary School</h3>
+        <p class="label">Public facility</p>
+        <span class="btn btn-small">View project</span>
+      </a>
+    </li>
+    <li class="slide">
+      <a href="/projects/olympic-pool">
+        <div class="slide-media"><img src="images/pool-2.jpg" alt="Olympic Pool" loading="lazy"></div>
+        <h3 class="slide-title">Olympic Pool</h3>
+        <p class="label">Public facility</p>
+        <span class="btn btn-small">View project</span>
+      </a>
+    </li>
+    <li class="slide">
+      <a href="/projects/office-building">
+        <div class="slide-media"><img src="images/office-1.jpg" alt="Office Building" loading="lazy"></div>
+        <h3 class="slide-title">Office Building</h3>
+        <p class="label">Public facility</p>
+        <span class="btn btn-small">View project</span>
+      </a>
+    </li>
+    <li class="slide">
+      <a href="/projects/flexible-housing">
+        <div class="slide-media"><img src="images/housing-3.jpg" alt="Flexible Housing" loading="lazy"></div>
+        <h3 class="slide-title">Flexible Housing</h3>
+        <p class="label">Residential</p>
+        <span class="btn btn-small">View project</span>
+      </a>
+    </li>
+    <li class="slide">
+      <a href="/projects/geodes-office">
+        <div class="slide-media"><img src="images/geodes-1.jpg" alt="Geodes Office" loading="lazy"></div>
+        <h3 class="slide-title">Geodes Office</h3>
+        <p class="label">Interior design</p>
+        <span class="btn btn-small">View project</span>
+      </a>
+    </li></ul>
         <div class="carousel-nav">
-          <button class="arrow" id="carousel-prev" aria-label="Previous">
-            <svg viewBox="0 0 44 18"><path d="M9.9 16.96L2.12 9.18 9.9 1.39M42.86 9.18H3.38" /></svg>
+          <button class="arrow" id="carousel-prev" aria-label="Previous" disabled="">
+            <svg viewBox="0 0 44 18"><path d="M9.9 16.96L2.12 9.18 9.9 1.39M42.86 9.18H3.38"></path></svg>
           </button>
           <button class="arrow" id="carousel-next" aria-label="Next">
-            <svg viewBox="0 0 44 18"><path d="M34.15 1.39l7.78 7.78-7.78 7.79M1.19 9.17h39.49" /></svg>
+            <svg viewBox="0 0 44 18"><path d="M34.15 1.39l7.78 7.78-7.78 7.79M1.19 9.17h39.49"></path></svg>
           </button>
         </div>
       </div>
@@ -63,30 +150,90 @@
 
     <section id="explore" class="section">
       <h2 class="h2 reveal" data-num="02">Index</h2>
-      <div id="explore-list"></div>
+      <div id="explore-list">
+    <a class="explore-row reveal" href="/projects/200-s-wacker">
+      <p class="explore-title">200 S Wacker<span class="label">Documentation · Chicago, IL</span></p>
+      <p>A scan-based documentation and technical coordination study for the exterior plaza of 200 S Wacker in downtown Chicago.</p>
+      <div class="explore-media"><img src="images/200-s-wacker-1.jpg" alt="200 S Wacker" loading="lazy"></div>
+    </a>
+    <a class="explore-row reveal" href="/projects/primary-school">
+      <p class="explore-title">Primary School<span class="label">Public facility</span></p>
+      <p>A school organised around group learning, with shared spaces and an atrium between the classrooms.</p>
+      <div class="explore-media"><img src="images/school-1.jpg" alt="Primary School" loading="lazy"></div>
+    </a>
+    <a class="explore-row reveal" href="/projects/olympic-pool">
+      <p class="explore-title">Olympic Pool<span class="label">Public facility</span></p>
+      <p>A sports centre that pulls the surrounding greenery into the building through long views.</p>
+      <div class="explore-media"><img src="images/pool-2.jpg" alt="Olympic Pool" loading="lazy"></div>
+    </a>
+    <a class="explore-row reveal" href="/projects/office-building">
+      <p class="explore-title">Office Building<span class="label">Public facility</span></p>
+      <p>An office building with a rigid urban façade and a second skin of aluminium louvres over a transparent curtain wall.</p>
+      <div class="explore-media"><img src="images/office-1.jpg" alt="Office Building" loading="lazy"></div>
+    </a>
+    <a class="explore-row reveal" href="/projects/flexible-housing">
+      <p class="explore-title">Flexible Housing<span class="label">Residential</span></p>
+      <p>A housing block whose apartments can adapt to the changing needs of the people living in them.</p>
+      <div class="explore-media"><img src="images/housing-3.jpg" alt="Flexible Housing" loading="lazy"></div>
+    </a>
+    <a class="explore-row reveal" href="/projects/geodes-office">
+      <p class="explore-title">Geodes Office<span class="label">Interior design</span></p>
+      <p>A green, technologically advanced office interior designed around flexible work and employee well-being.</p>
+      <div class="explore-media"><img src="images/geodes-1.jpg" alt="Geodes Office" loading="lazy"></div>
+    </a></div>
     </section>
 
     <section id="experience" class="section theme-white">
       <h2 class="h2 reveal" data-num="03">Experience</h2>
-      <div class="exp-cols" id="exp-cols"></div>
+      <div class="exp-cols" id="exp-cols">
+    <div class="exp-item reveal">
+      <p class="label">Current</p>
+      <h3>Freelance Architect</h3>
+      <p>PIKA 3D, Chicago</p>
+    </div>
+    <div class="exp-item reveal">
+      <p class="label">Sept – Nov 2019</p>
+      <h3>Intern Architect</h3>
+      <p>Ministry of Culture, Youth and Sport, Prishtina</p>
+    </div>
+    <div class="exp-item reveal">
+      <p class="label">2016 — 2019</p>
+      <h3>Architect</h3>
+      <p>New Dimension Architecture, Prishtina</p>
+    </div>
+    <div class="exp-item reveal">
+      <p class="label">June – July 2019</p>
+      <h3>Heritage Lab — “Refinding the Heritage of Letnica”</h3>
+      <p>Cultural Heritage without Borders (CHwB) Kosovo</p>
+    </div>
+    <div class="exp-item reveal">
+      <p class="label">June 2015</p>
+      <h3>“Santefaction” — access in public spaces</h3>
+      <p>Kosovo Architecture Festival workshop</p>
+    </div>
+    <div class="exp-item reveal">
+      <p class="label">2012 — 2020</p>
+      <h3>Master of Technical Sciences — Architecture</h3>
+      <p>University of Prishtina “Hasan Prishtina”, Faculty of Civil Engineering and Architecture</p>
+    </div></div>
     </section>
 
     <section id="about" class="section theme-black about">
-      <div class="about-portrait reveal" id="about-portrait"></div>
+      <div class="about-portrait reveal" id="about-portrait"><img src="images/portrait.jpg" alt="Kaltrina Ajdini" loading="lazy"></div>
       <div class="about-body">
         <h2 class="h2 reveal" data-num="04">About</h2>
-        <div class="bio reveal" id="about-bio"></div>
-        <div class="about-lists" id="about-lists"></div>
+        <div class="bio reveal" id="about-bio"><p>I’m an architect from Prishtina. My goal is always to give better shape to the built environment through beautiful, functional architecture — buildings and interiors that work well for the people who use them.</p><p>I studied architecture at the University of Prishtina “Hasan Prishtina” and spent three years at New Dimension Architecture, designing commercial and residential projects with budgets up to €6 million across every phase, from concept to construction documents and on-site supervision. Alongside practice I’ve worked on cultural heritage — documenting and protecting monuments with the Ministry of Culture, Youth and Sport and Cultural Heritage without Borders.</p><p>Today I work as a freelance architect for PIKA 3D in Chicago.</p><p>I’m detail-oriented, a fast learner and at my best in a team, comfortable juggling several projects at once.</p></div>
+        <div class="about-lists" id="about-lists"><div class="reveal"><h4>Expertise</h4><ul><li>Concept &amp; design development</li><li>Construction documentation</li><li>3D modelling &amp; visualisation</li><li>Interior design</li><li>Cultural heritage documentation</li><li>Scan-to-BIM &amp; existing conditions</li></ul></div><div class="reveal"><h4>Software</h4><ul><li>ArchiCAD</li><li>AutoCAD</li><li>SketchUp</li><li>Autodesk 3ds Max</li><li>Lumion</li><li>Adobe Photoshop</li><li>Microsoft Excel</li><li>Microsoft PowerPoint</li></ul></div><div class="reveal"><h4>Certifications</h4><ul><li>ArchiCAD 17 — 3D modelling &amp; documentation, archiEDU</li><li>Photoshop CS6 — post-processing, archiEDU</li><li>3ds Max 2016 — modelling &amp; rendering, VIProduct</li><li>SketchUp — 3D modelling &amp; documentation, VIProduct</li></ul></div><div class="reveal"><h4>Languages</h4><ul><li>Albanian — native</li><li>English — full</li><li>Turkish — fluent</li><li>Serbian — fluent</li><li>French — elementary</li></ul></div><div class="about-cv reveal"><a class="btn" href="/files/Kaltrina-Ajdini-CV.pdf" download="">Download CV (PDF)</a></div></div>
       </div>
     </section>
 
     <section id="contact" class="section theme-bright contact">
-      <h2 class="h2 reveal" data-num="05" data-bind="contactHeading"></h2>
+      <h2 class="h2 reveal" data-num="05" data-bind="contactHeading">Let’s build!</h2>
       <div class="contact-body reveal">
-        <p class="contact-text" data-bind="contactText"></p>
+        <p class="contact-text" data-bind="contactText">Open to new roles, collaborations and design commissions. Send a note and I’ll get back to you.</p>
         <form class="contact-form" id="contact-form">
-          <label>Name <span>(required)</span><input name="name" required autocomplete="name" /></label>
-          <label>Email <span>(required)</span><input name="email" type="email" required autocomplete="email" /></label>
+          <label>Name <span>(required)</span><input name="name" required="" autocomplete="name"></label>
+          <label>Email <span>(required)</span><input name="email" type="email" required="" autocomplete="email"></label>
           <label>Message<textarea name="message" rows="5"></textarea></label>
           <button type="submit" class="btn">Send</button>
           <p class="form-note">Opens your email app with the message ready to send.</p>
@@ -95,10 +242,18 @@
     </section>
   </main>
 
-  <div id="site-footer"></div>
+  
+  <footer class="site-footer theme-black">
+    <div class="footer-row">
+      <p>Architecture &amp; Interior Design</p>
+      <p><a href="https://www.linkedin.com/in/kaltrina-ajdini/" target="_blank" rel="noopener">LinkedIn</a><br><a href="/files/Kaltrina-Ajdini-CV.pdf" download="">Download CV</a></p>
+    </div>
+    <p class="copyright">© 2026 Kaltrina Ajdini</p>
+  </footer>
 
   <script src="content.js"></script>
   <script src="common.js"></script>
   <script src="script.js"></script>
-</body>
-</html>
+
+
+</body></html>
