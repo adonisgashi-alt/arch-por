@@ -2,8 +2,8 @@
 // JavaScript) can read every word, plus structured data, sitemap.xml, robots.txt and llms.txt.
 //
 // Run from the repo root after editing content.js or the templates:   node tools/prerender.js
-// Needs Playwright + Chromium. Writes: index.html, projects/<id>.html, 404.html, sitemap.xml,
-// robots.txt, llms.txt. Sources: tools/index.template.html, tools/project.template.html, content.js.
+// Needs Playwright + Chromium. Writes: index.html, about.html, contact.html, projects/<id>.html, 404.html,
+// sitemap.xml, robots.txt, llms.txt. Sources: tools/*.template.html, content.js.
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
@@ -65,10 +65,11 @@ const homeLd = { "@context": "https://schema.org", "@graph": [person, website, {
   "@type": "ItemList", name: "Projects", itemListElement: data.projects.map((p, i) => ({ "@type": "ListItem", position: i + 1, url: `${SITE}/projects/${p.id}`, name: p.title })),
 }] };
 
-/* ── Tiny local server: "/" → home template, "/projects/<id>" → project template ── */
+/* ── Tiny local server: "/" → home template, "/about", "/contact", "/projects/<id>" → their templates ── */
 const server = http.createServer((req, res) => {
   let p = decodeURIComponent(req.url.split("?")[0]);
   if (p === "/") p = "/tools/index.template.html";
+  else if (p === "/about" || p === "/contact") p = `/tools${p}.template.html`;
   else if (p.startsWith("/projects/")) p = "/tools/project.template.html";
   fs.readFile(path.join(ROOT, p), (err, buf) => {
     if (err) { res.writeHead(404); return res.end(); }
@@ -140,6 +141,21 @@ async function snapshot(browser, url, { title, description, canonical, image, ld
       ld: homeLd,
     }));
 
+    write("about.html", await snapshot(browser, `${base}/about`, {
+      title: `About — ${data.name}, ${data.title}`,
+      description: text(a.bio[0]),
+      canonical: `${SITE}/about`,
+      image: a.portrait ? abs(a.portrait) : undefined,
+      ld: { "@context": "https://schema.org", "@type": "ProfilePage", url: `${SITE}/about`, mainEntity: person },
+    }));
+
+    write("contact.html", await snapshot(browser, `${base}/contact`, {
+      title: `Contact — ${data.name}, ${data.title}`,
+      description: text(data.contactText),
+      canonical: `${SITE}/contact`,
+      image: abs(src(data.heroImages?.[0]) || src(data.projects[0].images[0])),
+    }));
+
     fs.rmSync(path.join(ROOT, "projects"), { recursive: true, force: true });
     for (const p of data.projects) {
       write(`projects/${p.id}.html`, await snapshot(browser, `${base}/projects/${p.id}`, {
@@ -161,7 +177,7 @@ async function snapshot(browser, url, { title, description, canonical, image, ld
 
   /* ── sitemap.xml, robots.txt, llms.txt ── */
   const today = new Date().toISOString().slice(0, 10);
-  const urls = [`${SITE}/`, ...data.projects.map((p) => `${SITE}/projects/${p.id}`)];
+  const urls = [`${SITE}/`, `${SITE}/about`, `${SITE}/contact`, ...data.projects.map((p) => `${SITE}/projects/${p.id}`)];
   write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map((u) => `  <url><loc>${u}</loc><lastmod>${today}</lastmod></url>`).join("\n")}
@@ -207,7 +223,8 @@ Sitemap: ${SITE}/sitemap.xml
     ...data.projects.map((p) => `- [${p.title}](${SITE}/projects/${p.id}) — ${[p.category, p.location].filter(Boolean).join(", ")}: ${text(p.summary)}`),
     "",
     "## Contact",
-    `- Portfolio and contact form: ${SITE}/#contact`,
+    `- About: ${SITE}/about`,
+    `- Contact form: ${SITE}/contact`,
     ...data.social.map((s) => `- ${s.label}: ${s.url}`),
     data.cv ? `- CV (PDF): ${abs(data.cv)}` : "",
     "",

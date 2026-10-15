@@ -38,49 +38,15 @@
   <div id="site-header"></div>
 
   <main id="top">
-    <section class="hero">
-      <div class="hero-media reveal" id="hero-media"></div>
-      <div class="hero-caption" id="hero-caption"></div>
-      <div class="hero-text">
-        <h1 class="hero-tagline reveal" data-bind="tagline"></h1>
-        <p class="hero-intro reveal" data-bind="intro"></p>
-      </div>
-    </section>
-
-    <section id="work" class="section">
+    <section id="work" class="section page-top">
       <div class="work-head">
-        <h2 class="h2 reveal">Selected Work</h2>
+        <h1 class="h2 reveal">Selected Work</h1>
         <div class="view-toggle reveal" role="group" aria-label="Project view">
           <button type="button" data-view="grid" aria-pressed="true">Grid</button>
           <button type="button" data-view="list" aria-pressed="false">List</button>
         </div>
       </div>
       <div class="work" id="work-list" data-view="grid"></div>
-    </section>
-
-    <section id="about" class="section theme-black about">
-      <div class="about-portrait reveal" id="about-portrait"></div>
-      <div class="about-body">
-        <h2 class="h2 reveal">About</h2>
-        <div class="bio reveal" id="about-bio"></div>
-        <div class="about-cv reveal" id="about-cv"></div>
-        <div class="timeline" id="about-timeline"></div>
-        <div class="about-lists" id="about-lists"></div>
-      </div>
-    </section>
-
-    <section id="contact" class="section theme-bright contact">
-      <h2 class="h2 reveal" data-bind="contactHeading"></h2>
-      <div class="contact-body reveal">
-        <p class="contact-text" data-bind="contactText"></p>
-        <form class="contact-form" id="contact-form">
-          <label>Name <span>(required)</span><input name="name" required autocomplete="name" /></label>
-          <label>Email <span>(required)</span><input name="email" type="email" required autocomplete="email" /></label>
-          <label>Message<textarea name="message" rows="5"></textarea></label>
-          <button type="submit" class="btn">Send</button>
-          <p class="form-note">Opens your email app with the message ready to send.</p>
-        </form>
-      </div>
     </section>
   </main>
 

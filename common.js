@@ -72,31 +72,29 @@
   const cover = (p) => p.images?.[0];
   const place = (p) => [p.location, p.year].filter(Boolean).join(", ");
 
-  // On the home page section links are "#about"; elsewhere they point back to "/#about".
-  const onHome = document.body.dataset.page === "home";
-  const home = onHome ? "" : "/";
+  // Work (home + project pages), About and Contact each have their own page
+  const page = document.body.dataset.page;
+  const current = page === "about" || page === "contact" ? page : "work";
+  const navLinks = [["work", "/", "Work"], ["about", "/about", "About"], ["contact", "/contact", "Contact"]]
+    .map(([key, href, text]) => `<a href="${href}"${key === current ? ' class="active" aria-current="page"' : ""}>${text}</a>`).join("\n      ");
 
   /* ── Header + mobile menu ── */
   // Pre-built pages already contain the header/footer; only fill the placeholders when present.
   const headerSlot = document.getElementById("site-header");
   if (headerSlot) headerSlot.outerHTML = `
   <header class="site-header">
-    <a href="${onHome ? "#top" : "/"}" class="brand">${esc(data.name)}</a>
+    <a href="/" class="brand">${esc(data.name)}</a>
     <nav class="nav" aria-label="Main">
-      <a href="${home}#work">Work</a>
-      <a href="${home}#about">About</a>
+      ${navLinks}
     </nav>
-    <a href="${home}#contact" class="btn btn-small">Contact</a>
     <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
       <span></span><span></span>
     </button>
   </header>
   <div class="menu" id="menu" aria-hidden="true">
     <nav aria-label="Mobile">
-      <a href="${home}#work">Work</a>
-      <a href="${home}#about">About</a>
+      ${navLinks}
     </nav>
-    <a href="${home}#contact" class="btn">Contact</a>
   </div>`;
 
   const burger = $("#burger"), menu = $("#menu");

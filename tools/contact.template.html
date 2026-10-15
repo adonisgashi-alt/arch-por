@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <base href="/" />
+  <title>Contact — Kaltrina Ajdini, Architect</title>
+  <meta name="description" content="Kaltrina Ajdini, architect from Prishtina — public buildings, housing, interiors and cultural heritage." />
+  <link rel="preload" href="/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin />
+  <style>
+    /* Fonts are self-hosted and preloaded. The page fades in once they're ready (max 1.5s),
+       so visitors never see a fallback font swap in. */
+    @font-face { font-family: "Instrument Serif"; font-style: normal; font-weight: 400; font-display: block;
+      src: url(/fonts/instrument-serif.woff2) format("woff2"); }
+    @font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 300 500; font-display: block;
+      src: url(/fonts/inter-tight.woff2) format("woff2"); }
+    html.wf-wait body { opacity: 0; }
+    body { transition: opacity .35s ease; }
+  </style>
+  <script>
+    (function () {
+      var root = document.documentElement, done = function () { root.classList.remove("wf-wait"); };
+      if (!document.fonts || !document.fonts.load) return;
+      root.classList.add("wf-wait");
+      setTimeout(done, 1500);
+      Promise.all([document.fonts.load('400 1em "Instrument Serif"'), document.fonts.load('400 1em "Inter Tight"')]).then(done, done);
+    })();
+  </script>
+  <meta property="og:title" content="Kaltrina Ajdini — Architect" />
+  <meta property="og:description" content="Public buildings, housing, interiors and cultural heritage." />
+  <meta property="og:image" content="https://www.kaltrinaajdini.com/images/school-1.jpg" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="contact">
+  <div id="site-header"></div>
+
+  <main id="top">
+    <section id="contact" class="section theme-bright contact page-top">
+      <h1 class="h2 reveal" data-bind="contactHeading"></h1>
+      <div class="contact-body reveal">
+        <p class="contact-text" data-bind="contactText"></p>
+        <form class="contact-form" id="contact-form">
+          <label>Name <span>(required)</span><input name="name" required autocomplete="name" /></label>
+          <label>Email <span>(required)</span><input name="email" type="email" required autocomplete="email" /></label>
+          <label>Message<textarea name="message" rows="5"></textarea></label>
+          <button type="submit" class="btn">Send</button>
+          <p class="form-note">Opens your email app with the message ready to send.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="content.js"></script>
+  <script src="common.js"></script>
+  <script src="contact.js"></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="/">
+  <title>Contact — Kaltrina Ajdini, Architect</title>
+  <meta name="description" content="Open to new roles, collaborations and design commissions. Send a note and I’ll get back to you.">
+  <link rel="preload" href="/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin="">
+  <link rel="preload" href="/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin="">
+  <style>
+    /* Fonts are self-hosted and preloaded. The page fades in once they're ready (max 1.5s),
+       so visitors never see a fallback font swap in. */
+    @font-face { font-family: "Instrument Serif"; font-style: normal; font-weight: 400; font-display: block;
+      src: url(/fonts/instrument-serif.woff2) format("woff2"); }
+    @font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 300 500; font-display: block;
+      src: url(/fonts/inter-tight.woff2) format("woff2"); }
+    html.wf-wait body { opacity: 0; }
+    body { transition: opacity .35s ease; }
+  </style>
+  <script>
+    (function () {
+      var root = document.documentElement, done = function () { root.classList.remove("wf-wait"); };
+      if (!document.fonts || !document.fonts.load) return;
+      root.classList.add("wf-wait");
+      setTimeout(done, 1500);
+      Promise.all([document.fonts.load('400 1em "Instrument Serif"'), document.fonts.load('400 1em "Inter Tight"')]).then(done, done);
+    })();
+  </script>
+  <meta property="og:title" content="Contact — Kaltrina Ajdini, Architect">
+  <meta property="og:description" content="Open to new roles, collaborations and design commissions. Send a note and I’ll get back to you.">
+  <meta property="og:image" content="https://www.kaltrinaajdini.com/images/hyatt-1.jpg">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+<meta property="og:url" content="https://www.kaltrinaajdini.com/contact"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="https://www.kaltrinaajdini.com/contact"></head>
+<body data-page="contact">
+  
+  <header class="site-header">
+    <a href="/" class="brand">Kaltrina Ajdini</a>
+    <nav class="nav" aria-label="Main">
+      <a href="/">Work</a>
+      <a href="/about">About</a>
+      <a href="/contact" class="active" aria-current="page">Contact</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+      <span></span><span></span>
+    </button>
+  </header>
+  <div class="menu" id="menu" aria-hidden="true">
+    <nav aria-label="Mobile">
+      <a href="/">Work</a>
+      <a href="/about">About</a>
+      <a href="/contact" class="active" aria-current="page">Contact</a>
+    </nav>
+  </div>
+
+  <main id="top">
+    <section id="contact" class="section theme-bright contact page-top">
+      <h1 class="h2 reveal" data-bind="contactHeading">Let’s build!</h1>
+      <div class="contact-body reveal">
+        <p class="contact-text" data-bind="contactText">Open to new roles, collaborations and design commissions. Send a note and I’ll get back to you.</p>
+        <form class="contact-form" id="contact-form">
+          <label>Name <span>(required)</span><input name="name" required="" autocomplete="name"></label>
+          <label>Email <span>(required)</span><input name="email" type="email" required="" autocomplete="email"></label>
+          <label>Message<textarea name="message" rows="5"></textarea></label>
+          <button type="submit" class="btn">Send</button>
+          <p class="form-note">Opens your email app with the message ready to send.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  
+  <footer class="site-footer theme-black">
+    <div class="footer-row">
+      <p>Architecture &amp; Interior Design</p>
+      <p><a href="https://www.linkedin.com/in/kaltrina-ajdini/" target="_blank" rel="noopener">LinkedIn</a><br><a href="/files/Kaltrina-Ajdini-CV.pdf" download="">Download CV</a></p>
+    </div>
+    <p class="copyright">© 2026 Kaltrina Ajdini</p>
+  </footer>
+
+  <script src="content.js"></script>
+  <script src="common.js"></script>
+  <script src="contact.js"></script>
+
+
+</body></html>

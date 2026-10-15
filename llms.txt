@@ -50,6 +50,7 @@ I’m detail-oriented, a fast learner and at my best in a team, comfortable jugg
 - [Geodes Office](https://www.kaltrinaajdini.com/projects/geodes-office) — Interior design: A green, technologically advanced office interior designed around flexible work and employee well-being.
 
 ## Contact
-- Portfolio and contact form: https://www.kaltrinaajdini.com/#contact
+- About: https://www.kaltrinaajdini.com/about
+- Contact form: https://www.kaltrinaajdini.com/contact
 - LinkedIn: https://www.linkedin.com/in/kaltrina-ajdini/
 - CV (PDF): https://www.kaltrinaajdini.com/files/Kaltrina-Ajdini-CV.pdf

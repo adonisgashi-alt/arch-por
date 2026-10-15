@@ -46,7 +46,7 @@ After changing `content.js` or the templates in `tools/`, run:
 node tools/prerender.js
 ```
 
-This regenerates `index.html`, `projects/*.html`, `404.html`, `sitemap.xml`, `robots.txt` and `llms.txt`
+This regenerates `index.html`, `about.html`, `contact.html`, `projects/*.html`, `404.html`, `sitemap.xml`, `robots.txt` and `llms.txt`
 (structured data for her profile and each project is included automatically).
 
 ## Publish
@@ -56,12 +56,15 @@ The site is on Vercel, connected to this GitHub repo. **Every push to `main` dep
 
 ## Layout
 
-Hero → Selected Work (one section, Grid or List view) → About (bio, CV, experience, education, skills) → Contact.
+Three pages in the menu: **Work** (`/`, the project list in Grid or List view), **About** (`/about`: bio, CV,
+experience, education, skills) and **Contact** (`/contact`: the form). Each project has its own page.
+The hero slideshow and tagline are hidden for now; to bring them back, put the `.hero` section
+(`#hero-media`, `#hero-caption`, tagline and intro) back into `tools/index.template.html` — `script.js` runs it when present.
 Everything sits on one 1440px page width with a 48px gutter.
 
 ## Features
 
-- Home: featured projects in a slow crossfade, Selected Work (Grid | List), About with experience timeline and CV, Contact
+- Work (home): Selected Work in Grid | List view; About page with experience timeline and CV; Contact page
 - Each project has its own page at `/projects/<id>` (`project.html`, routed by `vercel.json`) with cover, facts, description, captioned gallery and previous/next links (← → keys work too)
 - Contact form that opens the visitor's email app with the message filled in (no server needed)
 - Responsive down to phone width, respects reduced-motion settings
