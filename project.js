@@ -21,9 +21,22 @@
   const next = data.projects[(i + 1) % data.projects.length];
   const imgs = p.images?.length ? p.images : [null, null, null];
   const fig = (img, k) => `
-    <figure class="reveal">${media(img, img?.caption || `${p.title} — image ${k + 1}`, `${p.id}-${k}`, p.palette)}
+    <figure class="reveal"><div class="frame">${media(img, img?.caption || `${p.title} — image ${k + 1}`, `${p.id}-${k}`, p.palette)}</div>
       ${img?.caption ? `<figcaption>${esc(img.caption)}</figcaption>` : ""}
     </figure>`;
+  // Gallery rows. A project can set `gallery` in content.js to group images (by their index in `images`):
+  //   { layout: "full", images: [1] }        one image, full width
+  //   { layout: "duo", images: [1, 2] }      two side by side, same height
+  //   { layout: "feature", images: [3, 4, 5, 6] }  one large left, the rest stacked on the right
+  // Without `gallery`, every image after the cover gets its own full-width row.
+  const rows = p.gallery || imgs.slice(1).map((_, k) => ({ layout: "full", images: [k + 1] }));
+  const row = (r) => {
+    const figs = r.images.map((k) => fig(imgs[k], k));
+    if (r.layout === "feature") {
+      return `<div class="g-row g-feature g-stack-${figs.length - 1}">${figs[0]}<div class="g-stack">${figs.slice(1).join("")}</div></div>`;
+    }
+    return `<div class="g-row g-${r.layout}">${figs.join("")}</div>`;
+  };
   const facts = [["Location", p.location], ["Year", p.year], ["Status", p.status], ["Scope", p.scope],
     ["Area", p.area], ["Client", p.client], ["Role", p.role]].filter(([, v]) => v);
 
@@ -36,12 +49,12 @@
       <h1 class="h2">${esc(p.title)}</h1>
       <p class="project-meta">${esc([p.category, place(p)].filter(Boolean).join(" · "))}</p>
     </header>
-    <div class="project-cover">${fig(imgs[0], 0)}</div>
+    <div class="project-cover g-full">${fig(imgs[0], 0)}</div>
     <div class="project-info">
       <dl class="facts reveal">${facts.map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("")}</dl>
       <div class="project-text reveal">${(p.description || [p.summary]).map((t) => `<p>${esc(t)}</p>`).join("")}</div>
     </div>
-    <div class="project-gallery">${imgs.slice(1).map((img, k) => fig(img, k + 1)).join("")}</div>
+    <div class="project-gallery">${rows.map(row).join("")}</div>
     <nav class="project-nav" aria-label="More projects">
       <a href="/projects/${prev.id}"><span class="label">Previous</span>${esc(prev.title)}</a>
       <a href="/projects/${next.id}" class="next"><span class="label">Next</span>${esc(next.title)}</a>

@@ -24,6 +24,19 @@ Until real photos are added, each project shows a generated abstract architectur
 Run `npx vercel dev` (or `python3 -m http.server` for the home page only) and visit the local URL.
 (Opening `index.html` directly from disk won't load the styles, because paths are site-root based for the clean `/projects/<id>` URLs.)
 
+### Arranging a project's images
+
+By default each image after the cover gets its own full-width row. To group them, add a `gallery`
+to the project in `content.js` (numbers are positions in its `images` list; the cover is 0):
+
+```js
+gallery: [
+  { layout: "duo", images: [1, 2] },          // two side by side, same height
+  { layout: "feature", images: [3, 4, 5, 6] }, // one large left, the rest stacked right (2 or 3)
+  { layout: "full", images: [7] },             // one image, full width
+],
+```
+
 ## After editing content
 
 The pages are pre-built into plain HTML so search engines and AI assistants can read them.

@@ -225,10 +225,20 @@ body.locked { overflow: hidden; }
 .project-text p + p { margin-top: 1em; }
 .project-gallery { display: grid; gap: clamp(24px, 3vw, 48px); padding: 0 var(--pad); }
 /* Every project image sits in the same full-width light grey frame, shown whole (never cropped) */
-.project-cover figure > img, .project-cover figure > svg, .project-gallery figure > img, .project-gallery figure > svg {
-  display: block; width: 100%; height: auto; max-height: 80vh; object-fit: contain; background: var(--white-bg);
-}
-.project-cover figcaption, .project-gallery figcaption { font-size: 14px; color: var(--muted); padding-top: 12px; }
+/* Every project image sits in a light grey frame and is shown whole (never cropped) */
+.project-cover figure, .project-gallery figure { display: flex; flex-direction: column; min-height: 0; }
+.frame { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--white-bg); }
+.frame img, .frame svg { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
+.g-full .frame img, .g-full .frame svg { width: 100%; height: auto; max-height: 80vh; }
+
+/* Grouped rows: the row's shape sets its height, frames share it */
+.g-row { display: grid; gap: var(--gap); }
+.g-duo { grid-template-columns: 1fr 1fr; aspect-ratio: 3.1 / 1; }
+.g-feature { grid-template-columns: 2fr 1fr; }
+.g-feature.g-stack-2 { aspect-ratio: 2.15 / 1; }
+.g-feature.g-stack-3 { aspect-ratio: 1.75 / 1; }
+.g-stack { display: grid; grid-auto-rows: 1fr; gap: var(--gap); min-height: 0; }
+.project-cover figcaption, .project-gallery figcaption { font-size: 14px; color: var(--muted); padding-top: 10px; }
 .project-nav {
   display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap);
   margin-top: clamp(64px, 8vw, 128px); padding: clamp(32px, 4vw, 56px) var(--pad) clamp(64px, 8vw, 128px);
@@ -261,6 +271,8 @@ body.locked { overflow: hidden; }
   .about, .contact, .project-info { grid-template-columns: 1fr; }
   .about-portrait, .about-body, .contact .h2, .contact-body, .facts, .project-text { grid-column: 1; }
   .project-text { grid-row: 1; }
+  .project-gallery .g-row.g-row, .project-gallery .g-stack { display: grid; grid-template-columns: 1fr; aspect-ratio: auto; gap: clamp(24px, 3vw, 48px); }
+  .g-row .frame img, .g-row .frame svg { width: 100%; height: auto; max-height: none; }
   .about-portrait { max-width: 480px; }
   .contact-body { padding-top: 0; }
   .contact-form { grid-template-columns: 1fr; }
