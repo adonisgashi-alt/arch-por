@@ -9,9 +9,9 @@
     document.title = `Project not found — ${data.name}`;
     main.innerHTML = `
       <header class="project-head">
-        <a class="back-link" href="/#projects">← All projects</a>
+        <a class="back-link" href="/#work">← All projects</a>
         <h1 class="h2">Project not found</h1>
-        <p class="project-meta">This project may have moved. <a href="/#projects">See all projects</a>.</p>
+        <p class="project-meta">This project may have moved. <a href="/#work">See all projects</a>.</p>
       </header>`;
     return;
   }
@@ -32,7 +32,7 @@
 
   main.innerHTML = `
     <header class="project-head">
-      <a class="back-link" href="/#projects">← All projects</a>
+      <a class="back-link" href="/#work">← All projects</a>
       <h1 class="h2">${esc(p.title)}</h1>
       <p class="project-meta">${esc([p.category, place(p)].filter(Boolean).join(" · "))}</p>
     </header>

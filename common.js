@@ -83,8 +83,7 @@
   <header class="site-header">
     <a href="${onHome ? "#top" : "/"}" class="brand">${esc(data.name)}</a>
     <nav class="nav" aria-label="Main">
-      <a href="${home}#projects">Projects</a>
-      <a href="${home}#explore">Index</a>
+      <a href="${home}#work">Work</a>
       <a href="${home}#about">About</a>
     </nav>
     <a href="${home}#contact" class="btn btn-small">Contact</a>
@@ -94,9 +93,7 @@
   </header>
   <div class="menu" id="menu" aria-hidden="true">
     <nav aria-label="Mobile">
-      <a href="${home}#projects">Projects</a>
-      <a href="${home}#explore">Index</a>
-      <a href="${home}#experience">Experience</a>
+      <a href="${home}#work">Work</a>
       <a href="${home}#about">About</a>
     </nav>
     <a href="${home}#contact" class="btn">Contact</a>

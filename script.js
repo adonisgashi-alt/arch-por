@@ -2,114 +2,87 @@
 (function () {
   const { data, $, esc, media, cover, place, observeReveals } = window.Site;
   const projectUrl = (p) => `/projects/${p.id}`;
+  const pad2 = (n) => String(n).padStart(2, "0");
   const label = (p) => [p.category, place(p)].filter(Boolean).join(" · ");
 
   document.title = `${data.name} — ${data.title}`;
 
-  /* ── Hero: crossfading project images with a caption card, progress bars and a "View" cursor ── */
+  /* ── Hero: slow crossfade between featured projects, with a quiet caption line underneath ── */
   const heroes = (data.heroImages || [{ src: data.heroImage || cover(data.projects[0]) }]).map((h) => ({
     ...h, p: data.projects.find((p) => p.id === h.project),
   }));
-  const pad2 = (n) => String(n).padStart(2, "0");
   const hero = $("#hero-media");
   hero.innerHTML = heroes.map((h, i) => `
     <a class="hero-slide${i ? "" : " active"}" ${h.p ? `href="${projectUrl(h.p)}"` : ""} tabindex="-1" aria-hidden="${!!i}">
       ${media(h.src, h.p ? h.p.title : data.name, "hero" + i, null, 1600, 900).replace(' loading="lazy"', "")}
-    </a>`).join("") + `
-    <a class="hero-card" href="#">
-      <span class="hero-card-meta"><span class="hero-count"></span><span class="hero-cat"></span></span>
-      <span class="hero-card-title"></span>
-      <span class="hero-card-cta">View project <span class="hero-arrow" aria-hidden="true"></span></span>
-    </a>
-    ${heroes.length > 1 ? `<div class="hero-progress">${heroes.map((h, i) =>
-      `<button aria-label="Show ${esc(h.p ? h.p.title : "image " + (i + 1))}"><i></i></button>`).join("")}</div>` : ""}
-    <span class="hero-cursor" aria-hidden="true">View</span>`;
-
-  const slides = [...hero.querySelectorAll(".hero-slide")], bars = [...hero.querySelectorAll(".hero-progress button")];
-  const card = hero.querySelector(".hero-card");
-  let cur = 0;
-  const fillCard = () => {
-    const p = heroes[cur].p;
-    card.hidden = !p;
-    if (!p) return;
-    card.href = projectUrl(p);
-    card.querySelector(".hero-count").textContent = `${pad2(cur + 1)} / ${pad2(heroes.length)}`;
-    card.querySelector(".hero-cat").textContent = p.category || "";
-    card.querySelector(".hero-card-title").textContent = p.title;
-  };
+    </a>`).join("");
+  const caption = $("#hero-caption");
+  caption.innerHTML = `
+    <a class="hero-caption-text" href="#"><span class="hero-count"></span><span class="hero-title"></span><span class="hero-cat"></span></a>
+    ${heroes.length > 1 ? `<span class="hero-nav"><button type="button" aria-label="Previous project">←</button><button type="button" aria-label="Next project">→</button></span>` : ""}`;
+  const slides = [...hero.querySelectorAll(".hero-slide")];
+  const capLink = caption.querySelector(".hero-caption-text");
+  let cur = 0, timer;
   const show = (n) => {
     cur = (n + slides.length) % slides.length;
     slides.forEach((s, i) => { s.classList.toggle("active", i === cur); s.setAttribute("aria-hidden", i !== cur); });
-    bars.forEach((b, i) => { b.classList.toggle("active", i === cur); b.classList.toggle("done", i < cur); });
-    // Restart the progress animation on the active bar
-    const fill = bars[cur]?.querySelector("i");
-    if (fill) { fill.style.animation = "none"; void fill.offsetWidth; fill.style.animation = ""; }
-    card.classList.add("swap");
-    setTimeout(() => { fillCard(); card.classList.remove("swap"); }, 280);
+    const p = heroes[cur].p;
+    capLink.classList.add("swap");
+    setTimeout(() => {
+      capLink.hidden = !p;
+      if (p) {
+        capLink.href = projectUrl(p);
+        capLink.querySelector(".hero-count").textContent = `${pad2(cur + 1)} / ${pad2(heroes.length)}`;
+        capLink.querySelector(".hero-title").textContent = p.title;
+        capLink.querySelector(".hero-cat").textContent = p.category || "";
+      }
+      capLink.classList.remove("swap");
+    }, 250);
   };
-  fillCard();
+  const play = () => {
+    clearInterval(timer);
+    if (heroes.length > 1 && !matchMedia("(prefers-reduced-motion: reduce)").matches) timer = setInterval(() => show(cur + 1), 6000);
+  };
+  const [prevBtn, nextBtn] = caption.querySelectorAll(".hero-nav button");
+  prevBtn?.addEventListener("click", () => { show(cur - 1); play(); });
+  nextBtn?.addEventListener("click", () => { show(cur + 1); play(); });
   show(0);
-  // The active bar's fill animation drives the timing; hovering the hero pauses it (see CSS)
-  bars.forEach((b, i) => {
-    b.addEventListener("click", () => show(i));
-    b.querySelector("i").addEventListener("animationend", () => i === cur && show(cur + 1));
-  });
+  play();
 
-  // A "View" badge that follows the mouse over the image (mouse/trackpad only)
-  const cursor = hero.querySelector(".hero-cursor");
-  if (matchMedia("(pointer: fine)").matches) {
-    hero.addEventListener("mousemove", (e) => {
-      const r = hero.getBoundingClientRect();
-      const overUi = e.target.closest(".hero-card, .hero-progress");
-      cursor.classList.toggle("on", !overUi && !!heroes[cur].p);
-      cursor.style.transform = `translate(${e.clientX - r.left}px, ${e.clientY - r.top}px)`;
-    });
-    hero.addEventListener("mouseleave", () => cursor.classList.remove("on"));
-  }
-
-  /* ── Projects carousel ── */
-  const track = $("#carousel-track");
-  track.innerHTML = data.projects.map((p) => `
-    <li class="slide">
-      <a href="${projectUrl(p)}">
-        <div class="slide-media">${media(cover(p), p.title, p.id, p.palette)}</div>
-        <h3 class="slide-title">${esc(p.title)}</h3>
-        <p class="label">${esc(label(p))}</p>
-        <span class="btn btn-small">View project</span>
-      </a>
-    </li>`).join("");
-  const step = () => track.querySelector(".slide").offsetWidth + 20;
-  const prev = $("#carousel-prev"), next = $("#carousel-next");
-  const updateArrows = () => {
-    prev.disabled = track.scrollLeft < 4;
-    next.disabled = track.scrollLeft + track.clientWidth > track.scrollWidth - 4;
-  };
-  prev.addEventListener("click", () => track.scrollBy({ left: -step(), behavior: "smooth" }));
-  next.addEventListener("click", () => track.scrollBy({ left: step(), behavior: "smooth" }));
-  track.addEventListener("scroll", updateArrows, { passive: true });
-  addEventListener("resize", updateArrows);
-  updateArrows();
-
-  /* ── Project index ── */
-  $("#explore-list").innerHTML = data.projects.map((p) => `
-    <a class="explore-row reveal" href="${projectUrl(p)}">
-      <p class="explore-title">${esc(p.title)}<span class="label">${esc(label(p))}</span></p>
-      <p>${esc(p.summary)}</p>
-      <div class="explore-media">${media(cover(p), p.title, p.id + "-x", p.palette)}</div>
+  /* ── Selected work: one list of projects, shown as a grid or as an index list ── */
+  const work = $("#work-list");
+  work.innerHTML = data.projects.map((p, i) => `
+    <a class="work-item reveal" href="${projectUrl(p)}" data-index="${i}">
+      <div class="work-media">${media(cover(p), p.title, p.id, p.palette)}</div>
+      <span class="work-num">${pad2(i + 1)}</span>
+      <span class="work-title">${esc(p.title)}</span>
+      <span class="work-cat">${esc(p.category || "")}</span>
+      <span class="work-loc">${esc(p.location || "")}</span>
+      <span class="work-summary">${esc(p.summary)}</span>
+      <span class="work-arrow" aria-hidden="true"></span>
     </a>`).join("");
 
-  /* ── Experience ── */
-  const a = data.about;
-  $("#exp-cols").innerHTML = [...a.experience, ...a.education].map((x) => `
-    <div class="exp-item reveal">
-      <p class="label">${esc(x.years)}</p>
-      <h3>${esc(x.title)}</h3>
-      <p>${esc(x.place)}</p>
-    </div>`).join("");
+  // Grid | List toggle (remembered per visitor)
+  const toggles = [...document.querySelectorAll(".view-toggle button")];
+  const setView = (v) => {
+    work.dataset.view = v;
+    toggles.forEach((t) => t.setAttribute("aria-pressed", t.dataset.view === v));
+    try { localStorage.setItem("work-view", v); } catch (e) {}
+  };
+  toggles.forEach((t) => t.addEventListener("click", () => setView(t.dataset.view)));
+  try { const saved = localStorage.getItem("work-view"); if (saved === "list" || saved === "grid") setView(saved); } catch (e) {}
 
-  /* ── About ── */
-  $("#about-portrait").innerHTML = media(a.portrait, data.name, "portrait", ["#2a2927", "#5c5852", "#d8d4cc"], 800, 1120);
+  /* ── About: bio, CV, experience & education timeline, then skills ── */
+  const a = data.about;
+  $("#about-portrait").innerHTML = media(a.portrait, data.name, "portrait", ["#2a2927", "#5c5852", "#d8d4cc"], 800, 1000);
   $("#about-bio").innerHTML = a.bio.map((p) => `<p>${esc(p)}</p>`).join("");
+  $("#about-cv").innerHTML = data.cv ? `<a class="btn" href="/${esc(data.cv)}" download>Download CV (PDF)</a>` : "";
+  const timeline = (heading, items) => `
+    <div class="timeline-block reveal">
+      <h4>${heading}</h4>
+      ${items.map((x) => `<div class="timeline-row"><span class="label">${esc(x.years)}</span><span><strong>${esc(x.title)}</strong><span class="label">${esc(x.place)}</span></span></div>`).join("")}
+    </div>`;
+  $("#about-timeline").innerHTML = timeline("Experience", a.experience) + timeline("Education", a.education);
   const lists = [
     ["Expertise", a.services],
     ["Software", a.skills],
@@ -117,8 +90,7 @@
     ["Languages", a.languages],
   ].filter(([, items]) => items?.length);
   $("#about-lists").innerHTML = lists.map(([h, items]) =>
-    `<div class="reveal"><h4>${h}</h4><ul>${items.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>`).join("") +
-    (data.cv ? `<div class="about-cv reveal"><a class="btn" href="/${esc(data.cv)}" download>Download CV (PDF)</a></div>` : "");
+    `<div class="reveal"><h4>${h}</h4><ul>${items.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>`).join("");
 
   /* ── Contact form (opens the visitor's email app) ── */
   $("#contact-form").addEventListener("submit", (e) => {

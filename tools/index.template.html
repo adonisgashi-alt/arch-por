@@ -40,48 +40,37 @@
   <main id="top">
     <section class="hero">
       <div class="hero-media reveal" id="hero-media"></div>
+      <div class="hero-caption" id="hero-caption"></div>
       <div class="hero-text">
         <h1 class="hero-tagline reveal" data-bind="tagline"></h1>
         <p class="hero-intro reveal" data-bind="intro"></p>
       </div>
     </section>
 
-    <section id="projects" class="section">
-      <h2 class="h2 reveal" data-num="01">Projects</h2>
-      <div class="carousel">
-        <ul class="carousel-track" id="carousel-track"></ul>
-        <div class="carousel-nav">
-          <button class="arrow" id="carousel-prev" aria-label="Previous">
-            <svg viewBox="0 0 44 18"><path d="M9.9 16.96L2.12 9.18 9.9 1.39M42.86 9.18H3.38" /></svg>
-          </button>
-          <button class="arrow" id="carousel-next" aria-label="Next">
-            <svg viewBox="0 0 44 18"><path d="M34.15 1.39l7.78 7.78-7.78 7.79M1.19 9.17h39.49" /></svg>
-          </button>
+    <section id="work" class="section">
+      <div class="work-head">
+        <h2 class="h2 reveal" data-num="01">Selected Work</h2>
+        <div class="view-toggle reveal" role="group" aria-label="Project view">
+          <button type="button" data-view="grid" aria-pressed="true">Grid</button>
+          <button type="button" data-view="list" aria-pressed="false">List</button>
         </div>
       </div>
-    </section>
-
-    <section id="explore" class="section">
-      <h2 class="h2 reveal" data-num="02">Index</h2>
-      <div id="explore-list"></div>
-    </section>
-
-    <section id="experience" class="section theme-white">
-      <h2 class="h2 reveal" data-num="03">Experience</h2>
-      <div class="exp-cols" id="exp-cols"></div>
+      <div class="work" id="work-list" data-view="grid"></div>
     </section>
 
     <section id="about" class="section theme-black about">
       <div class="about-portrait reveal" id="about-portrait"></div>
       <div class="about-body">
-        <h2 class="h2 reveal" data-num="04">About</h2>
+        <h2 class="h2 reveal" data-num="02">About</h2>
         <div class="bio reveal" id="about-bio"></div>
+        <div class="about-cv reveal" id="about-cv"></div>
+        <div class="timeline" id="about-timeline"></div>
         <div class="about-lists" id="about-lists"></div>
       </div>
     </section>
 
     <section id="contact" class="section theme-bright contact">
-      <h2 class="h2 reveal" data-num="05" data-bind="contactHeading"></h2>
+      <h2 class="h2 reveal" data-num="03" data-bind="contactHeading"></h2>
       <div class="contact-body reveal">
         <p class="contact-text" data-bind="contactText"></p>
         <form class="contact-form" id="contact-form">

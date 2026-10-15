@@ -43,13 +43,12 @@ The site is on Vercel, connected to this GitHub repo. **Every push to `main` dep
 
 ## Layout
 
-Inspired by the Squarespace *Radian* template: a large hero image, a project carousel,
-an index of projects with images, an experience section, a dark About section, a contact
-form and a footer with her name set large across the page.
+Hero → Selected Work (one section, Grid or List view) → About (bio, CV, experience, education, skills) → Contact.
+Everything sits on one 1440px page width with a 48px gutter.
 
 ## Features
 
-- Project carousel and project index on the home page
+- Home: featured projects in a slow crossfade, Selected Work (Grid | List), About with experience timeline and CV, Contact
 - Each project has its own page at `/projects/<id>` (`project.html`, routed by `vercel.json`) with cover, facts, description, captioned gallery and previous/next links (← → keys work too)
 - Contact form that opens the visitor's email app with the message filled in (no server needed)
 - Responsive down to phone width, respects reduced-motion settings
