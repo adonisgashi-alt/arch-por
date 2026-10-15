@@ -33,7 +33,7 @@ window.PORTFOLIO = {
     { label: "LinkedIn", url: "https://www.linkedin.com/in/kaltrina-ajdini/" },
     // { label: "Instagram", url: "https://instagram.com/..." },
   ],
-  cv: "", // e.g. "files/cv.pdf" — leave empty to hide the link
+  cv: "files/Kaltrina-Ajdini-CV.pdf", // rebuild with: node tools/build-cv.js (source: tools/cv.html)
 
   about: {
     portrait: "", // e.g. "images/portrait.jpg"

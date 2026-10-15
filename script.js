@@ -78,12 +78,8 @@
     ["Languages", a.languages],
   ].filter(([, items]) => items?.length);
   $("#about-lists").innerHTML = lists.map(([h, items]) =>
-    `<div class="reveal"><h4>${h}</h4><ul>${items.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>`).join("");
-
-  /* ── Contact ── */
-  const mail = $("#contact-email");
-  mail.textContent = data.email;
-  mail.href = `mailto:${data.email}`;
+    `<div class="reveal"><h4>${h}</h4><ul>${items.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>`).join("") +
+    (data.cv ? `<div class="about-cv reveal"><a class="btn" href="/${esc(data.cv)}" download>Download CV (PDF)</a></div>` : "");
 
   /* ── Contact form (opens the visitor's email app) ── */
   $("#contact-form").addEventListener("submit", (e) => {

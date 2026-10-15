@@ -114,7 +114,7 @@
 
   /* ── Footer ── */
   const links = data.social.map((s) => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a>`);
-  if (data.cv) links.push(`<a href="${esc(data.cv)}" target="_blank" rel="noopener">CV</a>`);
+  if (data.cv) links.push(`<a href="/${esc(data.cv)}" download>Download CV</a>`);
   document.getElementById("site-footer").outerHTML = `
   <footer class="site-footer theme-black">
     <div class="footer-row">
@@ -122,20 +122,8 @@
       <p><a href="mailto:${esc(data.email)}">${esc(data.email)}</a>${data.phone ? `<br />${esc(data.phone)}` : ""}</p>
       <p>${links.join("<br />")}</p>
     </div>
-    <div class="wordmark" id="wordmark" aria-hidden="true"><span>${esc(data.name)}</span></div>
     <p class="copyright">© ${new Date().getFullYear()} ${esc(data.name)}</p>
   </footer>`;
-
-  // Giant name wordmark, sized to fill the footer width
-  const wordmark = $("#wordmark");
-  const fitWordmark = () => {
-    wordmark.style.fontSize = "100px";
-    const w = wordmark.clientWidth, textW = wordmark.firstChild.getBoundingClientRect().width;
-    wordmark.style.fontSize = `${Math.floor((100 * w) / textW * 0.99)}px`;
-  };
-  document.fonts?.ready.then(fitWordmark);
-  addEventListener("resize", fitWordmark);
-  fitWordmark();
 
   /* ── Simple text bindings ── */
   document.querySelectorAll("[data-bind]").forEach((el) => (el.textContent = data[el.dataset.bind] || ""));
