@@ -11,29 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
-  <header class="site-header">
-    <a href="#top" class="brand" data-bind="name"></a>
-    <nav class="nav" aria-label="Main">
-      <a href="#projects">Projects</a>
-      <a href="#explore">Index</a>
-      <a href="#about">About</a>
-    </nav>
-    <a href="#contact" class="btn btn-small">Contact</a>
-    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
-      <span></span><span></span>
-    </button>
-  </header>
-
-  <div class="menu" id="menu" aria-hidden="true">
-    <nav aria-label="Mobile">
-      <a href="#projects">Projects</a>
-      <a href="#explore">Index</a>
-      <a href="#experience">Experience</a>
-      <a href="#about">About</a>
-    </nav>
-    <a href="#contact" class="btn">Contact</a>
-  </div>
+<body data-page="home">
+  <div id="site-header"></div>
 
   <main id="top">
     <section class="hero">
@@ -91,41 +70,10 @@
     </section>
   </main>
 
-  <footer class="site-footer theme-black">
-    <div class="footer-row">
-      <p data-bind="footerLine"></p>
-      <p id="footer-contact"></p>
-      <p id="footer-links"></p>
-    </div>
-    <div class="wordmark" id="wordmark" aria-hidden="true"></div>
-    <p class="copyright">© <span id="year"></span> <span data-bind="name"></span></p>
-  </footer>
-
-  <!-- Project page -->
-  <div class="overlay" id="overlay" aria-hidden="true">
-    <article class="project" role="dialog" aria-modal="true" aria-labelledby="p-title">
-      <div class="project-bar">
-        <span class="brand" data-bind="name"></span>
-        <button class="btn btn-small" id="overlay-close">Close</button>
-      </div>
-      <header class="project-head">
-        <h2 id="p-title" class="h2"></h2>
-        <p id="p-meta" class="project-meta"></p>
-      </header>
-      <div id="p-cover" class="project-cover"></div>
-      <div class="project-info">
-        <dl class="facts" id="p-facts"></dl>
-        <div class="project-text" id="p-text"></div>
-      </div>
-      <div class="project-gallery" id="p-gallery"></div>
-      <nav class="project-nav">
-        <button id="p-prev">← Previous</button>
-        <button id="p-next">Next project →</button>
-      </nav>
-    </article>
-  </div>
+  <div id="site-footer"></div>
 
   <script src="content.js"></script>
+  <script src="common.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
