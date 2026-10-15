@@ -12,10 +12,10 @@
 window.PORTFOLIO = {
   name: "Kaltrina Ajdini",
   title: "Architect",
-  location: "Prishtina, Kosovo",
+  location: "Prishtina, Kosovo · freelancing for PIKA 3D, Chicago",
   tagline: "Beautiful, functional architecture that gives better shape to the places we live in.",
   // Short paragraph shown under the tagline on the right.
-  intro: "Architect working across public buildings, housing, interiors and cultural heritage — from the first concept through construction documentation and site coordination.",
+  intro: "Architect working across public buildings, housing, interiors and cultural heritage — from the first concept through construction documentation and site coordination. Currently freelancing for PIKA 3D, Chicago.",
   // Images that rotate at the top of the home page (wide images work best).
   heroImages: [
     { src: "images/school-1.jpg", project: "primary-school" },
@@ -30,7 +30,7 @@ window.PORTFOLIO = {
   footerLine: "Architecture & Interior Design",
   email: "kaltrinaajdini93@gmail.com",
   social: [
-    // { label: "LinkedIn", url: "https://www.linkedin.com/in/..." },
+    { label: "LinkedIn", url: "https://www.linkedin.com/in/kaltrina-ajdini/" },
     // { label: "Instagram", url: "https://instagram.com/..." },
   ],
   cv: "", // e.g. "files/cv.pdf" — leave empty to hide the link
@@ -40,9 +40,11 @@ window.PORTFOLIO = {
     bio: [
       "I’m an architect from Prishtina. My goal is always to give better shape to the built environment through beautiful, functional architecture — buildings and interiors that work well for the people who use them.",
       "I studied architecture at the University of Prishtina “Hasan Prishtina” and spent three years at New Dimension Architecture, designing commercial and residential projects with budgets up to €6 million across every phase, from concept to construction documents and on-site supervision. Alongside practice I’ve worked on cultural heritage — documenting and protecting monuments with the Ministry of Culture, Youth and Sport and Cultural Heritage without Borders.",
+      "Today I work as a freelance architect for PIKA 3D in Chicago.",
       "I’m detail-oriented, a fast learner and at my best in a team, comfortable juggling several projects at once.",
     ],
     experience: [
+      { years: "Current", title: "Freelance Architect", place: "PIKA 3D, Chicago" },
       { years: "Sept – Nov 2019", title: "Intern Architect", place: "Ministry of Culture, Youth and Sport, Prishtina" },
       { years: "2016 — 2019", title: "Architect", place: "New Dimension Architecture, Prishtina" },
       { years: "June – July 2019", title: "Heritage Lab — “Refinding the Heritage of Letnica”", place: "Cultural Heritage without Borders (CHwB) Kosovo" },
