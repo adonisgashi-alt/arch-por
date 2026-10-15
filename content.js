@@ -36,7 +36,7 @@ window.PORTFOLIO = {
   cv: "files/Kaltrina-Ajdini-CV.pdf", // rebuild with: node tools/build-cv.js (source: tools/cv.html)
 
   about: {
-    portrait: "", // e.g. "images/portrait.jpg"
+    portrait: "images/portrait.jpg",
     bio: [
       "I’m an architect from Prishtina. My goal is always to give better shape to the built environment through beautiful, functional architecture — buildings and interiors that work well for the people who use them.",
       "I studied architecture at the University of Prishtina “Hasan Prishtina” and spent three years at New Dimension Architecture, designing commercial and residential projects with budgets up to €6 million across every phase, from concept to construction documents and on-site supervision. Alongside practice I’ve worked on cultural heritage — documenting and protecting monuments with the Ministry of Culture, Youth and Sport and Cultural Heritage without Borders.",
