@@ -130,6 +130,10 @@ window.PORTFOLIO = {
         { src: "images/200-s-wacker-3.jpg", caption: "Archicad model" },
         { src: "images/200-s-wacker-4.jpg", caption: "Existing condition plan" },
       ],
+      gallery: [
+        { layout: "duo", images: [1, 2] },
+        { layout: "full", images: [3] },
+      ],
     },
     {
       id: "primary-school",
@@ -146,6 +150,10 @@ window.PORTFOLIO = {
         { src: "images/school-2.jpg", caption: "Shared learning space" },
         { src: "images/school-3.jpg", caption: "Classroom opening onto the atrium" },
         { src: "images/school-4.jpg", caption: "Site plan, ground floor and section" },
+      ],
+      gallery: [
+        { layout: "duo", images: [1, 2] },
+        { layout: "full", images: [3] },
       ],
     },
     {
@@ -164,6 +172,11 @@ window.PORTFOLIO = {
         { src: "images/pool-3.jpg", caption: "Street elevation" },
         { src: "images/pool-4.jpg", caption: "Ground floor, sections and tribune seating detail" },
       ],
+      gallery: [
+        { layout: "full", images: [1] },
+        { layout: "full", images: [2] },
+        { layout: "full", images: [3] },
+      ],
     },
     {
       id: "office-building",
@@ -180,6 +193,10 @@ window.PORTFOLIO = {
         { src: "images/office-4.jpg", caption: "Louvred second skin" },
         { src: "images/office-2.jpg", caption: "Interior" },
         { src: "images/office-3.jpg", caption: "Typical floor plan and façade" },
+      ],
+      gallery: [
+        { layout: "duo", images: [1, 2] },
+        { layout: "full", images: [3] },
       ],
     },
     {
@@ -198,6 +215,10 @@ window.PORTFOLIO = {
         { src: "images/housing-2.jpg", caption: "Courtyard" },
         { src: "images/housing-4.jpg", caption: "Section, elevation and apartment variations" },
       ],
+      gallery: [
+        { layout: "duo", images: [1, 3] },
+        { layout: "full", images: [2] },
+      ],
     },
     {
       id: "geodes-office",
@@ -215,6 +236,10 @@ window.PORTFOLIO = {
         { src: "images/geodes-3.jpg", caption: "Kitchen and well-being" },
         { src: "images/geodes-4.jpg", caption: "CEO’s office" },
         { src: "images/geodes-5.jpg", caption: "Plan, well-being concept and section" },
+      ],
+      gallery: [
+        { layout: "feature", images: [1, 2, 3] },
+        { layout: "full", images: [4] },
       ],
     },
   ],
