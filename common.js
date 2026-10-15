@@ -119,7 +119,6 @@
   <footer class="site-footer theme-black">
     <div class="footer-row">
       <p>${esc(data.footerLine)}</p>
-      <p><a href="mailto:${esc(data.email)}">${esc(data.email)}</a>${data.phone ? `<br />${esc(data.phone)}` : ""}</p>
       <p>${links.join("<br />")}</p>
     </div>
     <p class="copyright">© ${new Date().getFullYear()} ${esc(data.name)}</p>
