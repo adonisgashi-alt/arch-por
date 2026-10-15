@@ -24,10 +24,10 @@ Until real photos are added, each project shows a generated abstract architectur
 Run `npx vercel dev` (or `python3 -m http.server` for the home page only) and visit the local URL.
 (Opening `index.html` directly from disk won't load the styles, because paths are site-root based for the clean `/projects/<id>` URLs.)
 
-## Publish (free)
+## Publish
 
-**GitHub Pages:** repo → Settings → Pages → Deploy from branch → pick the branch and `/ (root)`.
-Netlify or Vercel also work — just drag the folder in; there's nothing to build.
+The site is on Vercel, connected to this GitHub repo. **Every push to `main` deploys to the live site automatically**
+(kaltrinaajdini.com). Pushes to other branches get a preview link only.
 
 ## Layout
 
