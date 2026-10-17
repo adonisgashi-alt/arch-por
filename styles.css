@@ -87,6 +87,19 @@ section[id] { scroll-margin-top: 72px; }
 .hero-slide.active { opacity: 1; pointer-events: auto; }
 .hero-slide img, .hero-slide svg { width: 100%; height: 100%; object-fit: cover; }
 
+/* Line-drawing slide: the traced lines draw themselves, then the render fades in under them.
+   Shown whole on white (the render has a white background) so lines and render line up. */
+.hero-slide.has-lines { background: #fff; }
+.hero-slide.has-lines img { object-fit: contain; opacity: 0; transition: opacity 1.4s ease; }
+.hero-slide.has-lines.drawn img { opacity: 1; }
+.hero-lines { position: absolute; inset: 0; transition: opacity 1.6s ease .5s; }
+.hero-lines svg { width: 100%; height: 100%; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; }
+.hero-lines line { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.hero-slide.drawing .hero-lines line { animation: draw-line var(--t) cubic-bezier(.55, 0, .25, 1) var(--d) forwards; }
+.hero-slide.drawn .hero-lines line { stroke-dashoffset: 0; }
+.hero-slide.drawn .hero-lines { opacity: 0; }
+@keyframes draw-line { to { stroke-dashoffset: 0; } }
+
 /* Hero caption: one quiet line under the image */
 .hero-caption {
   display: flex; justify-content: space-between; align-items: center; gap: 24px;

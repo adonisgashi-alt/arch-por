@@ -91,9 +91,10 @@ async function snapshot(browser, url, { title, description, canonical, image, ld
     d.documentElement.classList.remove("wf-wait");
     if (!d.documentElement.className) d.documentElement.removeAttribute("class");
     d.querySelectorAll(".in").forEach((e) => e.classList.remove("in"));
-    d.querySelectorAll(".hero-card.swap").forEach((e) => e.classList.remove("swap"));
-    d.querySelectorAll(".hero-cursor").forEach((e) => { e.removeAttribute("style"); e.classList.remove("on"); });
-    d.querySelectorAll("[style]").forEach((e) => { if (e.closest(".hero-progress")) e.removeAttribute("style"); });
+    d.querySelectorAll(".hero-caption-text.swap").forEach((e) => e.classList.remove("swap"));
+    // The hero is rebuilt on load; don't ship the inlined line drawing or its animation state
+    d.querySelectorAll(".hero-lines").forEach((e) => (e.innerHTML = ""));
+    d.querySelectorAll(".hero-slide").forEach((e) => e.classList.remove("drawing", "drawn"));
     // Per-page metadata
     const meta = (attr, key, value) => {
       if (!value) return;

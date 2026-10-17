@@ -8,15 +8,19 @@
   document.title = `${data.name} — ${data.title}`;
 
   /* ── Hero: slow crossfade between featured projects, with a quiet caption line underneath.
-     Hidden for now — it only runs when the page has #hero-media. ── */
+     A slide with `lines` (an SVG traced by tools/trace-lines.py) first draws itself as a line
+     drawing, then the render fades in underneath. Runs only when the page has #hero-media. ── */
   const hero = $("#hero-media");
   if (hero) {
+    const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const DRAW_MS = 3000; // when the render starts fading in under the lines
     const heroes = (data.heroImages || [{ src: data.heroImage || cover(data.projects[0]) }]).map((h) => ({
       ...h, p: data.projects.find((p) => p.id === h.project),
     }));
     hero.innerHTML = heroes.map((h, i) => `
-      <a class="hero-slide${i ? "" : " active"}" ${h.p ? `href="${projectUrl(h.p)}"` : ""} tabindex="-1" aria-hidden="${!!i}">
+      <a class="hero-slide${i ? "" : " active"}${h.lines ? " has-lines" : ""}" ${h.p ? `href="${projectUrl(h.p)}"` : ""} tabindex="-1" aria-hidden="${!!i}">
         ${media(h.src, h.p ? h.p.title : data.name, "hero" + i, null, 1600, 900).replace(' loading="lazy"', "")}
+        ${h.lines ? `<div class="hero-lines"></div>` : ""}
       </a>`).join("");
     const caption = $("#hero-caption");
     caption.innerHTML = `
@@ -25,9 +29,33 @@
     const slides = [...hero.querySelectorAll(".hero-slide")];
     const capLink = caption.querySelector(".hero-caption-text");
     let cur = 0, timer;
+
+    // Line drawing: restart the stroke animation, then let the render take over
+    const draw = (slide) => {
+      clearTimeout(slide.drawTimer);
+      slide.classList.remove("drawing", "drawn");
+      if (still || !slide.querySelector(".hero-lines svg")) return slide.classList.add("drawn");
+      void slide.offsetWidth; // restart the CSS animations
+      slide.classList.add("drawing");
+      slide.drawTimer = setTimeout(() => slide.classList.add("drawn"), DRAW_MS);
+    };
+    heroes.forEach((h, i) => {
+      if (!h.lines) return;
+      const slide = slides[i];
+      fetch(`/${h.lines}`).then((r) => (r.ok ? r.text() : Promise.reject()))
+        .then((svg) => { slide.querySelector(".hero-lines").innerHTML = svg; })
+        .catch(() => {})
+        .finally(() => { slide.linesReady = true; if (slide.classList.contains("active")) draw(slide); });
+    });
+
     const show = (n) => {
+      const prev = slides[cur];
       cur = (n + slides.length) % slides.length;
       slides.forEach((s, i) => { s.classList.toggle("active", i === cur); s.setAttribute("aria-hidden", i !== cur); });
+      if (slides[cur].linesReady) draw(slides[cur]); // otherwise it draws as soon as its lines load
+      if (prev !== slides[cur] && prev.classList.contains("has-lines")) {
+        setTimeout(() => { if (!prev.classList.contains("active")) prev.classList.remove("drawing", "drawn"); }, 1700);
+      }
       const p = heroes[cur].p;
       capLink.classList.add("swap");
       setTimeout(() => {
@@ -41,9 +69,10 @@
         capLink.classList.remove("swap");
       }, 250);
     };
+    // A drawn slide stays up longer so the finished render gets its moment
     const play = () => {
-      clearInterval(timer);
-      if (heroes.length > 1 && !matchMedia("(prefers-reduced-motion: reduce)").matches) timer = setInterval(() => show(cur + 1), 6000);
+      clearTimeout(timer);
+      if (heroes.length > 1 && !still) timer = setTimeout(() => { show(cur + 1); play(); }, heroes[cur].lines ? 9000 : 6000);
     };
     const [prevBtn, nextBtn] = caption.querySelectorAll(".hero-nav button");
     prevBtn?.addEventListener("click", () => { show(cur - 1); play(); });
