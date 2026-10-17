@@ -58,8 +58,8 @@ The site is on Vercel, connected to this GitHub repo. **Every push to `main` dep
 
 Three pages in the menu: **Work** (`/`, the project list in Grid or List view), **About** (`/about`: bio, CV,
 experience, education, skills) and **Contact** (`/contact`: the form). Each project has its own page.
-The home page opens with a hero slideshow of featured projects (`heroImages` in `content.js`). A slide with
-`lines` first draws itself as a line drawing, then the render fades in. To trace a new one:
+The home page opens with one featured project (`heroImages` in `content.js`; more entries make it a slideshow). An image with
+`lines` first draws itself as a line drawing (once per page load), then the render fades in. To trace a new one:
 `pip install opencv-python-headless` then `python3 tools/trace-lines.py images/<render>.jpg images/<render>-lines.svg`
 (works best on clean renders with straight edges and a plain background).
 Everything sits on one 1440px page width with a 48px gutter.

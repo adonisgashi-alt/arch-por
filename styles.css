@@ -111,6 +111,7 @@ section[id] { scroll-margin-top: 72px; }
 .hero-caption-text:hover .hero-title { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
 .hero-cat::before { content: "·"; margin-right: 14px; }
 .hero-cat:empty { display: none; }
+.hero-count:empty { display: none; }
 .hero-nav { display: flex; gap: 18px; }
 .hero-nav button { font-size: 16px; color: var(--muted); transition: color .2s; }
 .hero-nav button:hover { color: var(--ink); }

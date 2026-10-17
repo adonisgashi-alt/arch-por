@@ -21,12 +21,10 @@ window.PORTFOLIO = {
   // Short paragraph shown under the tagline on the right.
   intro: "Architect working across public buildings, housing, interiors and cultural heritage — from the first concept through construction documentation and site coordination. Currently freelancing for PIKA 3D, Chicago.",
   // Images that rotate at the top of the home page (wide images work best).
+  // Hero: one featured project. The Hyatt render draws itself as a line drawing once per page load.
+  // (Add more entries to turn it back into a slideshow.)
   heroImages: [
     { src: "images/hyatt-13.jpg", project: "hyatt-regency-chicago", lines: "images/hyatt-13-lines.svg" },
-    { src: "images/school-1.jpg", project: "primary-school" },
-    { src: "images/pool-2.jpg", project: "olympic-pool" },
-    { src: "images/housing-3.jpg", project: "flexible-housing" },
-    { src: "images/geodes-2.jpg", project: "geodes-office" },
   ],
   // Contact section
   contactHeading: "Let’s build!",

@@ -62,7 +62,7 @@
         capLink.hidden = !p;
         if (p) {
           capLink.href = projectUrl(p);
-          capLink.querySelector(".hero-count").textContent = `${pad2(cur + 1)} / ${pad2(heroes.length)}`;
+          capLink.querySelector(".hero-count").textContent = heroes.length > 1 ? `${pad2(cur + 1)} / ${pad2(heroes.length)}` : "";
           capLink.querySelector(".hero-title").textContent = p.title;
           capLink.querySelector(".hero-cat").textContent = p.category || "";
         }
