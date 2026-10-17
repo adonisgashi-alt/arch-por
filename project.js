@@ -111,7 +111,7 @@
       .then((svg) => { frame.querySelector(".cover-reveal-lines").innerHTML = svg; })
       .catch(() => box.classList.add("static"));
 
-    const CELL = 18; // px per "bitmap" square
+    const CELL = 8; // px per "bitmap" square
     const mask = document.createElement("canvas"), mctx = mask.getContext("2d");
     let cols = 0, rows = 0, thresholds, data, last = -1;
     const layout = () => {
