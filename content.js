@@ -100,7 +100,7 @@ window.PORTFOLIO = {
       ],
       // How the images after the cover are arranged (numbers are positions in `images`, cover = 0)
       gallery: [
-        { layout: "duo", images: [1, 2] },
+        { layout: "compare", images: [1, 2] },
         { layout: "feature", images: [3, 4, 5, 6] },
         { layout: "feature", images: [7, 8, 9] },
         { layout: "full", images: [11] },

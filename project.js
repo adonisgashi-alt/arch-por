@@ -28,9 +28,26 @@
   //   { layout: "full", images: [1] }        one image, full width
   //   { layout: "duo", images: [1, 2] }      two side by side, same height
   //   { layout: "feature", images: [3, 4, 5, 6] }  one large left, the rest stacked on the right
+  //   { layout: "compare", images: [1, 2] }  the same view twice, with a slider between them
+  //                                           (plays once when it comes into view, then it's draggable)
   // Without `gallery`, every image after the cover gets its own full-width row.
   const rows = p.gallery || imgs.slice(1).map((_, k) => ({ layout: "full", images: [k + 1] }));
+  const short = (img) => (img?.caption || "").split(/ over | of /)[0];
+  const compare = ([a, b]) => `
+    <figure class="reveal g-row g-compare">
+      <div class="frame compare" style="--pos: 50%">
+        ${media(imgs[b], imgs[b]?.caption || p.title, `${p.id}-${b}`, p.palette)}
+        <div class="compare-top">${media(imgs[a], imgs[a]?.caption || p.title, `${p.id}-${a}`, p.palette)}</div>
+        <span class="compare-label compare-label-a">${esc(short(imgs[a]))}</span>
+        <span class="compare-label compare-label-b">${esc(short(imgs[b]))}</span>
+        <span class="compare-handle" aria-hidden="true"></span>
+        <input class="compare-range" type="range" min="0" max="100" step="1" value="50"
+          aria-label="Slide to compare: ${esc(short(imgs[a]))} on the left, ${esc(short(imgs[b]))} on the right" />
+      </div>
+      <figcaption>${esc(short(imgs[a]))} and ${esc(short(imgs[b]))}, same view — drag to compare</figcaption>
+    </figure>`;
   const row = (r) => {
+    if (r.layout === "compare") return compare(r.images);
     const figs = r.images.map((k) => fig(imgs[k], k));
     if (r.layout === "feature") {
       return `<div class="g-row g-feature g-stack-${figs.length - 1}">${figs[0]}<div class="g-stack">${figs.slice(1).join("")}</div></div>`;
@@ -65,6 +82,38 @@
     if (e.target.closest("input, textarea")) return;
     if (e.key === "ArrowLeft") location.href = `/projects/${prev.id}`;
     if (e.key === "ArrowRight") location.href = `/projects/${next.id}`;
+  });
+
+  /* ── Compare sliders: sweep once on their own when first seen, then follow the visitor ── */
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.querySelectorAll(".compare").forEach((box) => {
+    const range = box.querySelector(".compare-range");
+    let auto = 0;
+    const set = (v) => { box.style.setProperty("--pos", `${v}%`); range.value = v; };
+    const stopAuto = () => { cancelAnimationFrame(auto); auto = 0; box.classList.remove("auto"); };
+    range.addEventListener("input", () => { stopAuto(); set(+range.value); });
+    range.addEventListener("pointerdown", stopAuto);
+    range.addEventListener("focus", () => box.classList.add("focus"));
+    range.addEventListener("blur", () => box.classList.remove("focus"));
+    if (still) return;
+    // 50 → 88 → 12 → 50, eased, about 4.5 seconds
+    const keys = [50, 88, 12, 50], seg = 1500;
+    const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+    const play = () => {
+      const t0 = performance.now();
+      box.classList.add("auto");
+      const step = (now) => {
+        const e = (now - t0) / seg, i = Math.floor(e);
+        if (i >= keys.length - 1) { set(50); return stopAuto(); }
+        set(keys[i] + (keys[i + 1] - keys[i]) * ease(e - i));
+        auto = requestAnimationFrame(step);
+      };
+      auto = requestAnimationFrame(step);
+    };
+    const io = new IntersectionObserver(([en]) => {
+      if (en.isIntersecting) { io.disconnect(); setTimeout(play, 600); }
+    }, { threshold: 0.6 });
+    io.observe(box);
   });
 
   observeReveals();

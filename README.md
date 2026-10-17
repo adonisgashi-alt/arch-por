@@ -33,6 +33,7 @@ to the project in `content.js` (numbers are positions in its `images` list; the 
 gallery: [
   { layout: "duo", images: [1, 2] },          // two side by side, same height
   { layout: "feature", images: [3, 4, 5, 6] }, // one large left, the rest stacked right (2 or 3)
+- `{ layout: "compare", images: [1, 2] }` — the same view twice with a slider between them; it sweeps once on its own when it scrolls into view, then visitors can drag it
   { layout: "full", images: [7] },             // one image, full width
 ],
 ```
