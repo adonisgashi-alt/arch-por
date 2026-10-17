@@ -54,6 +54,21 @@
     }
     return `<div class="g-row g-${r.layout}">${figs.join("")}</div>`;
   };
+  // Scroll reveal cover: pinned in the middle of the screen while scrolling turns the line drawing
+  // into the colour render, square by square from the bottom up. Then the page scrolls on.
+  const revealCover = () => `
+    <div class="project-cover cover-reveal" id="cover-reveal" style="--ratio: ${p.coverReveal.ratio}">
+      <div class="cover-reveal-pin">
+        <figure class="cover-reveal-fig">
+          <div class="frame cover-reveal-frame">
+            ${media(imgs[0], imgs[0]?.caption || p.title, `${p.id}-0`, p.palette).replace(' loading="lazy"', "")}
+            <div class="cover-reveal-lines"></div>
+            <canvas aria-hidden="true"></canvas>
+          </div>
+          <figcaption class="cover-reveal-hint">Scroll to reveal</figcaption>
+        </figure>
+      </div>
+    </div>`;
   const facts = [["Location", p.location], ["Year", p.year], ["Status", p.status], ["Scope", p.scope],
     ["Area", p.area], ["Client", p.client], ["Role", p.role]].filter(([, v]) => v);
 
@@ -66,7 +81,7 @@
       <h1 class="h2">${esc(p.title)}</h1>
       <p class="project-meta">${esc([p.category, place(p)].filter(Boolean).join(" · "))}</p>
     </header>
-    <div class="project-cover g-full">${fig(imgs[0], 0)}</div>
+    ${p.coverReveal ? revealCover() : `<div class="project-cover g-full">${fig(imgs[0], 0)}</div>`}
     <div class="project-info">
       <dl class="facts reveal">${facts.map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("")}</dl>
       <div class="project-text reveal">${(p.description || [p.summary]).map((t) => `<p>${esc(t)}</p>`).join("")}</div>
@@ -83,6 +98,65 @@
     if (e.key === "ArrowLeft") location.href = `/projects/${prev.id}`;
     if (e.key === "ArrowRight") location.href = `/projects/${next.id}`;
   });
+
+  /* ── Scroll reveal cover ── */
+  const rc = $("#cover-reveal");
+  if (rc) setupReveal(rc);
+  function setupReveal(box) {
+    const frame = box.querySelector(".cover-reveal-frame");
+    const img = frame.querySelector("img"), canvas = frame.querySelector("canvas"), ctx = canvas.getContext("2d");
+    const hint = box.querySelector(".cover-reveal-hint");
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches || !ctx || !img) return box.classList.add("static");
+    fetch(`/${p.coverReveal.lines}`).then((r) => (r.ok ? r.text() : Promise.reject()))
+      .then((svg) => { frame.querySelector(".cover-reveal-lines").innerHTML = svg; })
+      .catch(() => box.classList.add("static"));
+
+    const CELL = 18; // px per "bitmap" square
+    const mask = document.createElement("canvas"), mctx = mask.getContext("2d");
+    let cols = 0, rows = 0, thresholds, data, last = -1;
+    const layout = () => {
+      const r = frame.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2);
+      canvas.width = Math.round(r.width * dpr); canvas.height = Math.round(r.height * dpr);
+      cols = Math.max(1, Math.ceil(r.width / CELL)); rows = Math.max(1, Math.ceil(r.height / CELL));
+      mask.width = cols; mask.height = rows;
+      data = mctx.createImageData(cols, rows);
+      // Each square turns on at its own point: lower rows first, with some noise so the edge is ragged
+      thresholds = new Float32Array(cols * rows);
+      for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
+        const fromBottom = (rows - 1 - y) / Math.max(rows - 1, 1);
+        thresholds[y * cols + x] = 0.02 + fromBottom * 0.78 + Math.random() * 0.18;
+      }
+      last = -1; draw();
+    };
+    const progress = () => {
+      const r = box.getBoundingClientRect(), span = r.height - innerHeight;
+      return span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 1;
+    };
+    const draw = () => {
+      const t = progress();
+      hint.style.opacity = Math.max(0, 1 - t * 6);
+      if (!img.complete || !img.naturalWidth || Math.abs(t - last) < 0.001) return;
+      last = t;
+      const px = data.data;
+      for (let i = 0; i < thresholds.length; i++) px[i * 4 + 3] = t >= thresholds[i] ? 255 : 0;
+      mctx.putImageData(data, 0, 0);
+      ctx.globalCompositeOperation = "copy";
+      ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(mask, 0, 0, canvas.width, canvas.height);
+      ctx.globalCompositeOperation = "source-in";
+      ctx.imageSmoothingEnabled = true;
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      ctx.globalCompositeOperation = "source-over";
+    };
+    let ticking = false;
+    addEventListener("scroll", () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => { ticking = false; draw(); });
+    }, { passive: true });
+    addEventListener("resize", layout);
+    img.complete ? layout() : img.addEventListener("load", layout, { once: true });
+  }
 
   /* ── Compare sliders: sweep once on their own when first seen, then follow the visitor ── */
   const still = matchMedia("(prefers-reduced-motion: reduce)").matches;

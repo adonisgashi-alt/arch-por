@@ -38,6 +38,10 @@ gallery: [
 ],
 ```
 
+A project can also set `coverReveal: { lines: "images/<render>-lines.svg", ratio: width / height }`: its cover
+then starts as the line drawing and stays pinned mid-screen while scrolling reveals the colour render square by
+square from the bottom up (the Hyatt page does this). Trace the lines with `tools/trace-lines.py` (see below).
+
 ## After editing content
 
 The pages are pre-built into plain HTML so search engines and AI assistants can read them.

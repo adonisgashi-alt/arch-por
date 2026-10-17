@@ -93,7 +93,7 @@ async function snapshot(browser, url, { title, description, canonical, image, ld
     d.querySelectorAll(".in").forEach((e) => e.classList.remove("in"));
     d.querySelectorAll(".hero-caption-text.swap").forEach((e) => e.classList.remove("swap"));
     // The hero is rebuilt on load; don't ship the inlined line drawing or its animation state
-    d.querySelectorAll(".hero-lines").forEach((e) => (e.innerHTML = ""));
+    d.querySelectorAll(".hero-lines, .cover-reveal-lines").forEach((e) => (e.innerHTML = ""));
     d.querySelectorAll(".hero-slide").forEach((e) => e.classList.remove("drawing", "drawn"));
     // Per-page metadata
     const meta = (attr, key, value) => {
