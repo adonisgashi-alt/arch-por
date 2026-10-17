@@ -268,7 +268,6 @@ body.locked { overflow: hidden; }
   box-shadow: 0 2px 10px rgba(0,0,0,.18); transition: transform .2s;
 }
 .compare:hover .compare-handle::after, .compare.focus .compare-handle::after { transform: translate(-50%, -50%) scale(1.08); }
-.compare.focus .compare-handle::after { outline: 2px solid var(--ink); outline-offset: 2px; }
 .compare-label {
   position: absolute; top: 14px; padding: 5px 10px; border-radius: var(--radius); font-size: 13px;
   background: rgba(255,255,255,.88); color: var(--ink); pointer-events: none; transition: opacity .3s;
