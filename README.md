@@ -38,10 +38,11 @@ gallery: [
 ],
 ```
 
-A project can also set `coverReveal: { sketch: "images/<render>-sketch.jpg", ratio: width / height }` (or `lines:` with a
-traced SVG instead of `sketch:`): its cover then starts as a pencil sketch and stays pinned mid-screen while scrolling reveals the colour render like a
+A project can also set `coverReveal: { sketch: "images/<render>-ink.svg", ratio: width / height }` (or `lines:` with a
+traced SVG instead of `sketch:`): its cover then starts as a pen-and-ink sketch and stays pinned mid-screen while scrolling reveals the colour render like a
 watercolour wash rising from the bottom (the Hyatt page does this). Make the sketch with
-`python3 tools/sketch.py images/<render>.jpg images/<render>-sketch.jpg` (needs `pip install opencv-python-headless`).
+`python3 tools/ink-sketch.py images/<render>.jpg images/<render>-ink.svg [skip.json]` (needs
+`pip install opencv-python-headless`; the optional skip file removes cast-shadow outlines, see the tool's header).
 
 ## After editing content
 

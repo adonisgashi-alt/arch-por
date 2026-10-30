@@ -107,7 +107,7 @@
     const img = frame.querySelector("img"), canvas = frame.querySelector("canvas"), ctx = canvas.getContext("2d");
     const hint = box.querySelector(".cover-reveal-hint");
     if (matchMedia("(prefers-reduced-motion: reduce)").matches || !ctx || !img) return box.classList.add("static");
-    // The "before" is either a pencil sketch image (tools/sketch.py) or a traced line drawing (tools/trace-lines.py)
+    // The "before" is either a sketch image (tools/ink-sketch.py) or a traced line drawing (tools/trace-lines.py)
     if (!p.coverReveal.sketch) fetch(`/${p.coverReveal.lines}`).then((r) => (r.ok ? r.text() : Promise.reject()))
       .then((svg) => { frame.querySelector(".cover-reveal-lines").innerHTML = svg; })
       .catch(() => box.classList.add("static"));
