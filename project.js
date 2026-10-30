@@ -54,7 +54,7 @@
     }
     return `<div class="g-row g-${r.layout}">${figs.join("")}</div>`;
   };
-  // Scroll reveal cover: pinned in the middle of the screen while scrolling turns the line drawing
+  // Scroll reveal cover: pinned in the middle of the screen while scrolling turns the sketch
   // into the colour render as a watercolour wash rising from the bottom. Then the page scrolls on.
   const revealCover = () => `
     <div class="project-cover cover-reveal" id="cover-reveal" style="--ratio: ${p.coverReveal.ratio}">
@@ -62,7 +62,7 @@
         <figure class="cover-reveal-fig">
           <div class="frame cover-reveal-frame">
             ${media(imgs[0], imgs[0]?.caption || p.title, `${p.id}-0`, p.palette).replace(' loading="lazy"', "")}
-            <div class="cover-reveal-lines"></div>
+            <div class="cover-reveal-lines">${p.coverReveal.sketch ? `<img src="/${esc(p.coverReveal.sketch)}" alt="" />` : ""}</div>
             <canvas aria-hidden="true"></canvas>
           </div>
           <figcaption class="cover-reveal-hint">Scroll to reveal</figcaption>
@@ -107,7 +107,8 @@
     const img = frame.querySelector("img"), canvas = frame.querySelector("canvas"), ctx = canvas.getContext("2d");
     const hint = box.querySelector(".cover-reveal-hint");
     if (matchMedia("(prefers-reduced-motion: reduce)").matches || !ctx || !img) return box.classList.add("static");
-    fetch(`/${p.coverReveal.lines}`).then((r) => (r.ok ? r.text() : Promise.reject()))
+    // The "before" is either a pencil sketch image (tools/sketch.py) or a traced line drawing (tools/trace-lines.py)
+    if (!p.coverReveal.sketch) fetch(`/${p.coverReveal.lines}`).then((r) => (r.ok ? r.text() : Promise.reject()))
       .then((svg) => { frame.querySelector(".cover-reveal-lines").innerHTML = svg; })
       .catch(() => box.classList.add("static"));
 

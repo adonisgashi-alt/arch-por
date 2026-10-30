@@ -72,8 +72,8 @@ window.PORTFOLIO = {
     {
       id: "hyatt-regency-chicago",
       title: "Hyatt Regency Chicago",
-      // The cover starts as its line drawing; scrolling reveals the colour render (cover image only)
-      coverReveal: { lines: "images/hyatt-14-lines.svg", ratio: 2000 / 1125 },
+      // The cover starts as a pencil sketch; scrolling washes in the colour render (cover image only)
+      coverReveal: { sketch: "images/hyatt-14-sketch.jpg", ratio: 2000 / 1125 },
       category: "Documentation",
       year: "2026",
       location: "Chicago, IL",

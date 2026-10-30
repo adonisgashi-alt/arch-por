@@ -38,9 +38,10 @@ gallery: [
 ],
 ```
 
-A project can also set `coverReveal: { lines: "images/<render>-lines.svg", ratio: width / height }`: its cover
-then starts as the line drawing and stays pinned mid-screen while scrolling reveals the colour render like a
-watercolour wash rising from the bottom (the Hyatt page does this). Trace the lines with `tools/trace-lines.py` (see below).
+A project can also set `coverReveal: { sketch: "images/<render>-sketch.jpg", ratio: width / height }` (or `lines:` with a
+traced SVG instead of `sketch:`): its cover then starts as a pencil sketch and stays pinned mid-screen while scrolling reveals the colour render like a
+watercolour wash rising from the bottom (the Hyatt page does this). Make the sketch with
+`python3 tools/sketch.py images/<render>.jpg images/<render>-sketch.jpg` (needs `pip install opencv-python-headless`).
 
 ## After editing content
 

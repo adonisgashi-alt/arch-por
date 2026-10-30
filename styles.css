@@ -242,12 +242,13 @@ body.locked { overflow: hidden; }
 .cover-reveal-frame { position: relative; aspect-ratio: var(--ratio); background: #fff; }
 .cover-reveal-frame > * { position: absolute; inset: 0; width: 100%; height: 100%; }
 .cover-reveal-frame::after { content: ""; position: absolute; inset: 0; border: 1px solid var(--line); pointer-events: none; } /* keep the thin outline above the canvas */
-.cover-reveal-frame img { opacity: 0; } /* the source for the canvas; shown as-is when there's no animation */
+.cover-reveal-frame > img { opacity: 0; } /* the source for the canvas; shown as-is when there's no animation */
 .cover-reveal-lines svg { width: 100%; height: 100%; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; }
+.cover-reveal-lines img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .project-cover .cover-reveal-hint { text-align: center; transition: opacity .2s; }
 .cover-reveal.static { height: auto; }
 .cover-reveal.static .cover-reveal-pin { position: static; height: auto; padding-top: 0; }
-.cover-reveal.static img { opacity: 1; }
+.cover-reveal.static .cover-reveal-frame > img { opacity: 1; }
 .cover-reveal.static canvas, .cover-reveal.static .cover-reveal-lines, .cover-reveal.static .cover-reveal-hint { display: none; }
 .project-cover figure, .project-gallery figure { margin: 0; }
 
