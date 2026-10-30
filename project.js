@@ -55,7 +55,7 @@
     return `<div class="g-row g-${r.layout}">${figs.join("")}</div>`;
   };
   // Scroll reveal cover: pinned in the middle of the screen while scrolling turns the line drawing
-  // into the colour render, square by square from the bottom up. Then the page scrolls on.
+  // into the colour render as a watercolour wash rising from the bottom. Then the page scrolls on.
   const revealCover = () => `
     <div class="project-cover cover-reveal" id="cover-reveal" style="--ratio: ${p.coverReveal.ratio}">
       <div class="cover-reveal-pin">
@@ -111,20 +111,38 @@
       .then((svg) => { frame.querySelector(".cover-reveal-lines").innerHTML = svg; })
       .catch(() => box.classList.add("static"));
 
-    const CELL = 8; // px per "bitmap" square
+    // Watercolour wash: a soft, blotchy edge (layered noise) that bleeds upward from the bottom,
+    // with a slightly darker rim where the "pigment" pools at the edge of the wash
+    const RES = 5; // px per mask sample; the mask is scaled up smoothly, which softens the edge
+    const SOFT = 0.045, RIM = 0.028;
     const mask = document.createElement("canvas"), mctx = mask.getContext("2d");
-    let cols = 0, rows = 0, thresholds, data, last = -1;
+    const rim = document.createElement("canvas"), rctx = rim.getContext("2d");
+    const tint = document.createElement("canvas"), tctx = tint.getContext("2d");
+    let cols = 0, rows = 0, thresholds, data, rdata, last = -1;
+    // Smooth value noise, several octaves, so the edge has both big blooms and fine feathering
+    const lattice = new Float32Array(64 * 64).map(() => Math.random());
+    const smooth = (a) => a * a * (3 - 2 * a);
+    const noise = (x, y) => {
+      const xi = Math.floor(x), yi = Math.floor(y), xf = smooth(x - xi), yf = smooth(y - yi);
+      const at = (i, j) => lattice[((j & 63) << 6) | (i & 63)];
+      const top = at(xi, yi) + (at(xi + 1, yi) - at(xi, yi)) * xf;
+      const bot = at(xi, yi + 1) + (at(xi + 1, yi + 1) - at(xi, yi + 1)) * xf;
+      return top + (bot - top) * yf;
+    };
+    const fbm = (x, y) => 0.5 * noise(x, y) + 0.27 * noise(x * 2.1, y * 2.1) + 0.15 * noise(x * 4.3, y * 4.3) + 0.08 * noise(x * 9.1, y * 9.1);
     const layout = () => {
       const r = frame.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2);
       canvas.width = Math.round(r.width * dpr); canvas.height = Math.round(r.height * dpr);
-      cols = Math.max(1, Math.ceil(r.width / CELL)); rows = Math.max(1, Math.ceil(r.height / CELL));
-      mask.width = cols; mask.height = rows;
-      data = mctx.createImageData(cols, rows);
-      // Each square turns on at its own point: lower rows first, with some noise so the edge is ragged
+      tint.width = canvas.width; tint.height = canvas.height;
+      cols = Math.max(1, Math.ceil(r.width / RES)); rows = Math.max(1, Math.ceil(r.height / RES));
+      mask.width = rim.width = cols; mask.height = rim.height = rows;
+      data = mctx.createImageData(cols, rows); rdata = rctx.createImageData(cols, rows);
+      // Each point turns on at its own moment: lower first, the noise makes the wash front uneven
       thresholds = new Float32Array(cols * rows);
+      const scale = 7 / cols; // noise features relative to the image width, the same on any screen
       for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
         const fromBottom = (rows - 1 - y) / Math.max(rows - 1, 1);
-        thresholds[y * cols + x] = 0.02 + fromBottom * 0.78 + Math.random() * 0.18;
+        thresholds[y * cols + x] = fromBottom * 0.68 + fbm(x * scale, y * scale) * 0.32;
       }
       last = -1; draw();
     };
@@ -137,15 +155,33 @@
       hint.style.opacity = Math.max(0, 1 - t * 6);
       if (!img.complete || !img.naturalWidth || Math.abs(t - last) < 0.001) return;
       last = t;
-      const px = data.data;
-      for (let i = 0; i < thresholds.length; i++) px[i * 4 + 3] = t >= thresholds[i] ? 255 : 0;
+      const front = t * (1 + 2 * SOFT + 0.06) - SOFT - 0.03; // 0 → nothing coloured, 1 → all of it
+      const px = data.data, rp = rdata.data;
+      for (let i = 0; i < thresholds.length; i++) {
+        const d = front - thresholds[i];
+        const a = d <= -SOFT ? 0 : d >= SOFT ? 1 : smooth((d + SOFT) / (2 * SOFT));
+        px[i * 4 + 3] = a * 255;
+        rp[i * 4 + 3] = t < 1 ? Math.max(0, 1 - Math.abs(d - SOFT * 0.4) / RIM) * 255 : 0;
+      }
       mctx.putImageData(data, 0, 0);
+      rctx.putImageData(rdata, 0, 0);
+      const W = canvas.width, H = canvas.height;
+      ctx.imageSmoothingEnabled = tctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = tctx.imageSmoothingQuality = "high";
+      // the wash
       ctx.globalCompositeOperation = "copy";
-      ctx.imageSmoothingEnabled = false;
-      ctx.drawImage(mask, 0, 0, canvas.width, canvas.height);
+      ctx.drawImage(mask, 0, 0, W, H);
       ctx.globalCompositeOperation = "source-in";
-      ctx.imageSmoothingEnabled = true;
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, W, H);
+      // the pooled, darker edge: the render multiplied onto itself along the wash front
+      tctx.globalCompositeOperation = "copy";
+      tctx.drawImage(rim, 0, 0, W, H);
+      tctx.globalCompositeOperation = "source-in";
+      tctx.drawImage(img, 0, 0, W, H);
+      ctx.globalCompositeOperation = "multiply";
+      ctx.globalAlpha = 0.22;
+      ctx.drawImage(tint, 0, 0);
+      ctx.globalAlpha = 1;
       ctx.globalCompositeOperation = "source-over";
     };
     let ticking = false;
