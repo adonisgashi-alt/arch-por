@@ -24,7 +24,7 @@ window.PORTFOLIO = {
   // Hero: one featured project. The Hyatt render draws itself as a line drawing once per page load.
   // (Add more entries to turn it back into a slideshow.)
   heroImages: [
-    { src: "images/hyatt-13.jpg", project: "hyatt-regency-chicago", lines: "images/hyatt-13-lines.svg" },
+    { src: "images/hyatt-14.jpg", project: "hyatt-regency-chicago", lines: "images/hyatt-14-lines.svg" },
   ],
   // Contact section
   contactHeading: "Let’s build!",
@@ -73,7 +73,7 @@ window.PORTFOLIO = {
       id: "hyatt-regency-chicago",
       title: "Hyatt Regency Chicago",
       // The cover starts as its line drawing; scrolling reveals the colour render (cover image only)
-      coverReveal: { lines: "images/hyatt-13-lines.svg", ratio: 2000 / 1171 },
+      coverReveal: { lines: "images/hyatt-14-lines.svg", ratio: 2000 / 1125 },
       category: "Documentation",
       year: "2026",
       location: "Chicago, IL",
@@ -86,7 +86,7 @@ window.PORTFOLIO = {
         "From the coordinated model I produced the drawing set for the new stone caps on the planter walls — an enlarged, fully dimensioned plan and the north, south, east and west elevations at 1/4\" = 1'-0\" — together with perspectives, a top view and scan elevations marking the work areas.",
       ],
       images: [
-        "images/hyatt-13.jpg",
+        "images/hyatt-14.jpg",
         { src: "images/hyatt-2.jpg", caption: "Laser-scan point cloud over the Archicad model" },
         { src: "images/hyatt-1.jpg", caption: "Archicad model of the plaza, same view" },
         { src: "images/hyatt-4.jpg", caption: "Top view — model over point cloud" },
@@ -99,12 +99,14 @@ window.PORTFOLIO = {
         { src: "images/hyatt-12.jpg", caption: "Area A plan with dimensions" },
         { src: "images/hyatt-sheet-a1.jpg", caption: "Enlarged plan" },
         { src: "images/hyatt-sheet-a2.jpg", caption: "Elevations" },
+        { src: "images/hyatt-13.jpg", caption: "Model perspective — tower and plaza" },
       ],
       // How the images after the cover are arranged (numbers are positions in `images`, cover = 0)
       gallery: [
         { layout: "compare", images: [1, 2] },
         { layout: "feature", images: [3, 4, 5, 6] },
         { layout: "feature", images: [7, 8, 9] },
+        { layout: "full", images: [13] },
         { layout: "full", images: [11] },
         { layout: "full", images: [12] },
         { layout: "full", images: [10] },
