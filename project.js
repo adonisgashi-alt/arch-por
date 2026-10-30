@@ -44,7 +44,7 @@
         <input class="compare-range" type="range" min="0" max="100" step="1" value="50"
           aria-label="Slide to compare: ${esc(short(imgs[a]))} on the left, ${esc(short(imgs[b]))} on the right" />
       </div>
-      <figcaption>${esc(short(imgs[a]))} and ${esc(short(imgs[b]))}, same view — drag to compare</figcaption>
+      <figcaption>${esc(short(imgs[a]))} / ${esc(short(imgs[b]))} — same view, move across to compare</figcaption>
     </figure>`;
   const row = (r) => {
     if (r.layout === "compare") return compare(r.images);
@@ -69,8 +69,8 @@
         </figure>
       </div>
     </div>`;
-  const facts = [["Location", p.location], ["Year", p.year], ["Status", p.status], ["Scope", p.scope],
-    ["Area", p.area], ["Client", p.client], ["Role", p.role]].filter(([, v]) => v);
+  const facts = [["Location", p.address || p.location], ["Year", p.year], ["Typology", p.typology], ["Status", p.status],
+    ["Scope", p.scope], ["Discipline", p.discipline], ["Area", p.area], ["Client", p.client], ["Role", p.role]].filter(([, v]) => v);
 
   document.title = `${p.title} — ${data.name}`;
   document.querySelector('meta[name="description"]').content = p.summary || "";
