@@ -295,7 +295,7 @@ body.locked { overflow: hidden; }
 .compare-label-a { left: 14px; }
 .compare-label-b { right: 14px; }
 /* The range input covers the whole image: drag anywhere, or use the arrow keys */
-.compare-range { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; touch-action: pan-y; }
+.compare-range { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: col-resize; touch-action: pan-y; }
 .project-cover figcaption, .project-gallery figcaption { font-size: 14px; color: var(--muted); padding-top: 10px; }
 .project-nav {
   display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap);

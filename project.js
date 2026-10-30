@@ -195,7 +195,7 @@
     img.complete ? layout() : img.addEventListener("load", layout, { once: true });
   }
 
-  /* ── Compare sliders: sweep once on their own when first seen, then follow the visitor ── */
+  /* ── Compare sliders: sweep once on their own when first seen, then follow the cursor (or a drag) ── */
   const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
   document.querySelectorAll(".compare").forEach((box) => {
     const range = box.querySelector(".compare-range");
@@ -204,6 +204,13 @@
     const stopAuto = () => { cancelAnimationFrame(auto); auto = 0; box.classList.remove("auto"); };
     range.addEventListener("input", () => { stopAuto(); set(+range.value); });
     range.addEventListener("pointerdown", stopAuto);
+    // With a mouse the divider simply follows the cursor across the image (touch still drags)
+    box.addEventListener("pointermove", (e) => {
+      if (e.pointerType !== "mouse") return;
+      const r = box.getBoundingClientRect();
+      stopAuto();
+      set(Math.round(Math.min(100, Math.max(0, ((e.clientX - r.left) / r.width) * 100)) * 10) / 10);
+    });
     range.addEventListener("focus", () => box.classList.add("focus"));
     range.addEventListener("blur", () => box.classList.remove("focus"));
     if (still) return;
