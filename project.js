@@ -100,7 +100,7 @@
   });
 
   /* ── Image viewer: click a project image to see it full screen.
-     Zoom with the scroll wheel, a pinch, double-click or + / −; drag to move around; ← / → for the next image.
+     Click to zoom in (and again to zoom out), or use the scroll wheel, a pinch or + / −; drag to move around; ← / → for the next image.
      An image can set `zoom: "images/<name>-large.jpg"` in content.js to show a bigger file here only. ── */
   const shots = [...document.querySelectorAll(".project-cover.g-full .frame img, .project-gallery .frame:not(.compare) img")];
   if (shots.length) setupViewer(shots);
@@ -191,7 +191,6 @@
       e.preventDefault();
     });
     stage.addEventListener("wheel", (e) => { e.preventDefault(); zoomAt(s * Math.exp(-e.deltaY * 0.0018), e.clientX, e.clientY); }, { passive: false });
-    view.addEventListener("dblclick", (e) => zoomAt(s > 1.01 ? 1 : 2.5, e.clientX, e.clientY, true));
 
     // Drag to pan, pinch to zoom, swipe to change image, tap outside the image to close
     const pts = new Map();
@@ -217,10 +216,11 @@
       const single = pts.size === 1 && !pinch;
       pts.delete(e.pointerId);
       if (pts.size < 2) pinch = null;
-      if (!single || !start || s > 1.01) return;
+      if (!single || !start) return;
       const dx = e.clientX - start.x;
-      if (Math.abs(dx) > 60 && e.pointerType !== "mouse") show(i + (dx < 0 ? 1 : -1));
-      else if (!moved && start.t === stage) close();
+      if (!moved && start.t === view) zoomAt(s > 1.01 ? 1 : 2.5, e.clientX, e.clientY, true);   // click: zoom in / back out
+      else if (!moved && start.t === stage && s <= 1.01) close();                               // click outside: close
+      else if (s <= 1.01 && Math.abs(dx) > 60 && e.pointerType !== "mouse") show(i + (dx < 0 ? 1 : -1)); // swipe
     };
     stage.addEventListener("pointerup", lift);
     stage.addEventListener("pointercancel", (e) => { pts.delete(e.pointerId); pinch = null; });

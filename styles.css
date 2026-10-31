@@ -319,7 +319,7 @@ body.locked { overflow: hidden; }
   max-width: calc(100% - 2 * var(--pad)); max-height: calc(100% - 24px); object-fit: contain;
   transform-origin: center; will-change: transform; user-select: none; -webkit-user-select: none; cursor: zoom-in;
 }
-.lightbox.zoomed .lb-stage img { cursor: grab; }
+.lightbox.zoomed .lb-stage img { cursor: zoom-out; }
 .lightbox.zoomed .lb-stage img:active { cursor: grabbing; }
 .lb-bar { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 12px var(--pad) 18px; }
 .lb-caption { display: flex; gap: 14px; font-size: 14px; color: var(--muted); min-width: 0; }
