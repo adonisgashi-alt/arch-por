@@ -92,12 +92,140 @@
       <a href="/projects/${next.id}" class="next"><span class="label">Next</span>${esc(next.title)}</a>
     </nav>`;
 
-  // ← / → keys move between projects
+  // ← / → keys move between projects (not while the image viewer is open)
   document.addEventListener("keydown", (e) => {
-    if (e.target.closest("input, textarea")) return;
+    if (e.target.closest("input, textarea") || document.body.classList.contains("lb-open")) return;
     if (e.key === "ArrowLeft") location.href = `/projects/${prev.id}`;
     if (e.key === "ArrowRight") location.href = `/projects/${next.id}`;
   });
+
+  /* ── Image viewer: click a project image to see it full screen.
+     Zoom with the scroll wheel, a pinch, double-click or + / −; drag to move around; ← / → for the next image.
+     An image can set `zoom: "images/<name>-large.jpg"` in content.js to show a bigger file here only. ── */
+  const shots = [...document.querySelectorAll(".project-cover.g-full .frame img, .project-gallery .frame:not(.compare) img")];
+  if (shots.length) setupViewer(shots);
+  function setupViewer(shots) {
+    const big = (el) => {
+      const m = imgs.find((im) => im && typeof im === "object" && im.zoom && el.src.endsWith(im.src));
+      return m ? `/${m.zoom}` : el.currentSrc || el.src;
+    };
+    const lb = document.createElement("div");
+    lb.className = "lightbox"; lb.hidden = true;
+    lb.setAttribute("role", "dialog"); lb.setAttribute("aria-modal", "true"); lb.setAttribute("aria-label", "Image viewer");
+    lb.innerHTML = `
+      <div class="lb-stage"><img alt="" draggable="false" /></div>
+      ${shots.length > 1 ? `<button type="button" class="lb-arrow lb-prev" aria-label="Previous image">←</button>
+        <button type="button" class="lb-arrow lb-next" aria-label="Next image">→</button>` : ""}
+      <div class="lb-bar">
+        <p class="lb-caption"><span class="lb-count"></span><span class="lb-text"></span></p>
+        <div class="lb-tools">
+          <button type="button" data-zoom="out" aria-label="Zoom out">−</button>
+          <button type="button" data-zoom="in" aria-label="Zoom in">+</button>
+          <button type="button" class="lb-close" aria-label="Close">×</button>
+        </div>
+      </div>`;
+    document.body.appendChild(lb);
+    const stage = lb.querySelector(".lb-stage"), view = stage.querySelector("img");
+    let i = 0, s = 1, x = 0, y = 0, opener = null;
+    const maxZoom = () => Math.max(3, (view.naturalWidth / (view.offsetWidth || 1)) * 2.5);
+    const apply = (anim) => {
+      view.style.transition = anim ? "transform .25s ease" : "none";
+      view.style.transform = `translate(${x}px, ${y}px) scale(${s})`;
+      lb.classList.toggle("zoomed", s > 1.01);
+    };
+    const clamp = () => {  // keep the zoomed image covering the screen, no empty edges
+      const r = stage.getBoundingClientRect();
+      const mx = Math.max(0, (view.offsetWidth * s - r.width) / 2), my = Math.max(0, (view.offsetHeight * s - r.height) / 2);
+      x = Math.min(mx, Math.max(-mx, x)); y = Math.min(my, Math.max(-my, y));
+    };
+    const zoomAt = (ns, cx, cy, anim) => {
+      const r = stage.getBoundingClientRect();
+      if (cx == null) { cx = r.left + r.width / 2; cy = r.top + r.height / 2; }
+      ns = Math.min(maxZoom(), Math.max(1, ns));
+      const px = cx - (r.left + r.width / 2), py = cy - (r.top + r.height / 2);
+      x = px - (px - x) * (ns / s); y = py - (py - y) * (ns / s); s = ns;
+      if (s === 1) x = y = 0;
+      clamp(); apply(anim);
+    };
+    const show = (n) => {
+      i = (n + shots.length) % shots.length;
+      const el = shots[i];
+      s = 1; x = y = 0; apply(false);
+      view.src = big(el); view.alt = el.alt;
+      lb.querySelector(".lb-text").textContent = el.closest("figure")?.querySelector("figcaption")?.textContent.trim() || el.alt;
+      lb.querySelector(".lb-count").textContent = shots.length > 1 ? `${i + 1} / ${shots.length}` : "";
+    };
+    const open = (n) => {
+      opener = document.activeElement;
+      show(n); lb.hidden = false;
+      document.body.classList.add("locked", "lb-open");
+      requestAnimationFrame(() => lb.classList.add("open"));
+      lb.querySelector(".lb-close").focus();
+    };
+    const close = () => {
+      lb.classList.remove("open");
+      document.body.classList.remove("locked", "lb-open");
+      setTimeout(() => { lb.hidden = true; view.removeAttribute("src"); }, 200);
+      opener?.focus?.();
+    };
+
+    shots.forEach((el, n) => {
+      el.tabIndex = 0; el.setAttribute("role", "button");
+      el.setAttribute("aria-label", `View larger: ${el.alt}`);
+      el.addEventListener("click", () => open(n));
+      el.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(n); } });
+    });
+    lb.querySelector(".lb-close").addEventListener("click", close);
+    lb.querySelector(".lb-prev")?.addEventListener("click", () => show(i - 1));
+    lb.querySelector(".lb-next")?.addEventListener("click", () => show(i + 1));
+    lb.querySelectorAll("[data-zoom]").forEach((b) => b.addEventListener("click", () => zoomAt(s * (b.dataset.zoom === "in" ? 1.6 : 1 / 1.6), null, null, true)));
+    document.addEventListener("keydown", (e) => {
+      if (lb.hidden) return;
+      if (e.key === "Escape") close();
+      else if (e.key === "ArrowLeft") show(i - 1);
+      else if (e.key === "ArrowRight") show(i + 1);
+      else if (e.key === "+" || e.key === "=") zoomAt(s * 1.6, null, null, true);
+      else if (e.key === "-") zoomAt(s / 1.6, null, null, true);
+      else if (e.key === "0") zoomAt(1, null, null, true);
+      else return;
+      e.preventDefault();
+    });
+    stage.addEventListener("wheel", (e) => { e.preventDefault(); zoomAt(s * Math.exp(-e.deltaY * 0.0018), e.clientX, e.clientY); }, { passive: false });
+    view.addEventListener("dblclick", (e) => zoomAt(s > 1.01 ? 1 : 2.5, e.clientX, e.clientY, true));
+
+    // Drag to pan, pinch to zoom, swipe to change image, tap outside the image to close
+    const pts = new Map();
+    let pinch = null, start = null, moved = false;
+    stage.addEventListener("pointerdown", (e) => {
+      stage.setPointerCapture(e.pointerId);
+      pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (pts.size === 1) { start = { x: e.clientX, y: e.clientY, t: e.target }; moved = false; }
+      if (pts.size === 2) { const [a, b] = [...pts.values()]; pinch = { d: Math.hypot(a.x - b.x, a.y - b.y), s }; }
+    });
+    stage.addEventListener("pointermove", (e) => {
+      const pt = pts.get(e.pointerId);
+      if (!pt) return;
+      const dx = e.clientX - pt.x, dy = e.clientY - pt.y;
+      pt.x = e.clientX; pt.y = e.clientY;
+      if (Math.hypot(e.clientX - start.x, e.clientY - start.y) > 6) moved = true;
+      if (pts.size === 2 && pinch) {
+        const [a, b] = [...pts.values()];
+        zoomAt(pinch.s * Math.hypot(a.x - b.x, a.y - b.y) / pinch.d, (a.x + b.x) / 2, (a.y + b.y) / 2);
+      } else if (pts.size === 1 && s > 1.01) { x += dx; y += dy; clamp(); apply(false); }
+    });
+    const lift = (e) => {
+      const single = pts.size === 1 && !pinch;
+      pts.delete(e.pointerId);
+      if (pts.size < 2) pinch = null;
+      if (!single || !start || s > 1.01) return;
+      const dx = e.clientX - start.x;
+      if (Math.abs(dx) > 60 && e.pointerType !== "mouse") show(i + (dx < 0 ? 1 : -1));
+      else if (!moved && start.t === stage) close();
+    };
+    stage.addEventListener("pointerup", lift);
+    stage.addEventListener("pointercancel", (e) => { pts.delete(e.pointerId); pinch = null; });
+    addEventListener("resize", () => { if (!lb.hidden) { clamp(); apply(false); } });
+  }
 
   /* ── Scroll reveal cover ── */
   const rc = $("#cover-reveal");
